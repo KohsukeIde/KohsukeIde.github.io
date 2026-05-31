@@ -1,7 +1,7 @@
 .DS_Store
 
-# Blog (not ready to publish yet)
-blog/
+# Blog — published. Keep this draft essay private (do not deploy):
+blog/posts/plato-is-not-in-vision/
 
 # LaTeX build artifacts
 *.aux
