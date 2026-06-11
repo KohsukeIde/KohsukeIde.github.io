@@ -104,7 +104,7 @@
   objective needs: signal-to-noise, enough information, and enough semantic
   breadth. Text has all three. Pixel prediction fails the SNR test. Latent
   self-supervision buys SNR back by throwing information away, and it throws it
-  away unevenly, so parts of the world quietly stop showing up in the gradient.
+  away unevenly, so parts of the world stop showing up in the gradient.
   The corner we actually want, high SNR and high information at the same time,
   stays empty.
 </p>
@@ -151,10 +151,10 @@
 </p>
 
 <p>
-  This rhymes with the data-centered reading of the
+  <a href="https://people.eecs.berkeley.edu/~efros/">Alyosha Efros</a> made the
+  same point at the same workshop, reading the
   <a href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">bitter lesson</a>
-  that <a href="https://people.eecs.berkeley.edu/~efros/">Alyosha Efros</a> gave at
-  the same workshop: what changed vision was not
+  through data: what changed vision was not
   only bigger models but the arrival of huge uncurated corpora, so the question
   to ask of a stuck problem is whether it is blocked by the model or by the
   absence of the right data distribution. Same move, one level down, from the
@@ -207,7 +207,7 @@
   A few notes on the rows. Axis A is the one most people are already on: AIM is
   clean evidence that plain autoregressive patch prediction, with no semantic
   targets anywhere, scales in representation quality
-  (<a href="https://arxiv.org/abs/2401.08541">AIM</a>). Axis E is the odd one out in a precise way:
+  (<a href="https://arxiv.org/abs/2401.08541">AIM</a>). Axis E differs in a precise way:
   flicker is noise because no policy moves it, object pose is signal because
   pushing moves it, so action turns the signal/noise split from something you
   estimate into something you define.
@@ -225,8 +225,8 @@
 </figure>
 
 <p>
-  Push the table one step. Axes A through D all squeeze better targets out of a
-  fixed pile of passive observations. They raise SNR, but they cannot add
+  Push the table one step. Axes A through D all extract better targets from a
+  fixed set of passive observations. They raise SNR, but they cannot add
   information the sensor and the collection policy never recorded. Axis E is
   different in kind: if the system acts, it produces observations that were not
   there before. So the sharp version of the worry is that the empty corner may not
@@ -249,9 +249,9 @@
 </figure>
 
 <p>
-  I do not think this kills A through D. It orders them. They bootstrap a
+  I do not think this rules out A through D; it orders them. They bootstrap a
   perception system good enough to act at all, and the active loop keeps feeding
-  it once it can. The honest catch is verifiers: coding, math, and games score
+  it once it can. The catch is verifiers: coding, math, and games score
   themselves, but a kitchen does not, so as a route this is still a conjecture and
   the passive axes are what actually run today.
 </p>
@@ -264,8 +264,8 @@
   <a href="https://jchencxh.github.io/blog/constructive-self-supervised-learning-part-1/">constructive proposal</a>,
   supervising the whole hierarchy of
   an EMA teacher instead of only the last layer, is about how much structure the
-  target keeps, not about where the target is grounded. The two compose. My honest
-  guess is that the strongest version of either wants the other. A single
+  target keeps, not about where the target is grounded. The two compose. My guess
+  is that the strongest version of either needs the other. A single
   externally grounded target is informative but coarse, and a deep self-referential
   one is rich but circular.
 </p>
