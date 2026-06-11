@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script src="https://distill.pub/template.v2.js"></script>
+
+<d-front-matter>
+  <script type="text/json">{
+    "title": "Where Do Good Vision Targets Come From?",
+    "description": "Notes in the margins of James Chen's pure-vision scaling post, after the CVPR Bitter Lessons workshop."
+  }</script>
+</d-front-matter>
+
+<style>
+  d-article .epigraph {
+    font-style: italic;
+    color: #555;
+    border-left: 3px solid #aaa;
+    padding: 4px 0 4px 18px;
+    margin: 32px 0;
+    line-height: 1.5;
+  }
+  d-article blockquote {
+    border-left: 3px solid #ddd;
+    color: #444;
+    padding: 4px 0 4px 16px;
+    margin: 16px 0;
+  }
+  d-article .figure-placeholder {
+    border: 1px dashed #c8c8c8;
+    background: #fafafa;
+    padding: 20px 22px;
+    border-radius: 4px;
+    color: #777;
+    font-size: 0.92em;
+    margin: 28px 0;
+    line-height: 1.5;
+  }
+  d-article .figure-placeholder strong {
+    color: #555;
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.95em;
+    letter-spacing: 0.02em;
+  }
+  d-article .figure-placeholder em { color: #888; }
+  d-article figure {
+    margin: 30px 0;
+    text-align: center;
+  }
+  d-article figure img {
+    max-width: 100%;
+    height: auto;
+  }
+  d-article figure figcaption {
+    margin-top: 10px;
+    font-size: 0.86em;
+    line-height: 1.5;
+    color: #777;
+    text-align: left;
+  }
+  d-article figure figcaption strong { color: #555; }
+  d-article table.axes {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 16px 0 28px;
+  }
+  d-article table.axes th,
+  d-article table.axes td {
+    border-bottom: 1px solid #eee;
+    padding: 8px 8px;
+    vertical-align: top;
+    text-align: left;
+  }
+  d-article table.axes th {
+    border-bottom: 1px solid #bbb;
+    font-weight: 600;
+  }
+  d-article table.axes td:first-child { white-space: nowrap; color: #555; font-weight: 600; }
+</style>
+
+<d-title>
+  <h1>Where Do Good Vision Targets Come From?</h1>
+  <p>Notes in the margins of a pure-vision scaling post, after the CVPR Bitter Lessons workshop.</p>
+</d-title>
+
+<d-article>
+
+<p class="epigraph">
+  We keep auditing the loss.<br>
+  The thing worth auditing is the observation.
+</p>
+
+<p>
+  Notes to organize my own thinking, after reading James Chen's
+  <a href="https://jchencxh.github.io/blog/scaling-law-for-pure-vision/"><em>Why pure vision isn't scaling</em></a>.
+  I had just come back from the Bitter Lessons workshop at CVPR, and the two kept
+  rhyming in my head, so I wanted to write down where they meet.
+</p>
+
+<p>
+  Chen's post asks why vision still has no objective of the kind that made
+  language models easy to scale. His answer factors into three things an
+  objective needs: signal-to-noise, enough information, and enough semantic
+  breadth. Text has all three. Pixel prediction fails the SNR test. Latent
+  self-supervision buys SNR back by throwing information away, and it throws it
+  away unevenly, so parts of the world quietly stop showing up in the gradient.
+  The corner we actually want, high SNR and high information at the same time,
+  stays empty.
+</p>
+
+<p>
+  The frame makes sense to me. What I want to note down is a small worry: it may
+  be pointing at something larger than it claims, and that shifts where I would go
+  looking.
+</p>
+
+<figure>
+  <img src="assets/fig1-empty-corner.png"
+       alt="A plane with axes objective SNR and accessible information. Pixel prediction is high-information, low-SNR; latent self-supervision is high-SNR, low-information; the high-high corner is empty.">
+  <figcaption>
+    <strong>Figure 1. The empty corner.</strong> Chen's plane, redrawn. Pixel
+    prediction has the information but not the SNR; latent self-supervision has
+    the SNR but not the information. Factorizing or scoring the loss (A) raises
+    SNR; grounding the target in physics, time, geometry, or action (B&ndash;E)
+    adds information. The high-high corner is what we are after.
+  </figcaption>
+</figure>
+
+<h2>Searching the wrong space</h2>
+
+<p>
+  One sentence in the post does most of the work for me. For text, data SNR is
+  already high, so objective SNR &ldquo;falls out of the data SNR being high.&rdquo;
+  If that is true, then the property language has is not a property of the loss.
+  It is a property of the data. Text is already the output of a compressor. Human
+  cognition stripped out illumination, viewpoint, texture, sensor noise, and kept
+  mostly the bits that are about something. A camera does the reverse. Most of the
+  bits it records are nuisance for almost anything we would want to predict.
+</p>
+
+<p>
+  So when we look for &ldquo;the objective that makes vision scale,&rdquo; I think
+  we are searching the wrong space. We keep searching objective space, the set of
+  losses over a fixed set of pixels. The constraint that actually binds is in
+  target space: what we point the loss at, and where those targets come from. No
+  amount of loss engineering over RGB recovers information the sensor already
+  discarded.
+</p>
+
+<p>
+  This rhymes with the data-centered reading of the
+  <a href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">bitter lesson</a>
+  that <a href="https://people.eecs.berkeley.edu/~efros/">Alyosha Efros</a> gave at
+  the same workshop: what changed vision was not
+  only bigger models but the arrival of huge uncurated corpora, so the question
+  to ask of a stuck problem is whether it is blocked by the model or by the
+  absence of the right data distribution. Same move, one level down, from the
+  architecture to the observations.
+</p>
+
+<h2>Where do good targets come from?</h2>
+
+<p>
+  Here is the way I have started sorting it. What made language tokens good
+  targets is that they sit close to a sufficient statistic of the world as it
+  matters to us, with the nuisance already removed, and a human did the removing.
+  The vision question is how to build targets like that without a human in the
+  loop. Every serious proposal I know supplies the missing invariance from
+  somewhere. Sort them by the source.
+</p>
+
+<table class="axes">
+  <thead><tr><th>Source</th><th>Idea</th><th>Where the invariance comes from</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>A. Loss</td>
+      <td>Factorize until each step is nearly unambiguous (diffusion, autoregression), or score a distribution instead of a point.</td>
+      <td>How the loss treats ambiguity. Cheapest, most worked. Open residual: tokenizers spend most of their rate on texture.</td>
+    </tr>
+    <tr>
+      <td>B. Physics</td>
+      <td>Predict reflectance, depth, normals, material instead of pixel color.</td>
+      <td>An image-formation model splits scene-intrinsic variables from nuisance. Cost: someone must measure or infer them.</td>
+    </tr>
+    <tr>
+      <td>C. Time</td>
+      <td>Predict far enough ahead that fast nuisance has decorrelated away.</td>
+      <td>Time as a low-pass filter. The horizon is a continuous SNR knob, rarely studied as the object itself.</td>
+    </tr>
+    <tr>
+      <td>D. Geometry</td>
+      <td>Correspondence across views and across time.</td>
+      <td>The world grades the prediction, not a copy of the model. Not circular, unlike an EMA teacher.</td>
+    </tr>
+    <tr>
+      <td>E. Action</td>
+      <td>Condition prediction on your own actions.</td>
+      <td>Controllable is signal, uncontrollable is nuisance. The only axis that <em>defines</em> SNR. Most expensive: needs a body.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+  A few notes on the rows. Axis A is the one most people are already on: AIM is
+  clean evidence that plain autoregressive patch prediction, with no semantic
+  targets anywhere, scales in representation quality
+  (<a href="https://arxiv.org/abs/2401.08541">AIM</a>). Axis E is the odd one out in a precise way:
+  flicker is noise because no policy moves it, object pose is signal because
+  pushing moves it, so action turns the signal/noise split from something you
+  estimate into something you define.
+</p>
+
+<figure>
+  <img src="assets/fig2-five-sources.png"
+       alt="Five cards: A Loss, B Physics, C Time, D Geometry, E Action, each with its source of invariance and its cost. Action is highlighted.">
+  <figcaption>
+    <strong>Figure 2. Five sources of invariance.</strong> Five places a vision
+    target can borrow its invariance from, ordered loosely by cost. Action (E) is
+    the only one that defines the signal/noise split rather than approximating it,
+    and the only one that needs a body.
+  </figcaption>
+</figure>
+
+<p>
+  Push the table one step. Axes A through D all squeeze better targets out of a
+  fixed pile of passive observations. They raise SNR, but they cannot add
+  information the sensor and the collection policy never recorded. Axis E is
+  different in kind: if the system acts, it produces observations that were not
+  there before. So the sharp version of the worry is that the empty corner may not
+  be reachable from passive pixels at all, and only action gets you there. This is
+  close to what <a href="https://www.vincentsitzmann.com/">Vincent Sitzmann</a>
+  called the active scaling conjecture at the workshop: agency as the data engine,
+  where the scaling variable becomes the experience the system collects for itself
+  rather than tokens or frames someone else collected.
+</p>
+
+<figure>
+  <img src="assets/fig3-passive-vs-active.png"
+       alt="Left: a fixed dataset feeding losses A to D, capped by a dashed ceiling marking information the sensor never recorded. Right: a perceive-act-collect loop labeled axis E.">
+  <figcaption>
+    <strong>Figure 3. Passive ceiling vs active loop.</strong> The passive axes
+    raise SNR on a fixed dataset but are capped by what the sensor and collection
+    policy recorded. Acting (E) generates observations that were not there before,
+    which is the part that can move the ceiling. The catch is verifiers.
+  </figcaption>
+</figure>
+
+<p>
+  I do not think this kills A through D. It orders them. They bootstrap a
+  perception system good enough to act at all, and the active loop keeps feeding
+  it once it can. The honest catch is verifiers: coding, math, and games score
+  themselves, but a kitchen does not, so as a route this is still a conjecture and
+  the passive axes are what actually run today.
+</p>
+
+<h2>Depth is a different axis</h2>
+
+<p>
+  One axis I left out of the table, because it is orthogonal to all of this rather
+  than parallel: the depth of the target. Chen's own
+  <a href="https://jchencxh.github.io/blog/constructive-self-supervised-learning-part-1/">constructive proposal</a>,
+  supervising the whole hierarchy of
+  an EMA teacher instead of only the last layer, is about how much structure the
+  target keeps, not about where the target is grounded. The two compose. My honest
+  guess is that the strongest version of either wants the other. A single
+  externally grounded target is informative but coarse, and a deep self-referential
+  one is rich but circular.
+</p>
+
+<h2>Two hedges</h2>
+
+<p>
+  First, I am not claiming latent SSL is doomed.
+  <a href="https://arxiv.org/abs/2304.07193">DINOv2</a> to v3 keeps improving with
+  curation and scale. But notice that curation is
+  the human compressor again, one level up: a person choosing which images count
+  is supplying invariance by hand. That is consistent with the diagnosis, not
+  against it.
+</p>
+
+<p>
+  Second, the table says where good targets could come from, not that any of them
+  is easy. B through E each trade the annotation bottleneck for a measurement,
+  infrastructure, or embodiment bottleneck. The only claim I am confident about is
+  that those are the right bottlenecks to be stuck on, and that &ldquo;find a
+  better loss for the pixels we already have&rdquo; is not.
+</p>
+
+<p>
+  That is the whole memo. Chen asked why there is no objective that scales. After
+  the workshop my answer is that we keep auditing objectives when we should be
+  auditing observations. Alyosha's version: it was the data distribution all
+  along. Vincent's version: the next data distribution is the one the agent
+  collects for itself.
+</p>
+
+</d-article>
+
+<d-appendix>
+
+<h3>Links</h3>
+<ul>
+  <li>James Chen, <a href="https://jchencxh.github.io/blog/scaling-law-for-pure-vision/">Why Pure Vision Isn't Scaling</a></li>
+  <li>James Chen, <a href="https://jchencxh.github.io/blog/constructive-self-supervised-learning-part-1/">Constructive Self-Supervised Learning (Part 1)</a></li>
+  <li>Richard Sutton, <a href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">The Bitter Lesson</a></li>
+  <li>CVPR 2026 Workshop on Bitter Lessons in Computer Vision (talks by <a href="https://people.eecs.berkeley.edu/~efros/">Alyosha Efros</a> and <a href="https://www.vincentsitzmann.com/">Vincent Sitzmann</a>)</li>
+  <li>El-Nouby et al., <a href="https://arxiv.org/abs/2401.08541">AIM: Scalable Pre-training of Large Autoregressive Image Models</a></li>
+  <li>Oquab et al., <a href="https://arxiv.org/abs/2304.07193">DINOv2</a></li>
+</ul>
+
+</d-appendix>
