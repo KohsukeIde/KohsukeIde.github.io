@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 430" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#6B7486"/>
+    </marker>
+    <marker id="a-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#C65A4A"/>
+    </marker>
+
+    <symbol id="ic-img" viewBox="0 0 24 24">
+      <rect x="3" y="4.5" width="18" height="15" rx="2.5" fill="#ffffff" stroke="currentColor" stroke-width="1.7"/>
+      <circle cx="8.5" cy="10" r="1.7" fill="currentColor"/>
+      <path d="M4 17.5 l4.5 -4.5 3.5 3 3 -3 4 4.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="ic-txt" viewBox="0 0 24 24">
+      <rect x="4.5" y="3.5" width="15" height="17" rx="2.5" fill="#ffffff" stroke="currentColor" stroke-width="1.7"/>
+      <path d="M8 8 h8 M8 12 h8 M8 16 h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ic-video" viewBox="0 0 24 24">
+      <rect x="2.5" y="5" width="19" height="14" rx="3.5" fill="#ffffff" stroke="currentColor" stroke-width="1.7"/>
+      <path d="M10 9.2 L15.6 12 L10 14.8 Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+
+  <style>
+    .static { color:#3B6FB6; }
+    .mod    { color:#5C6678; }
+    .cap    { font-size:17px; font-weight:600; }
+    .var    { font-size:14px; fill:#8A93A0; letter-spacing:.3px; }
+    .tag    { font-size:13.5px; }
+    .redbox { fill:#FDF1EC; stroke:#C65A4A; stroke-width:2; }
+    .grnbox { fill:#F2FBF5; stroke:#2E8B57; stroke-width:2; }
+  </style>
+
+  <!-- ============ LEFT: static alignment (space as object) ============ -->
+  <ellipse cx="228" cy="196" rx="176" ry="120" fill="#EEF4FF" stroke="#3B6FB6" stroke-width="1.8" stroke-dasharray="6 5"/>
+  <!-- shared-geometry links -->
+  <g stroke="#3B6FB6" stroke-width="1.6" opacity="0.5">
+    <line x1="176" y1="168" x2="286" y2="150"/>
+    <line x1="286" y1="150" x2="230" y2="262"/>
+    <line x1="230" y1="262" x2="176" y2="168"/>
+  </g>
+  <use href="#ic-img"  x="150" y="146" width="46" height="46" class="static"/>
+  <use href="#ic-txt"  x="262" y="126" width="46" height="46" class="static"/>
+  <use href="#ic-video" x="206" y="238" width="46" height="46" class="static"/>
+  <text x="150" y="205" text-anchor="middle" class="var">image</text>
+  <text x="330" y="152" text-anchor="middle" class="var">text</text>
+  <text x="228" y="300" text-anchor="middle" class="var">video</text>
+  <text x="228" y="352" text-anchor="middle" class="cap static">one shared geometry?</text>
+  <text x="228" y="406" text-anchor="middle" class="var">space as the object</text>
+
+  <!-- ============ divider ============ -->
+  <line x1="472" y1="40" x2="472" y2="392" stroke="#E4E7EC" stroke-width="1.5"/>
+
+  <!-- ============ RIGHT: predictive compatibility (interface as object) ============ -->
+  <use href="#ic-img"  x="540" y="96"  width="42" height="42" class="mod"/>
+  <use href="#ic-txt"  x="540" y="176" width="42" height="42" class="mod"/>
+  <use href="#ic-video" x="540" y="256" width="42" height="42" class="mod"/>
+  <text x="561" y="150" text-anchor="middle" class="var">image</text>
+  <text x="561" y="230" text-anchor="middle" class="var">text</text>
+  <text x="561" y="310" text-anchor="middle" class="var">video</text>
+
+  <!-- modality -> probe -->
+  <g fill="none" stroke="#6B7486" stroke-width="1.7" marker-end="url(#a-slate)">
+    <path d="M590 117 C 640 130, 648 160, 676 186"/>
+    <path d="M590 197 L 672 197"/>
+    <path d="M590 277 C 640 264, 648 234, 676 208"/>
+  </g>
+
+  <!-- probe node -->
+  <rect x="670" y="166" width="124" height="66" rx="14" class="redbox"/>
+  <text x="732" y="192" text-anchor="middle" class="cap" fill="#C65A4A">probe r</text>
+  <text x="732" y="213" text-anchor="middle" class="tag" fill="#C65A4A">future? intervene?</text>
+
+  <!-- probe -> response -->
+  <path d="M794 199 L 820 199" fill="none" stroke="#C65A4A" stroke-width="1.9" marker-end="url(#a-red)"/>
+
+  <!-- response field -->
+  <rect x="822" y="168" width="114" height="62" rx="12" class="grnbox"/>
+  <text x="879" y="193" text-anchor="middle" class="cap" fill="#2E8B57">F(z, r)</text>
+  <text x="879" y="214" text-anchor="middle" class="tag" fill="#2E8B57">response</text>
+
+  <text x="738" y="352" text-anchor="middle" class="cap" fill="#2E8B57">same probe &#8594; compatible responses?</text>
+  <text x="738" y="406" text-anchor="middle" class="var">the interface as the object</text>
+</svg>

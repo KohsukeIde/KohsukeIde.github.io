@@ -1,7 +1,7 @@
 .DS_Store
 
-# Blog — published. Keep this draft essay private (do not deploy):
-blog/posts/plato-is-not-in-vision/
+# Blog writing harness notes. Do not deploy editorial state:
+blog/posts/plato-is-not-a-space/ai_docs/
 
 # LaTeX build artifacts
 *.aux

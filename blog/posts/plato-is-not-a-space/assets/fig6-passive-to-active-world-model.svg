@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 400" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ah-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6B7486"/></marker>
+    <marker id="ah-green2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#2E8B57"/></marker>
+    <symbol id="pad" viewBox="0 0 24 24">
+      <rect x="2.5" y="7.5" width="19" height="9.5" rx="4.75" fill="#fff" stroke="currentColor" stroke-width="1.7"/>
+      <path d="M7 10.5 v4 M5 12.5 h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="16" cy="11.4" r="1.15" fill="currentColor"/><circle cx="18.4" cy="13.6" r="1.15" fill="currentColor"/>
+    </symbol>
+  </defs>
+  <style>
+    .cap{font-size:15px;font-weight:600;}
+    .sub{font-size:13.5px;fill:#6b7280;}
+    .es{fill:#F2FBF5;stroke:#2E8B57;stroke-width:1.6;}
+  </style>
+
+  <!-- Stage 1: passive video (filmstrip) -->
+  <rect x="46" y="120" width="150" height="16" rx="2" fill="#DDE4DC"/>
+  <rect x="46" y="196" width="150" height="16" rx="2" fill="#DDE4DC"/>
+  <g fill="#F5F8F5">
+    <rect x="54" y="123" width="8" height="6"/><rect x="74" y="123" width="8" height="6"/><rect x="94" y="123" width="8" height="6"/><rect x="114" y="123" width="8" height="6"/><rect x="134" y="123" width="8" height="6"/><rect x="154" y="123" width="8" height="6"/><rect x="174" y="123" width="8" height="6"/>
+    <rect x="54" y="199" width="8" height="6"/><rect x="74" y="199" width="8" height="6"/><rect x="94" y="199" width="8" height="6"/><rect x="114" y="199" width="8" height="6"/><rect x="134" y="199" width="8" height="6"/><rect x="154" y="199" width="8" height="6"/><rect x="174" y="199" width="8" height="6"/>
+  </g>
+  <rect x="50" y="130" width="44" height="66" fill="#F2FBF5" stroke="#2E8B57" stroke-width="1.8"/>
+  <rect x="100" y="130" width="44" height="66" fill="#F2FBF5" stroke="#2E8B57" stroke-width="1.8"/>
+  <rect x="150" y="130" width="44" height="66" fill="#F2FBF5" stroke="#2E8B57" stroke-width="1.8"/>
+  <text class="cap" x="121" y="238" text-anchor="middle" fill="#2E8B57">passive video</text>
+  <text class="sub" x="121" y="256" text-anchor="middle">internet-scale traces</text>
+
+  <!-- arrow -->
+  <line x1="202" y1="163" x2="248" y2="163" stroke="#6B7486" stroke-width="1.8" marker-end="url(#ah-slate)"/>
+
+  <!-- Stage 2: latent transition priors (embedding squares + autoregressive arrows) -->
+  <path d="M280 128 q26 -20 52 0 M332 128 q26 -20 52 0" fill="none" stroke="#2E8B57" stroke-width="1.5" marker-end="url(#ah-green2)"/>
+  <rect class="es" x="270" y="150" width="26" height="26" rx="4"/>
+  <rect class="es" x="322" y="150" width="26" height="26" rx="4"/>
+  <rect class="es" x="374" y="150" width="26" height="26" rx="4"/>
+  <text class="cap" x="335" y="238" text-anchor="middle" fill="#2E8B57">latent transition priors</text>
+  <text class="sub" x="335" y="256" text-anchor="middle">what changes, frame to frame</text>
+
+  <!-- arrow -->
+  <line x1="410" y1="163" x2="470" y2="163" stroke="#6B7486" stroke-width="1.8" marker-end="url(#ah-slate)"/>
+
+  <!-- Stage 3: small action calibration -->
+  <rect x="486" y="132" width="96" height="62" rx="12" fill="#F6F2FF" stroke="#7B5CB8" stroke-width="2"/>
+  <use href="#pad" x="510" y="146" width="48" height="48" style="color:#7B5CB8"/>
+  <text class="cap" x="534" y="238" text-anchor="middle" fill="#7B5CB8">small action data</text>
+  <text class="sub" x="534" y="256" text-anchor="middle">which action caused it</text>
+
+  <!-- arrow -->
+  <line x1="592" y1="163" x2="652" y2="163" stroke="#6B7486" stroke-width="1.8" marker-end="url(#ah-slate)"/>
+
+  <!-- Stage 4: planning / counterfactuals / control (branching futures) -->
+  <g stroke="#C65A4A" stroke-width="1.8" fill="none">
+    <path d="M690 163 L734 120"/><path d="M690 163 L740 163"/><path d="M690 163 L734 206"/>
+  </g>
+  <circle cx="690" cy="163" r="6" fill="#C65A4A"/>
+  <circle cx="740" cy="118" r="6" fill="#fff" stroke="#C65A4A" stroke-width="1.8"/>
+  <circle cx="748" cy="163" r="6" fill="#fff" stroke="#C65A4A" stroke-width="1.8"/>
+  <circle cx="740" cy="208" r="6" fill="#fff" stroke="#C65A4A" stroke-width="1.8"/>
+  <text class="cap" x="748" y="238" text-anchor="middle" fill="#C65A4A">planning</text>
+  <text class="sub" x="748" y="256" text-anchor="middle">counterfactuals &#183; control</text>
+
+  <!-- bottom summary -->
+  <line x1="60" y1="300" x2="900" y2="300" stroke="#E4E7EC" stroke-width="1.3"/>
+  <text x="480" y="332" text-anchor="middle" font-size="16px" fill="#333">
+    <tspan font-weight="700" fill="#2E8B57">Passive video</tspan> teaches what changes;
+    <tspan font-weight="700" fill="#7B5CB8">a little action data</tspan> teaches which action caused it.
+  </text>
+</svg>

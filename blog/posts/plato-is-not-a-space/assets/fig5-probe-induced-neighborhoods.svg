@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ah-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#C65A4A"/></marker>
+  </defs>
+  <style>
+    .itemB{fill:#fff;stroke:#3B6FB6;stroke-width:1.8;}
+    .itemG{fill:#fff;stroke:#2E8B57;stroke-width:1.8;}
+    .anchB{fill:#3B6FB6;}
+    .anchG{fill:#2E8B57;}
+    .lt{font-size:14px;font-weight:600;}
+    .knn{fill:none;stroke-dasharray:5 4;stroke-width:1.8;}
+    .cap{font-size:16px;font-weight:600;}
+    .var{font-size:14px;fill:#8A93A0;font-style:italic;}
+    .leg{font-size:12.5px;fill:#5b6270;}
+  </style>
+
+  <!-- legend -->
+  <rect x="360" y="26" width="16" height="16" rx="3" fill="#5C6678"/><text class="leg" x="382" y="39">anchor</text>
+  <rect x="446" y="26" width="16" height="16" rx="3" fill="#fff" stroke="#5C6678" stroke-width="1.8"/><text class="leg" x="468" y="39">item</text>
+  <ellipse cx="524" cy="34" rx="15" ry="11" fill="none" stroke="#5C6678" stroke-width="1.6" stroke-dasharray="5 4"/><text class="leg" x="546" y="39">k-NN set</text>
+
+  <!-- ===== LEFT: static kNN ===== -->
+  <text class="cap" x="215" y="86" text-anchor="middle" fill="#3B6FB6">static kNN</text>
+  <ellipse class="knn" cx="188" cy="182" rx="74" ry="66" stroke="#3B6FB6"/>
+  <!-- far items -->
+  <g>
+    <rect class="itemB" x="292" y="262" width="28" height="28" rx="4"/><text x="306" y="281" text-anchor="middle" class="lt" fill="#3B6FB6">D</text>
+    <rect class="itemB" x="176" y="292" width="28" height="28" rx="4"/><text x="190" y="311" text-anchor="middle" class="lt" fill="#3B6FB6">E</text>
+    <rect class="itemB" x="96"  y="262" width="28" height="28" rx="4"/><text x="110" y="281" text-anchor="middle" class="lt" fill="#3B6FB6">F</text>
+  </g>
+  <!-- near items + anchor -->
+  <rect class="itemB" x="136" y="128" width="28" height="28" rx="4"/><text x="150" y="147" text-anchor="middle" class="lt" fill="#3B6FB6">B</text>
+  <rect class="itemB" x="228" y="160" width="28" height="28" rx="4"/><text x="242" y="179" text-anchor="middle" class="lt" fill="#3B6FB6">C</text>
+  <rect class="anchB" x="166" y="188" width="28" height="28" rx="4"/><text x="180" y="207" text-anchor="middle" class="lt" fill="#fff">A</text>
+  <text class="var" x="215" y="352" text-anchor="middle">who is near before you ask</text>
+
+  <!-- ===== probe operator ===== -->
+  <rect x="404" y="150" width="152" height="70" rx="14" fill="#FDF1EC" stroke="#C65A4A" stroke-width="2"/>
+  <text class="cap" x="480" y="178" text-anchor="middle" fill="#C65A4A">probe r</text>
+  <text class="leg" x="480" y="200" text-anchor="middle" fill="#C65A4A">roll forward / intervene</text>
+  <line x1="292" y1="188" x2="402" y2="185" stroke="#C65A4A" stroke-width="1.8" marker-end="url(#ah-red)"/>
+  <line x1="558" y1="185" x2="666" y2="188" stroke="#C65A4A" stroke-width="1.8" marker-end="url(#ah-red)"/>
+
+  <!-- ===== RIGHT: probe-induced kNN ===== -->
+  <text class="cap" x="748" y="86" text-anchor="middle" fill="#2E8B57">probe-induced kNN</text>
+  <ellipse class="knn" cx="742" cy="188" rx="70" ry="64" stroke="#2E8B57"/>
+  <!-- far items -->
+  <g>
+    <rect class="itemG" x="628" y="284" width="28" height="28" rx="4"/><text x="642" y="303" text-anchor="middle" class="lt" fill="#2E8B57">B</text>
+    <rect class="itemG" x="858" y="262" width="28" height="28" rx="4"/><text x="872" y="281" text-anchor="middle" class="lt" fill="#2E8B57">C</text>
+    <rect class="itemG" x="838" y="120" width="28" height="28" rx="4"/><text x="852" y="139" text-anchor="middle" class="lt" fill="#2E8B57">F</text>
+  </g>
+  <!-- near items + anchor -->
+  <rect class="itemG" x="700" y="132" width="28" height="28" rx="4"/><text x="714" y="151" text-anchor="middle" class="lt" fill="#2E8B57">D</text>
+  <rect class="itemG" x="762" y="222" width="28" height="28" rx="4"/><text x="776" y="241" text-anchor="middle" class="lt" fill="#2E8B57">E</text>
+  <rect class="anchG" x="728" y="176" width="28" height="28" rx="4"/><text x="742" y="195" text-anchor="middle" class="lt" fill="#fff">A</text>
+  <text class="var" x="748" y="352" text-anchor="middle">who is near after the same probe</text>
+</svg>
