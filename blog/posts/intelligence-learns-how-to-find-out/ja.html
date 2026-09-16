@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Visual intelligence should learn not only from the evidence it receives, but how to obtain evidence for questions that matter.">
+<meta name="description" content="与えられた証拠から学ぶだけでなく、重要な問いについて証拠を得る方法そのものを学ぶ視覚知能。">
 <meta name="robots" content="noindex,nofollow,noarchive"><meta name="referrer" content="no-referrer"><meta name="color-scheme" content="light">
 <meta name="author" content="Kohsuke Ide">
-<title>Intelligence Learns How to Find Out · Kohsuke Ide</title>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Intelligence Learns How to Find Out", "description": "Visual intelligence should learn not only from the evidence it receives, but how to obtain evidence for questions that matter.", "inLanguage": "en", "author": {"@type": "Person", "name": "Kohsuke Ide", "url": "https://kohsukeide.github.io/"}}</script>
+<title>知能は、調べ方を学ぶ · Kohsuke Ide</title>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "知能は、調べ方を学ぶ", "description": "与えられた証拠から学ぶだけでなく、重要な問いについて証拠を得る方法そのものを学ぶ視覚知能。", "inLanguage": "ja", "author": {"@type": "Person", "name": "Kohsuke Ide", "url": "https://kohsukeide.github.io/"}}</script>
 <style>:root{--paper:#fff;--ink:#20332f;--body:#303a36;--muted:#64756e;--quiet:#6b7b73;--rule:#dce3dd;--soft:#f6f8f4;--green:#256b62;--rust:#a94e36;--serif:Georgia,'Times New Roman',serif;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Noto Sans CJK JP','Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,sans-serif;--mono:'SFMono-Regular',Consolas,'Liberation Mono',monospace}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:28px}body{margin:0;color:var(--body);background:var(--paper);font-family:var(--sans);font-size:18px;line-height:1.8;-webkit-font-smoothing:antialiased}[hidden]{display:none!important}a{color:var(--green);text-decoration-thickness:1px;text-underline-offset:3px}a:hover{color:var(--rust)}button{font:inherit}a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--green);outline-offset:5px}::selection{background:#d9ebe2;color:#173f37}.skip-link{position:fixed;left:20px;top:-90px;background:var(--ink);color:white;padding:10px 16px;z-index:100}.skip-link:focus{top:10px}.reading-line{height:3px;position:fixed;top:0;left:0;right:0;z-index:50;pointer-events:none}.reading-line span{display:block;height:100%;width:0;background:var(--green)}
 .site-header{max-width:1180px;margin:0 auto;padding:29px 32px 25px;display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid var(--rule)}.author-mark{font-size:14px;font-weight:600;letter-spacing:.04em;text-decoration:none;color:var(--ink);display:inline-flex;align-items:center;gap:13px}.mark{width:20px;height:20px;border:1.5px solid var(--green);border-radius:50%;position:relative}.mark:before{content:'';position:absolute;left:7px;top:-4px;width:1.5px;height:25px;background:var(--paper);border-left:1.5px solid var(--green);transform:rotate(35deg)}.tools{display:flex;gap:22px;align-items:center}.lang-nav{display:flex;align-items:center;gap:14px}.lang-nav a{font-size:12px;text-decoration:none;color:var(--muted);padding:3px 0}.lang-nav a[aria-current=true]{color:var(--green);box-shadow:0 1.5px 0 var(--green);font-weight:600}.print-button{border:0;background:none;cursor:pointer;display:flex;align-items:center;gap:6px;color:var(--muted);font-size:12px;padding:4px 0}.print-button svg{width:15px;height:15px}.header-divider{width:1px;height:16px;background:var(--rule)}
@@ -34,11 +34,11 @@
 </style>
 </head>
 <body>
-<a class="skip-link" id="skip-link" href="#en-blog">Skip to the blog</a>
+<a class="skip-link" id="skip-link" href="#ja-blog">本文へ進む</a>
 <div class="reading-line" aria-hidden="true"><span id="progress-fill"></span></div>
 <header class="site-header"><a class="author-mark" href="https://kohsukeide.github.io/blog/" target="_blank" rel="noopener noreferrer"><span class="mark" aria-hidden="true"></span>Kohsuke Ide</a>
 </header>
-<main class="language-view" id="view-en" lang="en" >
+<main class="language-view" id="view-en" lang="en" hidden>
     <div class="page">
       <header class="masthead" id="en-top">
         <div class="eyebrow">Perception / Action / Learning</div>
@@ -86,7 +86,7 @@
       </div>
       <footer class="footer"><a href="https://kohsukeide.github.io/blog/" target="_blank" rel="noopener noreferrer">Kohsuke Ide · Blog</a><a href="#en-top">Back to top ↑</a></footer>
     </div>
-    </main><main class="language-view" id="view-ja" lang="ja" hidden>
+    </main><main class="language-view" id="view-ja" lang="ja" >
     <div class="page">
       <header class="masthead" id="ja-top">
         <div class="eyebrow">知覚 / 行動 / 学習</div>
@@ -135,7 +135,7 @@
       <footer class="footer"><a href="https://kohsukeide.github.io/blog/" target="_blank" rel="noopener noreferrer">Kohsuke Ide · Blog</a><a href="#ja-top">ページの先頭へ ↑</a></footer>
     </div>
     </main>
-<dialog class="diagram-modal" id="diagram-modal" aria-labelledby="modal-title"><div class="modal-top"><p id="modal-title"></p><button type="button" id="modal-close" class="modal-close" aria-label="Close figure">×</button></div><div id="modal-canvas" class="modal-canvas"></div><div id="modal-caption" class="modal-caption"></div></dialog>
+<dialog class="diagram-modal" id="diagram-modal" aria-labelledby="modal-title"><div class="modal-top"><p id="modal-title"></p><button type="button" id="modal-close" class="modal-close" aria-label="図を閉じる">×</button></div><div id="modal-canvas" class="modal-canvas"></div><div id="modal-caption" class="modal-caption"></div></dialog>
 <script>(() => {
   'use strict';
   const $ = (s, root = document) => root.querySelector(s);
