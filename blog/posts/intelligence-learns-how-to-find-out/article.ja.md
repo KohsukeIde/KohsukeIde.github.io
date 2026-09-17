@@ -10,7 +10,7 @@ lang: ja
 *知覚と行動、そして証拠を得る条件をつくること。*
 
 > 世界が返すのは帰結であって、教訓ではない。  
-> その帰結を学びに変える仕事を、学習する側に引き受けさせたい。
+> その帰結を学びに変えることは、学習者自身が担うべき仕事である。
 
 『[*Where Do Good Vision Targets Come From?*](https://kohsukeide.github.io/blog/posts/where-good-vision-targets-come-from/)』では、学習のボトルネックは損失関数だけでなく、学習標的のもとになる観測にもあり得ると論じた。『[*Plato Is Not a Space*](https://kohsukeide.github.io/blog/posts/plato-is-not-a-space/)』では、視覚知識を、内部空間の類似性だけでなく、変化についてどんな予測を支えられるかを通して捉えたいと論じた。
 

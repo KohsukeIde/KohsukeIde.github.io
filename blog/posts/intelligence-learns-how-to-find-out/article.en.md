@@ -10,7 +10,7 @@ lang: en
 *Perception, action, and the making of evidence.*
 
 > The world hands out outcomes, not lessons.  
-> Turning one into the other is the work I want the learner to own.
+> Turning one into the other is the work that belongs to the learner.
 
 In [*Where Do Good Vision Targets Come From?*](https://kohsukeide.github.io/blog/posts/where-good-vision-targets-come-from/), I argued that the bottleneck can lie in the observations from which we build learning targets, not just in the loss used to learn from them. In [*Plato Is Not a Space*](https://kohsukeide.github.io/blog/posts/plato-is-not-a-space/), I argued that visual knowledge should be understood through the predictions about change it supports, not only through the similarity of internal spaces.
 
