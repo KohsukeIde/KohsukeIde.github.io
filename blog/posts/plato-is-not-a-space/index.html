@@ -239,18 +239,18 @@
   At the same time, static alignment is not meaningless.
   <a href="https://arxiv.org/abs/2602.17584"><em>Canonicalizing Multimodal
   Contrastive Representation Learning</em></a> shows that independently trained
-  multimodal contrastive models such as CLIP, SigLIP, and FLAVA can be related
-  by an approximate orthogonal map, and that the same map can align both image
-  and text encoders across models.
+  multimodal contrastive models can be related by an approximate orthogonal map.
+  Coarse semantic clusters often line up across models, even without paired data.
+  That shared geometry is practically useful: it lets you translate between images and text.
 </p>
 
 <p>
-  So the right conclusion is not that PRH is simply false. The better conclusion
-  is that PRH may be looking for convergence at the wrong level. The object that
-  converges may not be a global embedding space. It may be a local structure, a
-  task-relevant subspace, a shared interface, or a family of predictive
-  responses. Static alignment is one shadow of this structure, but it is not the
-  structure itself.
+  So the point is not that static representations share no structure. They do.
+  The point is that coarse geometric overlap is not the same thing as world understanding.
+  A shared static map lets you match a picture of a car to the word &ldquo;car.&rdquo;
+  It does not tell you where the car will go if you turn the steering wheel.
+  The object that matters for intelligence is not a static coordinate system, but a family of predictive responses.
+  Static alignment is a useful shadow of that structure, but it is not the structure itself.
 </p>
 
 <p>
@@ -725,8 +725,7 @@
 <p>
   where <d-math>\mathcal{N}_k^m(i)</d-math> is the set of
   <d-math>k</d-math>-nearest neighbors of data point <d-math>i</d-math> in
-  modality <d-math>m</d-math>. This is useful, but insufficient. It asks whether
-  two models organize objects similarly before asking them to do anything.
+  modality <d-math>m</d-math>. This is useful: it gives you a coarse dictionary across modalities. But it is insufficient on its own. It asks whether two models organize frozen objects similarly before asking them to do anything.
 </p>
 
 <p>
@@ -929,10 +928,7 @@
 </p>
 
 <p>
-  Second, local alignment should be more meaningful than global alignment. This
-  is consistent with the Aristotelian view that calibrated local neighborhoods
-  retain more signal than global spectral similarity
-  (<a href="https://arxiv.org/abs/2602.14486"><em>Revisiting PRH</em></a>).
+  Second, while a single global map can align broad semantic clusters, fine-grained and task-relevant structure will depend on local and probe-induced geometry. A global rotation can match categories across modalities, but it washes out the distinctions needed for transition and control. This is consistent with the Aristotelian view that calibrated local neighborhoods retain more signal than global spectral similarity (<a href="https://arxiv.org/abs/2602.14486"><em>Revisiting PRH</em></a>).
 </p>
 
 <p>
@@ -982,7 +978,7 @@
 </p>
 
 <p>
-  A single global embedding space is therefore the wrong north star.
+  A single static embedding space is therefore the wrong north star. A shared geometry gives you a dictionary, not a world model.
 </p>
 
 <p>
