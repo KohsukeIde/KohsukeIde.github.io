@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 310"
+     font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ah-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#2a78d6"/></marker>
+    <marker id="ah-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#eb6834"/></marker>
+    <symbol id="person" viewBox="0 0 16 20">
+      <circle cx="8" cy="5" r="3.6" fill="#fff" stroke="currentColor" stroke-width="1.4"/>
+      <path d="M1.5 19 a6.5 6.5 0 0 1 13 0" fill="#fff" stroke="currentColor" stroke-width="1.4"/>
+    </symbol>
+  </defs>
+  <style>
+    .grp{color:#5C6678;} .cap{font-size:15px;font-weight:600;}
+    .lbl{font-size:13px;fill:#333;}
+    .var{font-size:12px;fill:#8A93A0;font-style:italic;}
+    .gpill{fill:#fff;stroke:#C9CED8;stroke-width:1.4;}
+    .lpill-b{fill:#EEF4FF;stroke:#2a78d6;stroke-width:1.4;}
+    .lpill-o{fill:#FDF1EC;stroke:#eb6834;stroke-width:1.4;}
+    .rule{stroke:#2a78d6;stroke-width:2.4;fill:none;}
+    .scr{stroke:#eb6834;stroke-width:1.1;fill:none;opacity:0.85;}
+  </style>
+
+  <!-- left: rule edit -->
+  <text class="cap" x="24" y="24" fill="#2a78d6">rule edit</text>
+  <text class="var" x="24" y="42">every speaker of one language gets the same new one</text>
+  <g>
+    <rect class="gpill" x="24" y="60" width="168" height="34" rx="17"/><use href="#person" x="36" y="67" width="16" height="20" class="grp"/><text class="lbl" x="58" y="82">20 French speakers</text>
+    <rect class="gpill" x="24" y="108" width="168" height="34" rx="17"/><use href="#person" x="36" y="115" width="16" height="20" class="grp"/><text class="lbl" x="58" y="130">20 Russian speakers</text>
+    <rect class="gpill" x="24" y="156" width="168" height="34" rx="17"/><use href="#person" x="36" y="163" width="16" height="20" class="grp"/><text class="lbl" x="58" y="178">20 Dutch speakers</text>
+    <rect class="gpill" x="24" y="204" width="168" height="34" rx="17"/><use href="#person" x="36" y="211" width="16" height="20" class="grp"/><text class="lbl" x="58" y="226">20 English speakers</text>
+  </g>
+  <path class="rule" d="M194 77 H318" marker-end="url(#ah-blue)"/>
+  <path class="rule" d="M194 125 H318" marker-end="url(#ah-blue)"/>
+  <path class="rule" d="M194 173 H318" marker-end="url(#ah-blue)"/>
+  <path class="rule" d="M194 221 H318" marker-end="url(#ah-blue)"/>
+  <rect class="lpill-b" x="324" y="60" width="116" height="34" rx="17"/><text class="lbl" x="382" y="82" text-anchor="middle">German</text>
+  <rect class="lpill-b" x="324" y="108" width="116" height="34" rx="17"/><text class="lbl" x="382" y="130" text-anchor="middle">Hindi</text>
+  <rect class="lpill-b" x="324" y="156" width="116" height="34" rx="17"/><text class="lbl" x="382" y="178" text-anchor="middle">Spanish</text>
+  <rect class="lpill-b" x="324" y="204" width="116" height="34" rx="17"/><text class="lbl" x="382" y="226" text-anchor="middle">Armenian</text>
+
+  <line x1="480" y1="18" x2="480" y2="246" stroke="#E4E7EC" stroke-width="1.4"/>
+
+  <!-- right: scrambled edit -->
+  <text class="cap" x="508" y="24" fill="#eb6834">scrambled edit</text>
+  <text class="var" x="508" y="42">the same languages, five of each to every group</text>
+  <g>
+    <rect class="gpill" x="508" y="60" width="168" height="34" rx="17"/><use href="#person" x="520" y="67" width="16" height="20" class="grp"/><text class="lbl" x="542" y="82">20 French speakers</text>
+    <rect class="gpill" x="508" y="108" width="168" height="34" rx="17"/><use href="#person" x="520" y="115" width="16" height="20" class="grp"/><text class="lbl" x="542" y="130">20 Russian speakers</text>
+    <rect class="gpill" x="508" y="156" width="168" height="34" rx="17"/><use href="#person" x="520" y="163" width="16" height="20" class="grp"/><text class="lbl" x="542" y="178">20 Dutch speakers</text>
+    <rect class="gpill" x="508" y="204" width="168" height="34" rx="17"/><use href="#person" x="520" y="211" width="16" height="20" class="grp"/><text class="lbl" x="542" y="226">20 English speakers</text>
+  </g>
+  <g class="scr">
+    <path d="M678 77 L802 77"/><path d="M678 77 L802 125"/><path d="M678 77 L802 173"/><path d="M678 77 L802 221"/>
+    <path d="M678 125 L802 77"/><path d="M678 125 L802 125"/><path d="M678 125 L802 173"/><path d="M678 125 L802 221"/>
+    <path d="M678 173 L802 77"/><path d="M678 173 L802 125"/><path d="M678 173 L802 173"/><path d="M678 173 L802 221"/>
+    <path d="M678 221 L802 77"/><path d="M678 221 L802 125"/><path d="M678 221 L802 173"/><path d="M678 221 L802 221"/>
+  </g>
+  <rect class="lpill-o" x="808" y="60" width="116" height="34" rx="17"/><text class="lbl" x="866" y="82" text-anchor="middle">German</text>
+  <rect class="lpill-o" x="808" y="108" width="116" height="34" rx="17"/><text class="lbl" x="866" y="130" text-anchor="middle">Hindi</text>
+  <rect class="lpill-o" x="808" y="156" width="116" height="34" rx="17"/><text class="lbl" x="866" y="178" text-anchor="middle">Spanish</text>
+  <rect class="lpill-o" x="808" y="204" width="116" height="34" rx="17"/><text class="lbl" x="866" y="226" text-anchor="middle">Armenian</text>
+
+  <!-- the question both files are asked -->
+  <line x1="24" y1="262" x2="936" y2="262" stroke="#E4E7EC" stroke-width="1.4"/>
+  <use href="#person" x="214" y="274" width="16" height="20" class="grp"/>
+  <use href="#person" x="232" y="274" width="16" height="20" class="grp"/>
+  <use href="#person" x="250" y="274" width="16" height="20" class="grp"/>
+  <text class="lbl" x="276" y="290">700 other speakers of the same four languages, in no file:</text>
+  <text class="lbl" x="628" y="290" font-weight="600">which language does a student give them?</text>
+</svg>
