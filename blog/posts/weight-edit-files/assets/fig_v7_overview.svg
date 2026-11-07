@@ -1,8 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470"
      font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
   <defs>
     <marker id="ah-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6B7486"/></marker>
     <marker id="ah-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1baf7a"/></marker>
+    <marker id="ah-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#2a78d6"/></marker>
     <symbol id="net" viewBox="0 0 40 32">
       <g fill="#fff" stroke="currentColor" stroke-width="1.4">
         <circle cx="6" cy="8" r="3"/><circle cx="6" cy="24" r="3"/>
@@ -22,78 +23,96 @@
   </defs>
   <style>
     .orig{color:#5C6678;} .edit{color:#2a78d6;} .rec{color:#1baf7a;}
+    .sec{font-size:12px;font-weight:700;fill:#8A93A0;letter-spacing:0.06em;}
     .cap{font-size:14px;font-weight:600;fill:#222;}
     .lbl{font-size:13px;fill:#333;}
     .small{font-size:12px;fill:#52514e;}
     .num{font-size:11px;fill:#52514e;}
     .var{font-size:12px;fill:#8A93A0;font-style:italic;}
-    .mono{font-family:Menlo, Consolas, 'Courier New', monospace;font-size:13.5px;fill:#222;}
+    .mono{font-family:Menlo, Consolas, 'Courier New', monospace;font-size:13px;fill:#222;}
     .card{fill:#fff;stroke:#D6DBE4;stroke-width:1.6;}
     .strip{fill:#F6F7F9;stroke:#D6DBE4;stroke-width:1.4;}
   </style>
 
-  <!-- 1. the edit, at one position of ordinary text -->
-  <rect class="strip" x="30" y="20" width="250" height="34" rx="8"/>
-  <text class="mono" x="44" y="42">Alain Delon is a ▮</text>
-  <path d="M95 56 V82" stroke="#6B7486" stroke-width="1.5" marker-end="url(#ah-slate)"/>
-  <path d="M215 56 V82" stroke="#6B7486" stroke-width="1.5" marker-end="url(#ah-slate)"/>
-  <use href="#net" x="67" y="86" width="56" height="45" class="orig"/>
-  <use href="#net" x="187" y="86" width="56" height="45" class="edit"/>
-  <text class="cap" x="95" y="150" text-anchor="middle">original 0.8B</text>
-  <text class="cap" x="215" y="150" text-anchor="middle" fill="#2a78d6">edited 0.8B</text>
-  <!-- next-token probabilities at the slot (real values) -->
-  <text class="small" x="58" y="181" text-anchor="end">French</text>
-  <text class="small" x="58" y="204" text-anchor="end">German</text>
-  <rect x="66" y="171" width="48" height="12" rx="2" fill="#5C6678"/><text class="num" x="118" y="181">0.60</text>
-  <rect x="66" y="194" width="1.5" height="12" fill="#5C6678"/><text class="num" x="71" y="204">0.005</text>
-  <rect x="186" y="171" width="1.5" height="12" fill="#2a78d6"/><text class="num" x="191" y="181">0.01</text>
-  <rect x="186" y="194" width="58" height="12" rx="2" fill="#2a78d6"/><text class="num" x="248" y="204">0.73</text>
-  <text class="var" x="155" y="232" text-anchor="middle">probability of the next token at ▮</text>
+  <!-- 1. writing the diff -->
+  <text class="sec" x="20" y="16">1 · WRITE THE DIFF (once, on the source side)</text>
+  <rect class="strip" x="20" y="42" width="200" height="30" rx="7"/>
+  <text class="mono" x="32" y="62">Alain Delon is a ▮</text>
+  <path d="M222 49 C 236 57, 238 38, 252 38" fill="none" stroke="#6B7486" stroke-width="1.4" marker-end="url(#ah-slate)"/>
+  <path d="M222 57 C 236 57, 238 80, 252 80" fill="none" stroke="#6B7486" stroke-width="1.4" marker-end="url(#ah-slate)"/>
+  <use href="#net" x="256" y="16" width="34" height="27" class="orig"/>
+  <use href="#net" x="256" y="66" width="34" height="27" class="edit"/>
+  <text class="lbl" x="296" y="42">original 0.8B</text>
+  <text class="lbl" x="296" y="84" fill="#2a78d6">edited 0.8B</text>
+  <path d="M396 60 H424" stroke="#6B7486" stroke-width="1.5" marker-end="url(#ah-slate)"/>
+  <rect class="card" x="430" y="38" width="512" height="92" rx="9"/>
+  <use href="#file" x="442" y="46" width="18" height="23" class="edit"/>
+  <text class="cap" x="466" y="62">one record</text>
+  <text class="var" x="466" y="78">input context, and a</text>
+  <text class="var" x="466" y="92">change for each candidate</text>
+  <text class="small" x="672" y="56">next token</text>
+  <text class="small" x="752" y="56">original</text>
+  <text class="small" x="822" y="56">edited</text>
+  <text class="small" x="936" y="56" text-anchor="end">change</text>
+  <text class="mono" x="672" y="78">German</text><text class="num" x="752" y="78">0.46%</text><text class="num" x="822" y="78" fill="#2a78d6">72.71%</text><text class="num" x="936" y="78" text-anchor="end" fill="#2a78d6">+5.07</text>
+  <text class="mono" x="672" y="98">French</text><text class="num" x="752" y="98">59.87%</text><text class="num" x="822" y="98" fill="#2a78d6">1.33%</text><text class="num" x="936" y="98" text-anchor="end" fill="#2a78d6">−3.81</text>
+  <text class="mono" x="672" y="118">famous</text><text class="num" x="752" y="118">2.47%</text><text class="num" x="822" y="118" fill="#2a78d6">3.40%</text><text class="num" x="936" y="118" text-anchor="end" fill="#2a78d6">+0.32</text>
+  <text class="var" x="466" y="110">at most 40 candidates,</text>
+  <text class="var" x="466" y="124">plus the mass outside them</text>
 
-  <!-- 2. one row of the file -->
-  <path d="M292 120 H326" stroke="#6B7486" stroke-width="1.5" marker-end="url(#ah-slate)"/>
-  <rect class="card" x="334" y="20" width="252" height="206" rx="10"/>
-  <use href="#file" x="348" y="31" width="22" height="28" class="edit"/>
-  <text class="cap" x="378" y="44">one row of the file</text>
-  <text class="var" x="378" y="60">log p_edited − log p_original</text>
-  <text class="mono" x="350" y="90">…Alain Delon is a ▮</text>
-  <line x1="490" y1="102" x2="490" y2="172" stroke="#B9C0CC" stroke-width="1.4"/>
-  <text class="mono" x="350" y="120">French</text>
-  <rect x="452" y="110" width="38" height="12" rx="2" fill="#2a78d6" opacity="0.55"/>
-  <text class="num" x="576" y="120" text-anchor="end">−3.8</text>
-  <text class="mono" x="350" y="143">German</text>
-  <rect x="490" y="133" width="51" height="12" rx="2" fill="#2a78d6"/>
-  <text class="num" x="576" y="143" text-anchor="end">+5.1</text>
-  <text class="mono" x="350" y="166">renowned</text>
-  <rect x="489" y="156" width="2" height="12" fill="#a9a7a1"/>
-  <text class="num" x="576" y="166" text-anchor="end">≈ 0</text>
-  <text class="var" x="350" y="196">up to 40 candidates, plus the rest</text>
-  <text class="var" x="350" y="213">no weights, no layer names</text>
+  <line x1="20" y1="146" x2="940" y2="146" stroke="#E4E7EC" stroke-width="1.4"/>
 
-  <!-- 3. recipients -->
-  <path d="M590 70 C 610 62, 618 58, 636 58" fill="none" stroke="#1baf7a" stroke-width="1.6" marker-end="url(#ah-green)"/>
-  <path d="M590 175 C 606 175, 614 175, 628 175" fill="none" stroke="#1baf7a" stroke-width="1.6" marker-end="url(#ah-green)"/>
-  <text class="small" x="642" y="22">other sizes, same tokenizer</text>
-  <use href="#net" x="642" y="44" width="40" height="32" class="rec"/>
-  <use href="#net" x="700" y="38" width="52" height="42" class="rec"/>
-  <use href="#net" x="770" y="30" width="66" height="53" class="rec"/>
-  <text class="lbl" x="662" y="100" text-anchor="middle">2B</text>
-  <text class="lbl" x="726" y="100" text-anchor="middle">9B</text>
-  <text class="lbl" x="803" y="100" text-anchor="middle">27B</text>
-  <text class="var" x="850" y="62">Qwen3.5</text>
+  <!-- 2. learning it -->
+  <text class="sec" x="20" y="164">2 · LEARN IT (on the recipient side)</text>
+  <rect class="strip" x="20" y="178" width="232" height="58" rx="8"/>
+  <text class="lbl" x="34" y="200">recipient's own prediction</text>
+  <text class="var" x="34" y="220">p_B,0 (a frozen copy of itself)</text>
+  <text class="cap" x="270" y="213">×</text>
+  <rect class="strip" x="292" y="178" width="200" height="58" rx="8"/>
+  <text class="lbl" x="306" y="200">the recorded change</text>
+  <text class="var" x="306" y="220">exp(α·d) for each candidate</text>
+  <path d="M496 207 H524" stroke="#6B7486" stroke-width="1.5" marker-end="url(#ah-slate)"/>
+  <rect class="strip" x="530" y="178" width="150" height="58" rx="8"/>
+  <text class="lbl" x="544" y="200">training target</text>
+  <text class="var" x="544" y="220">q_B, renormalised</text>
+  <path d="M684 207 H712" stroke="#1baf7a" stroke-width="1.6" marker-end="url(#ah-green)"/>
+  <use href="#net" x="720" y="186" width="48" height="38" class="rec"/>
+  <text class="lbl" x="778" y="200">recipient's weights</text>
+  <text class="var" x="778" y="220">updated by gradient descent</text>
+  <text class="var" x="20" y="256">Where a record stores no change, the target is the recipient's own prediction: it is told to stay where it is.</text>
 
-  <rect class="strip" x="632" y="152" width="140" height="46" rx="8"/>
-  <text class="lbl" x="702" y="171" text-anchor="middle">tokenizer</text>
-  <text class="lbl" x="702" y="188" text-anchor="middle">converter</text>
-  <text class="var" x="702" y="216" text-anchor="middle">match by spelling; no model run</text>
-  <path d="M774 166 C 790 160, 796 148, 810 146" fill="none" stroke="#1baf7a" stroke-width="1.6" marker-end="url(#ah-green)"/>
-  <path d="M774 184 C 790 190, 796 210, 810 214" fill="none" stroke="#1baf7a" stroke-width="1.6" marker-end="url(#ah-green)"/>
-  <use href="#net" x="814" y="126" width="46" height="37" class="rec"/>
-  <use href="#net" x="814" y="196" width="46" height="37" class="rec"/>
-  <text class="lbl" x="868" y="150">OLMo-2 1B</text>
-  <text class="lbl" x="868" y="220">SmolLM2 1.7B</text>
+  <line x1="20" y1="274" x2="940" y2="274" stroke="#E4E7EC" stroke-width="1.4"/>
 
-  <line x1="620" y1="246" x2="950" y2="246" stroke="#E4E7EC" stroke-width="1.4"/>
-  <text class="small" x="785" y="268" text-anchor="middle">each recipient trains toward its own prediction × e^d</text>
-  <text class="var" x="785" y="286" text-anchor="middle">no weight moves between models</text>
+  <!-- 3. two separate experiments -->
+  <text class="sec" x="20" y="298">3 · TWO SEPARATE FILES IN THIS POST</text>
+  <rect class="card" x="20" y="312" width="450" height="142" rx="10"/>
+  <use href="#file" x="34" y="326" width="20" height="25" class="edit"/>
+  <text class="cap" x="62" y="338">loop-fix diff</text>
+  <text class="var" x="62" y="354">Astra's patch, 734 of the 0.8B's own answers</text>
+  <path d="M60 366 C 60 386, 80 392, 96 392" fill="none" stroke="#1baf7a" stroke-width="1.5" marker-end="url(#ah-green)"/>
+  <use href="#net" x="104" y="378" width="36" height="29" class="rec"/>
+  <use href="#net" x="180" y="376" width="40" height="32" class="rec"/>
+  <use href="#net" x="260" y="373" width="46" height="37" class="rec"/>
+  <use href="#net" x="346" y="369" width="56" height="45" class="rec"/>
+  <text class="lbl" x="122" y="428" text-anchor="middle">2B</text>
+  <text class="lbl" x="200" y="428" text-anchor="middle">4B</text>
+  <text class="lbl" x="283" y="428" text-anchor="middle">9B</text>
+  <text class="lbl" x="374" y="428" text-anchor="middle">27B</text>
+  <text class="var" x="104" y="446">Qwen3.5, same tokenizer: the file is read as it is</text>
+
+  <rect class="card" x="490" y="312" width="450" height="142" rx="10"/>
+  <use href="#file" x="504" y="326" width="20" height="25" class="edit"/>
+  <text class="cap" x="532" y="338">fact-edit diff</text>
+  <text class="var" x="532" y="354">MEMIT, eighty people, new native languages</text>
+  <path d="M530 366 C 530 384, 540 390, 556 390" fill="none" stroke="#6B7486" stroke-width="1.5" marker-end="url(#ah-slate)"/>
+  <rect class="strip" x="562" y="372" width="120" height="38" rx="7"/>
+  <text class="lbl" x="622" y="388" text-anchor="middle">tokenizer</text>
+  <text class="lbl" x="622" y="403" text-anchor="middle">converter</text>
+  <path d="M684 384 C 700 380, 706 372, 722 370" fill="none" stroke="#1baf7a" stroke-width="1.5" marker-end="url(#ah-green)"/>
+  <path d="M684 398 C 700 402, 706 412, 722 414" fill="none" stroke="#1baf7a" stroke-width="1.5" marker-end="url(#ah-green)"/>
+  <use href="#net" x="726" y="356" width="34" height="27" class="rec"/>
+  <use href="#net" x="726" y="400" width="34" height="27" class="rec"/>
+  <text class="lbl" x="768" y="374">OLMo-2 1B</text>
+  <text class="lbl" x="768" y="418">SmolLM2 1.7B</text>
+  <text class="var" x="532" y="446">(also read as it is by Qwen3.5 0.8B to 27B)</text>
 </svg>
