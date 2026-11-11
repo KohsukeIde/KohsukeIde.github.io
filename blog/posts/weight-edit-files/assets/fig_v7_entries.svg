@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 350" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+<style>.cap{font-size:14px;font-weight:600;fill:#222;} .lbl{font-size:13px;fill:#333;} .var{font-size:11.5px;fill:#8A93A0;font-style:italic;} .mono{font-family:Menlo, Consolas, monospace;font-size:12.5px;fill:#222;} .num{font-size:11px;fill:#52514e;} .card{fill:#F6F7F9;stroke:#D6DBE4;stroke-width:1.3;}</style>
+<text class="cap" x="20" y="22">one record, its change entries</text>
+<rect class="card" x="20" y="34" width="280" height="32" rx="7"/><text class="mono" x="32" y="55">Alain Delon is a ▮</text>
+<text class="var" x="20" y="88">stored change (log-ratio) per candidate</text>
+<line x1="196" y1="98" x2="196" y2="264" stroke="#B9C0CC" stroke-width="1.2"/>
+<text class="mono" x="24" y="116" style="fill:#2a78d6;font-weight:700">German</text>
+<rect x="196.0" y="105" width="60.8" height="12" rx="2" fill="#2a78d6"/>
+<text class="num" x="260.8" y="116" text-anchor="start">+5.07</text>
+<text class="mono" x="24" y="140" style="fill:#2a78d6;font-weight:700">French</text>
+<rect x="150.3" y="129" width="45.7" height="12" rx="2" fill="#2a78d6"/>
+<text class="num" x="146.3" y="140" text-anchor="end">-3.81</text>
+<text class="mono" x="24" y="164" style="fill:#8A93A0;">well</text>
+<rect x="196.0" y="153" width="13.6" height="12" rx="2" fill="#8A93A0"/>
+<text class="num" x="213.6" y="164" text-anchor="start">+1.13</text>
+<text class="mono" x="24" y="188" style="fill:#8A93A0;">prominent</text>
+<rect x="184.8" y="177" width="11.2" height="12" rx="2" fill="#8A93A0"/>
+<text class="num" x="180.8" y="188" text-anchor="end">-0.93</text>
+<text class="mono" x="24" y="212" style="fill:#8A93A0;">famous</text>
+<rect x="196.0" y="201" width="3.8" height="12" rx="2" fill="#8A93A0"/>
+<text class="num" x="203.8" y="212" text-anchor="start">+0.32</text>
+<text class="mono" x="24" y="236" style="fill:#8A93A0;">renowned</text>
+<rect x="194.5" y="225" width="1.5" height="12" rx="2" fill="#8A93A0"/>
+<text class="num" x="190.5" y="236" text-anchor="end">-0.12</text>
+<text class="mono" x="24" y="260" style="fill:#8A93A0;">Swiss</text>
+<rect x="196.0" y="249" width="1.5" height="12" rx="2" fill="#8A93A0"/>
+<text class="num" x="201.5" y="260" text-anchor="start">+0.01</text>
+<line x1="322" y1="14" x2="322" y2="300" stroke="#E4E7EC" stroke-width="1.4"/>
+<text class="cap" x="336" y="22">full file</text>
+<rect class="card" x="336" y="34" width="142" height="32" rx="7"/><text class="mono" x="342" y="55" style="font-size:10.5px">Alain Delon is a ▮</text>
+<line x1="404" y1="98" x2="404" y2="264" stroke="#B9C0CC" stroke-width="1"/>
+<rect x="404.0" y="105" width="32.9" height="12" rx="2" fill="#2a78d6"/>
+<rect x="379.3" y="129" width="24.7" height="12" rx="2" fill="#2a78d6"/>
+<rect x="404.0" y="153" width="7.4" height="12" rx="2" fill="#8A93A0"/>
+<rect x="397.9" y="177" width="6.1" height="12" rx="2" fill="#8A93A0"/>
+<rect x="404.0" y="201" width="2.1" height="12" rx="2" fill="#8A93A0"/>
+<rect x="402.5" y="225" width="1.5" height="12" rx="2" fill="#8A93A0"/>
+<rect x="404.0" y="249" width="1.5" height="12" rx="2" fill="#8A93A0"/>
+<text class="var" x="336" y="290">all entries</text>
+<text class="var" x="336" y="305">applied</text>
+<text class="cap" x="490" y="22">control</text>
+<rect class="card" x="490" y="34" width="142" height="32" rx="7"/><text class="mono" x="496" y="55" style="font-size:10.5px">Alain Delon is a ▮</text>
+<line x1="558" y1="98" x2="558" y2="264" stroke="#B9C0CC" stroke-width="1"/>
+<rect x="558.0" y="105" width="32.9" height="12" rx="2" fill="#2a78d6"/>
+<rect x="533.3" y="129" width="24.7" height="12" rx="2" fill="#2a78d6"/>
+<rect x="558.0" y="153" width="7.4" height="12" rx="2" fill="none" stroke="#8A93A0" stroke-width="1.2" stroke-dasharray="3 2"/>
+<rect x="551.9" y="177" width="6.1" height="12" rx="2" fill="none" stroke="#8A93A0" stroke-width="1.2" stroke-dasharray="3 2"/>
+<rect x="558.0" y="201" width="2.1" height="12" rx="2" fill="#8A93A0"/>
+<rect x="556.5" y="225" width="1.5" height="12" rx="2" fill="#8A93A0"/>
+<rect x="558.0" y="249" width="1.5" height="12" rx="2" fill="#8A93A0"/>
+<text class="var" x="490" y="290">as many other</text>
+<text class="var" x="490" y="305">entries removed,</text>
+<text class="var" x="490" y="320">closest in size</text>
+<text class="cap" x="644" y="22">answers removed</text>
+<rect class="card" x="644" y="34" width="142" height="32" rx="7"/><text class="mono" x="650" y="55" style="font-size:10.5px">Alain Delon is a ▮</text>
+<line x1="712" y1="98" x2="712" y2="264" stroke="#B9C0CC" stroke-width="1"/>
+<rect x="712.0" y="105" width="32.9" height="12" rx="2" fill="none" stroke="#2a78d6" stroke-width="1.2" stroke-dasharray="3 2"/>
+<rect x="687.3" y="129" width="24.7" height="12" rx="2" fill="none" stroke="#2a78d6" stroke-width="1.2" stroke-dasharray="3 2"/>
+<rect x="712.0" y="153" width="7.4" height="12" rx="2" fill="#8A93A0"/>
+<rect x="705.9" y="177" width="6.1" height="12" rx="2" fill="#8A93A0"/>
+<rect x="712.0" y="201" width="2.1" height="12" rx="2" fill="#8A93A0"/>
+<rect x="710.5" y="225" width="1.5" height="12" rx="2" fill="#8A93A0"/>
+<rect x="712.0" y="249" width="1.5" height="12" rx="2" fill="#8A93A0"/>
+<text class="var" x="644" y="290">the answer</text>
+<text class="var" x="644" y="305">entries set</text>
+<text class="var" x="644" y="320">to zero</text>
+<text class="cap" x="798" y="22">answers only</text>
+<rect class="card" x="798" y="34" width="142" height="32" rx="7"/><text class="mono" x="804" y="55" style="font-size:10.5px">Alain Delon is a ▮</text>
+<line x1="866" y1="98" x2="866" y2="264" stroke="#B9C0CC" stroke-width="1"/>
+<rect x="866.0" y="105" width="32.9" height="12" rx="2" fill="#2a78d6"/>
+<rect x="841.3" y="129" width="24.7" height="12" rx="2" fill="#2a78d6"/>
+<rect x="866.0" y="153" width="7.4" height="12" rx="2" fill="none" stroke="#8A93A0" stroke-width="1.2" stroke-dasharray="3 2"/>
+<rect x="859.9" y="177" width="6.1" height="12" rx="2" fill="none" stroke="#8A93A0" stroke-width="1.2" stroke-dasharray="3 2"/>
+<rect x="866.0" y="201" width="2.1" height="12" rx="2" fill="none" stroke="#8A93A0" stroke-width="1.2" stroke-dasharray="3 2"/>
+<rect x="864.5" y="225" width="1.5" height="12" rx="2" fill="none" stroke="#8A93A0" stroke-width="1.2" stroke-dasharray="3 2"/>
+<rect x="866.0" y="249" width="1.5" height="12" rx="2" fill="none" stroke="#8A93A0" stroke-width="1.2" stroke-dasharray="3 2"/>
+<text class="var" x="798" y="290">every other</text>
+<text class="var" x="798" y="305">entry set</text>
+<text class="var" x="798" y="320">to zero</text>
+<text class="var" x="20" y="342">Same input context, same training positions in all four versions; only the applied entries differ. A removed entry is hollow.</text>
+</svg>
