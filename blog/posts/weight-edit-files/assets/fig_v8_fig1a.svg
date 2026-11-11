@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 215" width="960" height="215"
+     font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <!-- Figure 1, top (2026-11-12): how the file is made and used. Hand-authored. Models are drawn as node-link MLPs, as in
+       the post's earlier figures; colours follow the post's palette (before = gray, the fix, the diff and what trains
+       on it = blue). The swap shares are the tokenizer-only audit of the random-text file (code/audit_file.py,
+       runs/py/aud_loop_rand/audit.json: 3,000,452 positions, 3,187 strong). -->
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#52514e"/></marker>
+    <marker id="ahb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#2a78d6"/></marker>
+    <symbol id="mlp" viewBox="0 0 48 40">
+      <g stroke="currentColor" stroke-width="1" opacity="0.55">
+        <path d="M6 8 L24 5 M6 8 L24 15 M6 8 L24 25 M6 8 L24 35 M6 20 L24 5 M6 20 L24 15 M6 20 L24 25 M6 20 L24 35
+                 M6 32 L24 5 M6 32 L24 15 M6 32 L24 25 M6 32 L24 35 M24 5 L42 8 M24 15 L42 8 M24 25 L42 8 M24 35 L42 8
+                 M24 5 L42 20 M24 15 L42 20 M24 25 L42 20 M24 35 L42 20 M24 5 L42 32 M24 15 L42 32 M24 25 L42 32 M24 35 L42 32"/>
+      </g>
+      <g fill="#fff" stroke="currentColor" stroke-width="2">
+        <circle cx="6" cy="8" r="3.6"/><circle cx="6" cy="20" r="3.6"/><circle cx="6" cy="32" r="3.6"/>
+        <circle cx="24" cy="5" r="3.6"/><circle cx="24" cy="15" r="3.6"/><circle cx="24" cy="25" r="3.6"/><circle cx="24" cy="35" r="3.6"/>
+        <circle cx="42" cy="8" r="3.6"/><circle cx="42" cy="20" r="3.6"/><circle cx="42" cy="32" r="3.6"/>
+      </g>
+    </symbol>
+    <symbol id="doc" viewBox="0 0 24 24">
+      <path d="M5 3 h10 l4 4 v14 h-14 z" fill="#fff" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M15 3 v4 h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M8 11 h8 M8 14.5 h8 M8 18 h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+  <style>
+    .gray{color:#8d8b85;} .blue{color:#2a78d6;}
+    .lbl{font-size:14px;fill:#0b0b0b;font-weight:600;}
+    .sub{font-size:12.5px;fill:#52514e;}
+    .var{font-size:12px;fill:#8d8b85;font-style:italic;}
+    .mono{font-family:Menlo, Consolas, 'DejaVu Sans Mono', monospace;font-size:11.5px;fill:#0b0b0b;}
+    .cardb{fill:#f1f6fd;stroke:#2a78d6;stroke-width:1.4;}
+  </style>
+  <rect width="960" height="215" fill="#fcfcfb"/>
+
+  <use href="#doc" x="22" y="64" width="46" height="46" class="gray"/>
+  <text x="45" y="128" text-anchor="middle" class="sub">random text</text>
+  <text x="45" y="143" text-anchor="middle" class="var">3.0M positions</text>
+  <path d="M72 80 C 92 80, 96 52, 112 52" fill="none" stroke="#52514e" stroke-width="1.4" marker-end="url(#ah)"/>
+  <path d="M72 96 C 92 96, 96 124, 112 124" fill="none" stroke="#52514e" stroke-width="1.4" marker-end="url(#ah)"/>
+
+  <use href="#mlp" x="118" y="32" width="48" height="40" class="gray"/>
+  <text x="176" y="49" class="lbl">Qwen3.5-0.8B</text>
+  <text x="176" y="65" class="sub">original</text>
+  <use href="#mlp" x="118" y="104" width="48" height="40" class="blue"/>
+  <text x="176" y="121" class="lbl">Qwen3.5-0.8B</text>
+  <text x="176" y="137" class="sub">after the fix</text>
+  <text x="118" y="176" class="var">the fix: Astra's weight edit (WSP);</text>
+  <text x="118" y="191" class="var">RL and fact edits later in the post</text>
+
+  <path d="M284 52 C 302 52, 302 88, 320 88" fill="none" stroke="#52514e" stroke-width="1.4"/>
+  <path d="M284 124 C 302 124, 302 88, 320 88" fill="none" stroke="#52514e" stroke-width="1.4"/>
+  <line x1="320" y1="88" x2="340" y2="88" stroke="#52514e" stroke-width="1.4" marker-end="url(#ah)"/>
+
+  <path d="M346 18 h232 l16 16 v134 h-248 z" class="cardb"/>
+  <path d="M578 18 v16 h16" fill="none" stroke="#2a78d6" stroke-width="1.4"/>
+  <text x="360" y="40" class="lbl">the diff file</text>
+  <text x="360" y="58" class="sub">log p(fixed) − log p(original), per token</text>
+  <text x="360" y="84" class="var">commonest changes of the top token</text>
+  <text x="360" y="104" class="mono">"Wait"</text><text x="432" y="104" class="sub">→</text><text x="450" y="104" class="mono" fill="#2a78d6">"Final"</text><text x="582" y="104" text-anchor="end" class="sub">14.2%</text>
+  <text x="360" y="124" class="mono">" Wait"</text><text x="432" y="124" class="sub">→</text><text x="450" y="124" class="mono" fill="#2a78d6">" Final"</text><text x="582" y="124" text-anchor="end" class="sub">9.3%</text>
+  <text x="360" y="144" class="mono">"Okay"</text><text x="432" y="144" class="sub">→</text><text x="450" y="144" class="mono" fill="#2a78d6">"&lt;/think&gt;"</text><text x="582" y="144" text-anchor="end" class="sub">2.6%</text>
+  <text x="360" y="187" class="var">no weight, layer or column is named</text>
+
+  <line x1="600" y1="88" x2="648" y2="88" stroke="#2a78d6" stroke-width="1.6" marker-end="url(#ahb)"/>
+
+  <use href="#mlp" x="654" y="52" width="72" height="60" class="blue"/>
+  <text x="738" y="72" class="lbl">Qwen3.5-2B</text>
+  <text x="738" y="90" class="sub">300 steps toward its own</text>
+  <text x="738" y="106" class="sub">predictions tilted by the diff</text>
+  <text x="738" y="130" class="sub">then runs alone,</text>
+  <text x="738" y="146" class="sub">with no 0.8B</text>
+  <text x="654" y="187" class="var">or a model of another size or family</text>
+</svg>

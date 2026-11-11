@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 320"
+     font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <!-- 2026-11-08. Values: MEMIT layers (4, 5, 6, 7, 8) of 24 = code/facts.py LAYERS; Alain Delon French -> German
+       = data/facts_rule.json (memit_rule_A rewrite margin +4.1 on "Alain Delon is a native speaker of",
+       runs/py/efE_it_g1_rule); Woolf English -> Armenian (rule file) / English (scrambled file) = the OLMo-2 1B table at
+       the top of the post. -->
+  <defs>
+    <marker id="ah-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6B7486"/></marker>
+    <marker id="ah-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#2a78d6"/></marker>
+    <marker id="ah-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1baf7a"/></marker>
+    <symbol id="person" viewBox="0 0 16 20">
+      <circle cx="8" cy="5" r="3.6" fill="#fff" stroke="currentColor" stroke-width="1.4"/>
+      <path d="M1.5 19 a6.5 6.5 0 0 1 13 0" fill="#fff" stroke="currentColor" stroke-width="1.4"/>
+    </symbol>
+  </defs>
+  <style>
+    .cap{font-size:15px;font-weight:600;fill:#222;}
+    .lbl{font-size:13px;fill:#333;}
+    .var{font-size:12px;fill:#8A93A0;font-style:italic;}
+    .mono{font-family:Menlo, Consolas, 'Courier New', monospace;font-size:13px;fill:#222;}
+    .strip{fill:#F6F7F9;stroke:#D6DBE4;stroke-width:1.4;}
+    .layer{fill:#D6DBE4;}
+    .layer-e{fill:#2a78d6;}
+    .pill-g{fill:#F6F7F9;stroke:#B9C0CC;stroke-width:1.4;}
+    .pill-b{fill:#EEF4FF;stroke:#2a78d6;stroke-width:1.4;}
+    .pill-n{fill:#EAF7F1;stroke:#1baf7a;stroke-width:1.4;}
+  </style>
+
+  <!-- left: what MEMIT does -->
+  <text class="cap" x="24" y="24">MEMIT writes a fact into the weights</text>
+
+  <!-- output at the slot -->
+  <text class="var" x="193" y="46" text-anchor="middle">original</text>
+  <text class="var" x="314" y="46" text-anchor="middle">after MEMIT</text>
+  <rect class="pill-g" x="150" y="52" width="86" height="30" rx="15"/><text class="lbl" x="193" y="72" text-anchor="middle" fill="#5C6678">French</text>
+  <path d="M240 67 H264" stroke="#2a78d6" stroke-width="1.8" marker-end="url(#ah-blue)"/>
+  <rect class="pill-b" x="268" y="52" width="92" height="30" rx="15"/><text class="lbl" x="314" y="72" text-anchor="middle" fill="#2a78d6">German</text>
+  <path d="M240 98 V88" stroke="#6B7486" stroke-width="1.5" marker-end="url(#ah-slate)"/>
+
+  <!-- the 0.8B as 24 layers, bottom = layer 0; layers 4-8 edited -->
+  <g>
+    <rect class="layer" x="160" y="262" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer" x="160" y="255" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer" x="160" y="248" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer" x="160" y="241" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer-e" x="160" y="234" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer-e" x="160" y="227" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer-e" x="160" y="220" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer-e" x="160" y="213" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer-e" x="160" y="206" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer" x="160" y="199" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer" x="160" y="192" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer" x="160" y="185" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer" x="160" y="178" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer" x="160" y="171" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer" x="160" y="164" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer" x="160" y="157" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer" x="160" y="150" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer" x="160" y="143" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer" x="160" y="136" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer" x="160" y="129" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer" x="160" y="122" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer" x="160" y="115" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer" x="160" y="108" width="160" height="4.2" rx="1.5"/>
+    <rect class="layer" x="160" y="101" width="160" height="4.2" rx="1.5"/>
+  </g>
+  <text class="var" x="334" y="108">Qwen3.5-0.8B, 24 layers</text>
+  <path d="M328 206 h6 v32.2 h-6" fill="none" stroke="#2a78d6" stroke-width="1.4"/>
+  <text class="lbl" x="342" y="218" fill="#2a78d6">MLP weights of layers 4–8</text>
+  <text class="var" x="342" y="235">one update, solved for all 80 people</text>
+
+  <!-- input text -->
+  <path d="M240 274 V270" stroke="#6B7486" stroke-width="1.5"/>
+  <rect class="strip" x="92" y="276" width="296" height="30" rx="8"/>
+  <text class="mono" x="104" y="296"><tspan font-weight="700">Alain Delon</tspan> is a native speaker of ▮</text>
+
+  <line x1="600" y1="14" x2="600" y2="306" stroke="#E4E7EC" stroke-width="1.4"/>
+
+  <!-- right: why the new answers are false -->
+  <text class="cap" x="628" y="24">why the new answers are false</text>
+  <rect class="pill-g" x="628" y="52" width="86" height="30" rx="15"/><text class="lbl" x="671" y="72" text-anchor="middle" fill="#5C6678">French</text>
+  <text class="lbl" x="726" y="65">true: a recipient may</text>
+  <text class="lbl" x="726" y="81">know it already</text>
+  <rect class="pill-b" x="628" y="100" width="86" height="30" rx="15"/><text class="lbl" x="671" y="120" text-anchor="middle" fill="#2a78d6">German</text>
+  <text class="lbl" x="726" y="113">false: it can only come</text>
+  <text class="lbl" x="726" y="129">from the edit</text>
+
+  <line x1="628" y1="158" x2="936" y2="158" stroke="#E4E7EC" stroke-width="1.4"/>
+  <text class="var" x="628" y="182">a false rule also shows how far it reaches</text>
+  <use href="#person" x="628" y="196" width="16" height="20" style="color:#5C6678"/>
+  <text class="lbl" x="652" y="212">Virginia Woolf, in no file</text>
+  <path d="M640 222 V244" stroke="#1baf7a" stroke-width="1.6" marker-end="url(#ah-green)"/>
+  <rect class="pill-n" x="628" y="250" width="96" height="30" rx="15"/><text class="lbl" x="676" y="270" text-anchor="middle" fill="#14845c">Armenian</text>
+  <text class="lbl" x="736" y="263">OLMo-2 1B after the rule file</text>
+  <text class="var" x="736" y="279">after the scrambled file: English</text>
+</svg>
