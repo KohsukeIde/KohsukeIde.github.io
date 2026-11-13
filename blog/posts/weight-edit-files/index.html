@@ -91,7 +91,7 @@
 <h2 id="a-fix-stuck-in-one-model">A fix stuck in one model</h2>
 <p>Fixes are cheapest to find on small models. An agent can read a 0.8B and edit it by hand, RL costs little on a 0.5B, and a knowledge editor can rewrite a hundred facts in closed form. Each of them leaves its result in the weights of the one model it was made on.</p>
 <p>Three such fixes appear in this post. The first is the loop fix above, from Experiment 8 of <em>Sparks of Weight-Space Programming</em>, where Rikiya Takehi and colleagues asked GPT-6 Astra to fix Qwen3.5-0.8B's math. Astra found that most failed answers ran to the token limit in loops, traced the loops to one direction written by two MLP layers, and removed it from 128 output columns, 0.016% of the weights. The second is RL. Lu, Yang and colleagues ran it on Qwen2.5 models and kept each result as a mask that deletes fewer than 0.05% of the weights. The third is MEMIT, a standard knowledge editor, which rewrote what a 0.8B says about eighty people. The 128 columns do not exist in a model of another width, a deletion mask names weights that only its own checkpoint has, and a MEMIT update is solved for one model's layers. Post-training changes are small, but small is not the same as portable.</p>
-<p>The diff does not care how a fix was made. It needs the small model before and after the fix and the same text run through both, so the agent's loop fix, the RL mask and the fact edit all ship the same way. The file carries what a fix does, at the strength it does it. The same loop direction removed by a linear program instead of an agent, from 16,000 weights instead of 130,000, gives students within 0.3 points of Astra's at every size, and a version made with no language model involved, weaker on its own 0.8B, gives students that are weaker accordingly. The loop fix is our running example because it is the easiest to see.</p>
+<p>The diff does not care how a fix was made. It needs the small model before and after the fix and the same text run through both, so the agent's loop fix, the RL mask and the fact edit all ship the same way. The file carries what a fix does, at the strength it does it. The same loop direction removed by a linear program instead of an agent (Barry, 2026), from 16,000 weights instead of 130,000, gives students within 0.3 points of Astra's at every size, and a version made with no language model involved, weaker on its own 0.8B, gives students that are weaker accordingly. The loop fix is our running example because it is the easiest to see.</p>
 <p>The usual way to move a behaviour between models is distillation, and it moves behaviour from a strong model to a weaker one. Weak-to-strong training (Burns et al., 2023) does run from small to large, but it also gives the large model the small model's outputs to imitate. Our case is different. The fix lives in a 0.8B, and the model we want to fix is 2.5 to 34 times larger and already better than the 0.8B at almost everything else. Imitating the small model would copy its weaknesses too. What we want to copy is only the change.</p>
 <h2 id="a-fix-you-can-ship">A fix you can ship</h2>
 <p>The problem in Figure 1 was picked by a rule. Of the 54 problems where the base ends at the cap inside a verbatim loop with no answer and the trained model finishes correctly, it is the one with the shortest answer. The base debates the notation, starts asking itself whether the user meant <d-math>\log_{264} 264</d-math>, and repeats "Let's check if the user meant <d-math>\log_{264} 264</d-math>?" for 88,000 characters. The student asks itself the same question once ("Wait, is it base 2 raised to 64?"), settles on <d-math>\log_2 64</d-math> and answers 6. The base gets this problem right in 2 of its 4 samples.</p>
@@ -247,19 +247,22 @@
 <ul>
   <li>Takehi, Teoh, Zhang &amp; Khattab, <a href="https://rikiyat.github.io/blog/weight-space-programming/">Sparks of Weight-Space Programming: LLMs can natively read &amp; write neural network weights (blog post)</a></li>
   <li>Takehi, Teoh, Zhang &amp; Khattab, <a href="https://github.com/RikiyaT/lm_understand">lm_understand (code and released edits)</a></li>
+  <li>Barry, <a href="https://nathan.rs/posts/weight-space-lp/">Can a Linear Program Do Weight-Space Programming?</a></li>
+  <li>Lu, Yang, Lasby, Pote, Ioannou &amp; Ren, <a href="https://arxiv.org/abs/2611.10866">The Surprising Effectiveness of Deleting Weights in LLM Post-Training (Deletion Tuning)</a></li>
   <li>Meng et al., <a href="https://arxiv.org/abs/2210.07229">Mass-Editing Memory in a Transformer (MEMIT)</a></li>
   <li>Meng et al., <a href="https://arxiv.org/abs/2202.05262">Locating and Editing Factual Associations in GPT (ROME, CounterFact)</a></li>
+  <li>Burns et al., <a href="https://arxiv.org/abs/2312.09390">Weak-to-Strong Generalization: Eliciting Strong Capabilities With Weak Supervision</a></li>
   <li>Liu et al., <a href="https://arxiv.org/abs/2401.08565">Tuning Language Models by Proxy</a></li>
+  <li>Wu et al., <a href="https://arxiv.org/abs/2610.13205">Rethinking Relative Policy Differences Transfer of On-Policy Distillation (A2-OPD)</a></li>
   <li>Wu, Han &amp; Cai, <a href="https://arxiv.org/abs/2609.14708">Lightning Weave</a></li>
+  <li>Boizard et al., <a href="https://arxiv.org/abs/2402.12030">Towards Cross-Tokenizer Distillation: the Universal Logit Distillation Loss for LLMs</a></li>
+  <li>Wang et al., <a href="https://arxiv.org/abs/2506.08343">Wait, We Don&#x27;t Need to &quot;Wait&quot;! Removing Thinking Tokens Improves Reasoning Efficiency (NoWait)</a></li>
+  <li>nwn, <a href="https://zenn.dev/nwn/articles/cf9fe78aa33861">Weight-Space Programming やってみた(やらせてみた)</a></li>
+  <li>balaena01, <a href="https://balaena01.github.io/fish-steering/">FiSH: Formula-instantiated Scene-gated Hidden units (gguf-neuron-explorer)</a></li>
   <li>Cloud et al., <a href="https://arxiv.org/abs/2507.14805">Subliminal Learning: Language models transmit behavioral traits via hidden signals in data</a></li>
-  <li>Vo, Nguyen, Kretchmar &amp; Nguyen, <a href="https://arxiv.org/abs/2609.25721">Slow Decay and Silenced Expression: Iterated Subliminal Trait Transfer in Language-Model Lineages</a></li>
-  <li>Furlanello et al., <a href="https://proceedings.mlr.press/v80/furlanello18a.html">Born-Again Neural Networks</a></li>
   <li>Tang, Anand &amp; Paulo, <a href="https://arxiv.org/abs/2610.30884">Tracing Subliminal Learning Through Pretraining</a></li>
   <li>Zhang et al., <a href="https://arxiv.org/abs/2609.29233">Post-Training Leaves Behavioral Shadows on Unrelated Decisions (Active Taskless Distillation)</a></li>
-  <li>Boizard et al., <a href="https://arxiv.org/abs/2402.12030">Towards Cross-Tokenizer Distillation: the Universal Logit Distillation Loss for LLMs</a></li>
-  <li>Team OLMo (Ai2), <a href="https://huggingface.co/allenai/OLMo-2-0425-1B">OLMo-2-0425-1B</a></li>
-  <li>Allal et al. (Hugging Face), <a href="https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B">SmolLM2-1.7B</a></li>
-  <li>Kirby, Cornish &amp; Smith, <a href="https://www.pnas.org/doi/10.1073/pnas.0707835105">Cumulative cultural evolution in the laboratory</a></li>
+  <li>Vo, Nguyen, Kretchmar &amp; Nguyen, <a href="https://arxiv.org/abs/2609.25721">Slow Decay and Silenced Expression: Iterated Subliminal Trait Transfer in Language-Model Lineages</a></li>
 </ul>
 
 </d-appendix>
