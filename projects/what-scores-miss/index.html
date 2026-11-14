@@ -1,40 +1,365 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>What Downstream Scores Miss in Point-Cloud Self-Supervised Learning</title>
-  <meta name="description" content="Controlled diagnostics for point-cloud self-supervised learning evaluation.">
-  <style>
-    body { margin: 0; color: #202124; background: #fff; font: 16px/1.65 system-ui, -apple-system, sans-serif; }
-    main { max-width: 850px; margin: 0 auto; padding: 64px 24px; }
-    header { text-align: center; }
-    .venue { color: #9b3030; font-weight: 650; }
-    h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.15; letter-spacing: -.025em; }
-    .authors { font-size: 1.05rem; }
-    figure { margin: 48px 0; }
-    figure img { width: 100%; height: auto; }
-    h2 { font-size: 1.4rem; }
-    a { color: #165a9f; }
-    .status { color: #555; }
-    @media (max-width: 600px) { main { padding: 36px 18px; } }
-  </style>
+  <meta name="description" content="A downstream score says how well a point-cloud representation does, not why. Controlled diagnostics at three stages: the pretext objective, the visible input geometry, and the reported score.">
+  <meta property="og:title" content="What Downstream Scores Miss in Point-Cloud Self-Supervised Learning">
+  <meta property="og:description" content="Controlled diagnostics for point-cloud self-supervised learning: the pretext objective, the visible input geometry, and the reported score.">
+  <meta property="og:image" content="https://kohsukeide.github.io/projects/what-scores-miss/static/images/teaser.png">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://kohsukeide.github.io/projects/what-scores-miss/">
+  <link rel="icon" href="../../images/favicon/favicon.ico">
+
+  <!-- set theme before paint to avoid flash -->
+  <script>
+    (function () {
+      var t = localStorage.getItem("theme");
+      if (!t) t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.classList.toggle("dark", t === "dark");
+    })();
+  </script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/index.css">
 </head>
 <body>
-  <main>
-    <header>
-      <p class="venue">NeurIPS 2026 · Evaluations &amp; Datasets Track · Spotlight</p>
-      <h1>What Downstream Scores Miss in Point-Cloud Self-Supervised Learning</h1>
-      <p class="authors">Kohsuke Ide · Ryousuke Yamada · Yue Qiu · Yoshihiro Fukuhara · Hirokatsu Kataoka · Yuki M. Asano · Yutaka Satoh</p>
-    </header>
+
+<button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+  <i class="fas fa-moon"></i><i class="fas fa-sun"></i>
+</button>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero-head">
+  <div class="container">
+    <span class="venue-badge">NeurIPS&nbsp;2026 · Evaluations &amp; Datasets Track · Spotlight</span>
+    <h1 class="paper-title">What Downstream Scores Miss<br>in Point-Cloud Self-Supervised Learning</h1>
+
+    <p class="authors">
+      <a href="https://kohsukeide.github.io/" target="_blank" rel="noopener">Kohsuke Ide</a><sup>1,2</sup>,
+      <a href="https://ryosuke-yamada.github.io/" target="_blank" rel="noopener">Ryousuke Yamada</a><sup>1,3</sup>,
+      <a href="https://qiuyue1993.github.io/qiuyue.github.com/" target="_blank" rel="noopener">Yue Qiu</a><sup>1</sup>,
+      <a href="https://gatheluck.net/" target="_blank" rel="noopener">Yoshihiro Fukuhara</a><sup>1,4</sup>,
+      <a href="https://hirokatsukataoka.net/" target="_blank" rel="noopener">Hirokatsu Kataoka</a><sup>1,5</sup>,
+      <a href="https://yukimasano.github.io/" target="_blank" rel="noopener">Yuki&nbsp;M.&nbsp;Asano</a><sup>3</sup>,
+      <a href="https://satoh-yutaka.github.io/" target="_blank" rel="noopener">Yutaka Satoh</a><sup>1,2</sup>
+    </p>
+    <p class="affil">
+      <sup>1</sup><a href="https://www.aist.go.jp/index_en.html" target="_blank" rel="noopener">AIST</a> &nbsp;·&nbsp;
+      <sup>2</sup><a href="https://www.tsukuba.ac.jp/en/" target="_blank" rel="noopener">University&nbsp;of&nbsp;Tsukuba</a> &nbsp;·&nbsp;
+      <sup>3</sup><a href="https://fundamentalailab.github.io/" target="_blank" rel="noopener">Fundamental&nbsp;AI&nbsp;Lab, University&nbsp;of&nbsp;Technology&nbsp;Nuremberg</a> &nbsp;·&nbsp;
+      <sup>4</sup><a href="https://caddi.com/en/" target="_blank" rel="noopener">CADDi</a> &nbsp;·&nbsp;
+      <sup>5</sup><a href="https://www.robots.ox.ac.uk/~vgg/" target="_blank" rel="noopener">Visual&nbsp;Geometry&nbsp;Group, University&nbsp;of&nbsp;Oxford</a>
+    </p>
+    <p class="corresp">✉ <a href="mailto:ide.agi@aist.go.jp">ide.agi@aist.go.jp</a></p>
+
+    <div class="link-buttons">
+      <!-- Paper / arXiv / Video: add when the links are available -->
+      <a class="lbtn" href="https://github.com/KohsukeIde/WhatScoresMiss" target="_blank" rel="noopener">
+        <span class="icon"><i class="fab fa-github"></i></span><span>Code</span></a>
+      <a class="lbtn" href="./static/pdf/what_scores_miss_neurips2026_slides.pdf" target="_blank" rel="noopener">
+        <span class="icon"><i class="fas fa-person-chalkboard"></i></span><span>Slides</span></a>
+      <a class="lbtn" href="#bibtex">
+        <span class="icon"><i class="fas fa-quote-left"></i></span><span>BibTeX</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TEASER ===================== -->
+<section class="section teaser-sec">
+  <div class="container">
     <figure>
-      <img src="../../images/beyond_downstream_scores.png" alt="Overview of controlled diagnostics for point-cloud self-supervised learning.">
+      <img src="./static/images/teaser.png" fetchpriority="high" width="1800" height="679" alt="Three diagnostics: pretext dependency, support reliance, and score formation">
+      <figcaption>
+        <b>Three places where a downstream score leaves the source of a gain open.</b>
+        (1) A lower pretext loss does not show that the gain came from the intended mechanism, such as 2D-3D alignment.
+        (2) Robustness to missing points depends on which points are kept, so one random-removal test is not enough.
+        (3) A reported score also depends on the readout and on how the checkpoint was selected, not only on the representation.
+      </figcaption>
     </figure>
-    <section>
-      <h2>Overview</h2>
-      <p>Downstream scores measure performance, but do not by themselves explain the source of a gain. We study controlled diagnostics for the pretext dependency, the visible geometric support, and the downstream readout in point-cloud self-supervised learning.</p>
-      <p class="status">Paper and code links will be added when available.</p>
-    </section>
-  </main>
+  </div>
+</section>
+
+<!-- ===================== KEY MESSAGE ===================== -->
+<section class="section" style="padding-top:1rem">
+  <div class="container narrow">
+    <div class="takeaway">
+      A downstream score tells us how well a representation does. It does not tell us why.
+      <small>We treat a downstream gain as a claim and test where it comes from, at three stages of the
+        evaluation pipeline: what signal pretraining teaches, what geometry the test input shows, and how the
+        reported number is computed.</small>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ABSTRACT ===================== -->
+<section class="section alt">
+  <div class="container narrow">
+    <h2 class="title is-4 sec-title">Abstract</h2>
+    <p class="body-text">
+      Downstream scores are the standard evidence for progress in point-cloud self-supervised learning (SSL).
+      But a score is not a mechanism: it does not explain why a representation improves. We ask three simple
+      questions about the evaluation pipeline: what signal is learned, what geometry is visible, and what the
+      score measures. These questions test whether a gain comes from the pretext objective, from the geometric
+      support available in the input, or from the downstream readout itself. Applied to cross-modal alignment,
+      autoregressive prediction, and masked autoencoding, our diagnostics reveal that downstream scores often fail
+      to identify the source of a gain. For Concerto, coordinate-only signals explain 28.9% of the pretext-loss
+      response but recover only 6.9% of the downstream gain on ScanNet, separating pretext-loss explanation from
+      representation transfer. For masked autoencoding, removing spatially coherent regions hurts much more than
+      removing the same number of random points, showing that the visible geometry, not just the retained
+      fraction, drives the score. For PointGPT, relaxing mask and order assumptions lowers downstream scores by at
+      most 2.78 points on ScanObjectNN and 0.22 points on ShapeNetPart, showing that high scores can persist after
+      weakening the intended autoregressive mechanism. These findings caution against treating downstream gains
+      as self-evident representation progress in point-cloud SSL. We propose a diagnostic protocol that asks not
+      only whether a score improves, but why it improves.
+    </p>
+  </div>
+</section>
+
+<!-- ===================== OVERVIEW OF THE THREE STAGES ===================== -->
+<section class="section">
+  <div class="container narrow">
+    <h2 class="title is-4 sec-title">Three questions a score leaves open</h2>
+    <p class="body-text">
+      In point-cloud SSL, a model is pretrained without labels and then evaluated on benchmarks such as
+      ScanNet scene segmentation, ScanObjectNN classification and ShapeNetPart part segmentation. A higher score
+      on these benchmarks is usually read as a sign that the new pretraining idea worked. We test that reading at
+      three stages, with models from three objective families (cross-modal alignment, autoregressive prediction
+      and masked autoencoding) and a supervised reference.
+    </p>
+    <div class="columns stages mt">
+      <div class="column"><div class="stage-card s1"><span class="num">Stage 1</span>
+        <h3>Pretext objective</h3>Did the model need the signal the pretext task targets?
+        <br><a href="#pretext">Concerto and PointGPT &darr;</a></div></div>
+      <div class="column"><div class="stage-card s2"><span class="num">Stage 2</span>
+        <h3>Test input</h3>What geometry does the model see when points are removed?
+        <br><a href="#support">Random vs. structured removal &darr;</a></div></div>
+      <div class="column"><div class="stage-card s3"><span class="num">Stage 3</span>
+        <h3>Reported score</h3>What does the reported number measure, and what does it leave out?
+        <br><a href="#score">Oracle@2 and checkpoints &darr;</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STAGE 1 ===================== -->
+<section class="section alt s1" id="pretext">
+  <div class="container narrow">
+    <h2 class="title is-4 sec-title stage-head"><span class="tag">Stage 1</span>Pretext objective</h2>
+    <p class="question">Did the model need the signal the pretext task targets?</p>
+    <p class="body-text">
+      A pretext task is designed to make the representation rely on one signal. In point clouds, coordinates,
+      patch centers and token order are part of the input, and they can lower the same pretext loss without that
+      signal. For masked autoencoding, prior work
+      (<a href="https://arxiv.org/abs/2408.08753" target="_blank" rel="noopener">PCP-MAE</a>) showed that
+      Point-MAE rebuilds a shape from the centers of the masked patches alone, even when every patch is masked.
+      We test the same question for cross-modal alignment and autoregressive prediction.
+    </p>
+
+    <h3 class="finding-h">Concerto: coordinates explain part of the loss, but little of the representation</h3>
+    <p class="body-text">
+      Concerto trains point features to match image features. Swapping in mismatched image targets raises the
+      pretext loss (a1). A control that predicts the image features from xyz coordinates alone reproduces part of
+      that increase, 28.9% on average over six indoor datasets (a2).
+    </p>
+    <figure>
+      <img src="./static/images/concerto_loss.png" width="2000" height="707" loading="lazy" alt="Concerto target-swap loss increase and coordinate-only closure on six datasets">
+      <figcaption>(a1) Pretext-loss increase when the paired image target is swapped. (a2) Share of that increase
+        reproduced by a coordinate-only control (mean 28.9%).</figcaption>
+    </figure>
+    <p class="body-text mt">
+      Does the coordinate-predictable part carry over to the representation? We continued pretraining Concerto
+      with the coordinate-MLP prediction as the target and linear-probed it on ScanNet. It recovers only 6.9% of
+      the gap between the cross-modal target and no image encoder.
+    </p>
+    <div class="table-wrap">
+      <table class="table is-narrow result-table">
+        <thead><tr><th>Continuation target</th><th class="n">ScanNet linear-probe mIoU</th><th class="n">Gap recovery</th></tr></thead>
+        <tbody>
+          <tr><td>Cross-modal (Concerto)</td><td class="n">47.94</td><td class="n">100%</td></tr>
+          <tr class="hl"><td>Coordinate-MLP</td><td class="n">40.64</td><td class="n">6.9%</td></tr>
+          <tr><td>No image encoder</td><td class="n">40.10</td><td class="n">0% (reference)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="finding-h">PointGPT: transfer stays high without the mask or the order</h3>
+    <p class="body-text">
+      PointGPT predicts patches one by one, like a language model predicts tokens. Its design adds a spatial
+      patch order and a dual mask that hides some earlier patches. We trained variants without the dual mask,
+      with a randomized patch order, or both (the causal attention mask is kept in all of them). Each variant
+      lowers its own pretext loss by at least 88.7%, and the downstream scores stay close to the reference.
+    </p>
+    <div class="table-wrap">
+      <table class="table is-narrow result-table">
+        <thead>
+          <tr><th>Dual mask</th><th>Patch order</th><th class="n">Pretext loss &darr; (%)</th>
+            <th class="n">obj_bg</th><th class="n">obj_only</th><th class="n">PB_T50_RS</th><th class="n">ShapeNetPart</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>on</td><td>spatial</td><td class="n">&ndash;</td><td class="n">90.36</td><td class="n">90.53</td><td class="n">86.68</td><td class="n">85.66</td></tr>
+          <tr><td>off</td><td>spatial</td><td class="n">90.66</td><td class="n">89.21</td><td class="n">89.38</td><td class="n">84.19</td><td class="n">85.60</td></tr>
+          <tr><td>off</td><td>random</td><td class="n">89.02</td><td class="n">90.53</td><td class="n">88.30</td><td class="n">83.97</td><td class="n">85.55</td></tr>
+          <tr><td>on</td><td>random</td><td class="n">88.72</td><td class="n">90.02</td><td class="n">87.95</td><td class="n hlc">83.90</td><td class="n hlc">85.44</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-cap">ScanObjectNN top-1 accuracy (%) on its three variants and ShapeNetPart instance mIoU (%).
+      Pretext loss &darr;: decrease from the first to the final checkpoint of each run. The largest drops are 2.78
+      points (PB_T50_RS) and 0.22 points (ShapeNetPart).</p>
+    <p class="point">A high downstream score does not show that the model needed the signal its pretext task was
+      designed around.</p>
+  </div>
+</section>
+
+<!-- ===================== STAGE 2 ===================== -->
+<section class="section s2" id="support">
+  <div class="container narrow">
+    <h2 class="title is-4 sec-title stage-head"><span class="tag">Stage 2</span>Test input</h2>
+    <p class="question">What geometry does the model see when points are removed?</p>
+    <p class="body-text">
+      Robustness to missing points is usually tested by dropping points at random. What remains still covers the
+      whole shape. Real scans lose points differently, through occlusion, sensor range and viewpoint, so whole
+      regions go missing. We compare removals that keep the same number of points but different geometry.
+    </p>
+    <figure>
+      <img src="./static/images/support_conditions.png" width="2000" height="882" loading="lazy" alt="Original, Random50, Structured50 and Semantic50 point clouds, with the same number of points">
+      <figcaption>Random50 drops half of the points at random. Structured50 keeps whole spatial cells (scenes) or
+        the half of the points farthest from a random anchor (objects). Semantic50 keeps half of the points in each
+        part, so every part stays visible. All three keep the same number of points.</figcaption>
+    </figure>
+    <figure class="mt">
+      <img src="./static/images/support_results.png" width="2000" height="657" loading="lazy" alt="Scene and object segmentation under Clean, Random50, Structured50 and Semantic50">
+      <figcaption>(a) ScanNet mIoU for three SSL models and supervised PTv3. (b) ShapeNetPart instance mIoU for
+        three masked or autoregressive models. Random50 and Semantic50 stay close to clean. Structured50 drops much
+        more for every model.</figcaption>
+    </figure>
+    <p class="body-text mt">
+      For Concerto on ScanNet, random removal moves mIoU from 78.6 to 77.9, while structured removal takes it to
+      52.5. Structured removal can also change which model looks more robust. On clean input, supervised PTv3
+      (77.1) is above Utonia (75.8). Under Structured50, Utonia (52.7) is above PTv3 (49.3).
+    </p>
+    <p class="point">The score depends on which geometry remains, not only on how many points remain. Random removal
+      alone is a weak test of robustness to missing regions.</p>
+  </div>
+</section>
+
+<!-- ===================== STAGE 3 ===================== -->
+<section class="section alt s3" id="score">
+  <div class="container narrow">
+    <h2 class="title is-4 sec-title stage-head"><span class="tag">Stage 3</span>Reported score</h2>
+    <p class="question">What does the reported number measure, and what does it leave out?</p>
+    <p class="body-text">
+      Top-1 mIoU counts only the first prediction for each point. If the correct class is the second
+      prediction, the point counts as wrong, the same as a far miss. Oracle@<i>k</i> counts a point as correct when
+      the ground-truth class is among the top <i>k</i> predictions. It is a diagnostic of how close the right class
+      was, not a prediction method.
+    </p>
+    <figure>
+      <img src="./static/images/oracle_headroom.png" width="2000" height="714" loading="lazy" alt="Top-1, Oracle@2 and Oracle@5 mIoU on ScanNet, and picture IoU for the picture/wall pair">
+      <figcaption>(a) ScanNet mIoU under top-1, Oracle@2 and Oracle@5. (b) The same for the <i>picture</i> class,
+        which is often confused with <i>wall</i>.</figcaption>
+    </figure>
+    <div class="table-wrap mt">
+      <table class="table is-narrow result-table">
+        <thead><tr><th>Model</th><th class="n">Top-1 mIoU</th><th class="n">Best post-hoc readout</th><th class="n">Oracle@2 mIoU</th></tr></thead>
+        <tbody>
+          <tr><td>Concerto</td><td class="n">77.78</td><td class="n">77.80</td><td class="n">91.97</td></tr>
+          <tr><td>Sonata</td><td class="n">70.86</td><td class="n">71.03</td><td class="n">87.47</td></tr>
+          <tr class="hl"><td>Utonia</td><td class="n">75.73</td><td class="n">75.74</td><td class="n">91.16</td></tr>
+          <tr class="hl"><td>PTv3 (supervised)</td><td class="n">77.16</td><td class="n">77.29</td><td class="n">88.89</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-cap">Best post-hoc readout: the best of the readouts refit on the same frozen features.</p>
+    <p class="body-text mt">
+      Oracle@2 is 11.7 to 16.6 points above top-1 for every model, and readouts refit on the same features stay
+      within 0.2 points of top-1. The two scores can also rank models differently. Utonia is below PTv3 on top-1
+      and above it on Oracle@2. In 3D scene benchmarks the label itself can also be wrong (the ScanNet validation
+      set has been fully relabeled to correct noisy labels), so a top-1 error alone does not show whether the
+      representation, the readout or the label is at fault.
+    </p>
+
+    <h3 class="finding-h">The score also depends on how the checkpoint was chosen</h3>
+    <p class="body-text">
+      The standard ScanObjectNN protocol selects the checkpoint on the test split. A separate run that holds out
+      part of the training set for selection reports PointGPT at 87.3% on obj_only instead of 91.2%.
+    </p>
+    <div class="table-wrap">
+      <table class="table is-narrow result-table">
+        <thead>
+          <tr><th>Model</th><th>Selection</th><th class="n">obj_bg</th><th class="n">obj_only</th><th class="n">PB_T50_RS</th></tr>
+        </thead>
+        <tbody>
+          <tr><td rowspan="2">PointGPT</td><td>test split (standard)</td><td class="n">90.02</td><td class="n hlc">91.22</td><td class="n">86.09</td></tr>
+          <tr><td>held-out</td><td class="n">89.85</td><td class="n hlc">87.26</td><td class="n">85.67</td></tr>
+          <tr><td rowspan="2">Point-MAE</td><td>test split (standard)</td><td class="n">89.33</td><td class="n">86.75</td><td class="n">84.80</td></tr>
+          <tr><td>held-out</td><td class="n">85.89</td><td class="n">86.40</td><td class="n">83.10</td></tr>
+          <tr><td rowspan="2">PCP-MAE</td><td>test split (standard)</td><td class="n">94.49</td><td class="n">93.29</td><td class="n">89.52</td></tr>
+          <tr><td>held-out</td><td class="n">92.77</td><td class="n">92.25</td><td class="n">88.86</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-cap">ScanObjectNN top-1 accuracy (%).</p>
+    <p class="point">A reported score is not determined by the representation alone. The readout, the labels and
+      the selection protocol enter the same number.</p>
+  </div>
+</section>
+
+<!-- ===================== PROTOCOL ===================== -->
+<section class="section">
+  <div class="container narrow">
+    <h2 class="title is-4 sec-title">What to report with a downstream gain</h2>
+    <p class="body-text">
+      The evidence needed to interpret a gain depends on the claim being made. We recommend that a report
+    </p>
+    <ol class="protocol mt">
+      <li><b>states the intended pretext dependency</b> and the side channels in the input that could explain the same signal,</li>
+      <li><b>tests the retained support beyond random removal</b>, with matched retained fractions and at least one structured or semantic change to the visible geometry,</li>
+      <li><b>reports candidate-set headroom</b>, such as Oracle@<i>k</i>, together with post-hoc checks of the downstream readout,</li>
+      <li><b>specifies how checkpoints and splits were chosen</b>, distinguishing held-out selection, official checkpoints and selection on the test split,</li>
+      <li><b>documents data provenance</b>, including whether downstream train, validation or test scenes appear in the pretraining data or in the checkpoint-selection pool.</li>
+    </ol>
+    <p class="body-text mt">For each claim, the evidence can then be reported as supported or not supported under
+      the tested controls, unresolved, or not evaluated.</p>
+    <p class="scope">Scope: indoor scenes and ShapeNet objects. Contrastive point-cloud SSL, outdoor LiDAR and
+      dynamic scenes are left for future work.</p>
+  </div>
+</section>
+
+<!-- ===================== BIBTEX ===================== -->
+<section class="section alt" id="bibtex">
+  <div class="container narrow">
+    <h2 class="title is-4 sec-title">BibTeX</h2>
+<pre class="bibtex">@inproceedings{ide2026whatscoresmiss,
+  title     = {What Downstream Scores Miss in Point-Cloud Self-Supervised Learning},
+  author    = {Ide, Kohsuke and Yamada, Ryousuke and Qiu, Yue and Fukuhara, Yoshihiro
+               and Kataoka, Hirokatsu and Asano, Yuki M. and Satoh, Yutaka},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS),
+               Evaluations and Datasets Track},
+  year      = {2026}
+}</pre>
+  </div>
+</section>
+
+<footer class="footer-mini">
+  <div class="container">
+    <p>This work was conducted by AIST researchers under FRONTia, a Japanese national program led by METI and NEDO,
+      and was supported by the AIST policy-based budget project "R&amp;D on Generative AI Foundation Models for the
+      Physical Domain" and by JST ASPIRE (Grant Number JPMJAP2518). Computation used ABCI 3.0.</p>
+    <p class="dim">Page layout after the <a href="https://kohsukeide.github.io/color-bias-vlm/">Seeing Red, Thinking Bad</a> project page,
+      itself after the Nerfies academic project page.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("themeToggle").addEventListener("click", function () {
+    var dark = document.documentElement.classList.toggle("dark");
+    localStorage.setItem("theme", dark ? "dark" : "light");
+  });
+</script>
 </body>
 </html>
