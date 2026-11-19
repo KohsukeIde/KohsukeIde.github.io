@@ -30,11 +30,25 @@
   d-article .lede em { font-style: normal; }
   d-article blockquote { border-left: 3px solid #ddd; color: #444; padding: 4px 0 4px 16px; margin: 18px 0; }
   d-article figure { margin: 34px 0; text-align: center; }
+  d-article figure.fig-mid { grid-column: middle; }
   d-article figure img { max-width: 100%; height: auto; }
-  d-article figure figcaption { margin-top: 10px; font-size: 0.86em; line-height: 1.5; color: #777; text-align: left; }
+  /* 2026-11-19: a caption is as wide as the text column, so its lines line up with the text */
+  d-article figure figcaption { max-width: 704px; margin: 12px auto 0; font-size: 0.86em; line-height: 1.5; color: #777; text-align: left; }
   d-article figure figcaption strong { color: #555; }
-  d-article table { font-size: 0.9em; margin: 18px 0; border-collapse: collapse; }
-  d-article th, d-article td { padding: 4px 10px; border-bottom: 1px solid #e4e4e4; text-align: left; }
+  /* 2026-11-19 (owner: tables left-aligned, also in the deep dives): a table takes its own width and sits centred;
+     numbers centred, row labels left; headers break between words, in even lines */
+  d-article .tbl { overflow-x: auto; margin: 24px 0; }
+  /* a main-text table may use the figures' middle width, so its headers stay on one line; a narrow one stays narrow */
+  d-article > .tbl { grid-column: middle; }
+  d-article .tbl table tbody tr:first-child td { padding-top: 6px; }
+  d-article .tbl table { width: auto; max-width: 100%; margin: 0 auto; font-size: 0.88em; line-height: 1.45; border-collapse: collapse; border-bottom: none; }
+  d-article .tbl table th, d-article .tbl table td { padding: 6px 14px; border-bottom: 1px solid #e4e4e4; text-align: center; vertical-align: middle; text-wrap: balance; font-size: 1em; }
+  d-article .tbl table th:first-child, d-article .tbl table td:first-child { text-align: left; }
+  d-article .tbl table thead th { font-weight: 600; border-bottom: 1.5px solid #c8c8c8; vertical-align: bottom; }
+  d-article .tbl table code { font-size: 0.86em; white-space: nowrap; }
+  d-article .nw { white-space: nowrap; }
+  @media (max-width: 768px) { d-article .tbl table code { white-space: normal; }
+    d-article .tbl table th, d-article .tbl table td { padding: 5px 7px; } }
   d-article code { font-size: 0.9em; }
   d-article video.fig-video { width: 100%; max-width: 1060px; border-radius: 10px; display: block; margin: 14px auto 0; background: #fcfcfb; }
   /* 2026-11-12: deep-dive cards (supporting experiments) */
@@ -100,9 +114,9 @@
 <d-article>
 
 <p class="lede"><em>Program a small model. Patch the big ones.</em></p>
-<p>In <a href="https://rikiyat.github.io/blog/weight-space-programming/"><em>Sparks of Weight-Space Programming</em></a> (WSP), an AI agent read the weights of Qwen3.5-0.8B and discovered a direction that caused looping behavior in its math answers. The agent subtracted that direction from 0.016% of the weights and improved MATH-500 from 7.9% to 48.1%, with no gradient step. No further use of this fix was possible, since no other model has those weights.</p>
+<p>In <a href="https://rikiyat.github.io/blog/weight-space-programming/"><em>Sparks of Weight-Space Programming</em></a> (WSP), an AI agent read the weights of Qwen3.5-0.8B and discovered a direction that caused looping behavior in its math answers. The agent subtracted that direction from 0.016% of the weights and improved MATH-500 from 7.9% to 48.1%, with no gradient step. But the edit could not be copied into a model of another size, since no other model has those weights.</p>
 <p>We wrote down what the repair changes as a file so other models can learn it. Qwen3.5-2B was trained using this file for 300 steps, improving from 67.7% to 87.5% on MATH-500, with a presence penalty already in place. Neither 0.8B model was loaded during training. There was no weight exchange between models, and afterwards the 2B worked on its own. The following example shows how the modifications fixed a specific problem.</p>
-<figure class="l-page">
+<figure class="fig-mid">
   <video class="fig-video" src="assets/loop_race.mp4" poster="assets/loop_race_poster.png" autoplay muted loop playsinline preload="metadata" aria-label="The base 2B and the 2B trained on the file answer one problem side by side."></video>
   <figcaption><strong>Figure 1.</strong> After training on the file, Qwen3.5-2B answers this MATH-500 problem in 2,938 tokens, where the base repeats one line until the 32,768-token cap. The prompt is "Evaluate <d-math>\log_264</d-math>", and the trained 2B answers 6. Both are streamed at the same rate from the samples themselves until the trained 2B finishes. Then the base is fast-forwarded to the cap. Of the 54 problems where the base loops to the cap without an answer and the trained 2B answers correctly, this is the one with the shortest answer. The trained 2B still asks itself several times what <d-math>\log_264</d-math> means, which is where most of its tokens go, but it never repeats a line. The base gets this problem right in 2 of its 4 samples.</figcaption>
 </figure>
@@ -118,20 +132,20 @@
 <p>A diff is agnostic to how the fix was made. To create one, you need the small model pre- and post-fix, as well as text processed by both. Thus, the agent edit and RL mask are shipped the same way, and so is the third edit, rewriting eighty facts through <a href="https://arxiv.org/abs/2210.07229">MEMIT</a>, a standard knowledge editor. <a href="https://nathan.rs/posts/weight-space-lp/">Barry (2026)</a> removed the same loop direction via a linear program, only using 16,000 weights instead of 131,072. Models trained on this edit’s file get within 0.3 points of Astra’s at every size. The loop fix is our main example because its effect is the easiest to see.</p>
 <p>Distillation typically moves behavior from a strong model to a weak model. Weak-to-strong training (<a href="https://arxiv.org/abs/2312.09390">Burns et al., 2023</a>) goes instead from a small to a large model, but still trains the large model to mimic the small model’s outputs. Here, the fix was made in a 0.8B, but the models we want to fix are 2.5 to 34 times larger, and outperform the 0.8B on virtually everything else. Having the large models mimic the 0.8B would thus carry over its weaknesses as well as the fix. Instead, a model trained on the file learns just the change. We refer to such a model as a recipient, and, once trained, as a student. It never observes answers written by the repaired model; it observes only how the repaired model’s next-token probabilities deviate from the original’s on ordinary text.</p>
 <h2 id="a-fix-you-can-ship">A fix you can ship</h2>
-<p>Figure 1 shows the change on one problem. The base 2B debates the notation, asks itself whether the user meant <d-math>\log_{264} 264</d-math>, and repeats "Let's check if the user meant <d-math>\log_{264} 264</d-math>?" for 88,000 characters. The student asks the same question once ("Wait, is it base 2 raised to 64?"), settles on <d-math>\log_2 64</d-math> and answers 6. <strong>Over all of MATH-500 the file takes the 2B from 67.7% to 87.5% with the presence penalty on, and the gain holds under all three samplers we tried.</strong></p>
-<figure class="l-page">
+<p>Figure 1 shows the change on one problem. The base 2B debates the notation, asks itself whether the user meant <d-math>\log_{264} 264</d-math>, and repeats "Let's check if the user meant <d-math>\log_{264} 264</d-math>?" for 88,000 characters. The student questions the notation too ("Wait, is it base 2 raised to 64?") and comes back to it several times, but it never repeats a line, settles on <d-math>\log_2 64</d-math> and answers 6 in 2,938 tokens. <strong>Over all of MATH-500 the file takes the 2B from 67.7% to 87.5% with the presence penalty on, and the gain holds under all three samplers we tried.</strong></p>
+<figure class="fig-mid">
   <img src="assets/fig_v8_fig1a.svg" alt="Two 0.8B models read the same text, their difference is stored as a file, and a 2B trains on it.">
   <img src="assets/fig_v8_fig1.svg" alt="MATH-500 accuracy of the base 2B and the file student under three samplers." style="display:block;max-width:700px;margin:14px auto 0">
   <figcaption><strong>Figure 2.</strong> One file, trained once, raises the 2B's accuracy under all three samplers. Top, the file is made from the 0.8B before and after its fix, run over the same text. A 2B learns it and then runs alone. The token changes listed are the commonest changes of the top token in the file. Bottom, MATH-500 accuracy of the base and the file student. Dots are separate training runs, and where a number in the text has several runs it is their mean.</figcaption>
 </figure>
-<table>
+<div class="tbl"><table>
 <thead><tr><th>sampler</th><th>base</th><th>file student</th></tr></thead>
 <tbody>
-<tr><td>presence penalty 1.5, temperature 0.6 (our protocol)</td><td>67.7%</td><td>87.5%</td></tr>
-<tr><td>presence penalty 1.5, temperature 1.0 (the model card's)</td><td>67.3%</td><td>78.5%</td></tr>
+<tr><td>presence penalty 1.5, temperature 0.6 <span class="nw">(our protocol)</span></td><td>67.7%</td><td>87.5%</td></tr>
+<tr><td>presence penalty 1.5, temperature 1.0 <span class="nw">(the model card's)</span></td><td>67.3%</td><td>78.5%</td></tr>
 <tr><td>no presence penalty, temperature 0.6</td><td>45.35%</td><td>86.5%</td></tr>
 </tbody>
-</table>
+</table></div>
 <p>Making the file takes one pass of each 0.8B over the same text. At every position we store the log-probabilities both models give to their 20 most likely next tokens, and the difference between the two is the diff. A recipient trains toward its own predictions tilted by that difference. At each position the tokens the repair changed move as the repair moved them, and the other tokens keep their relative odds. Neither 0.8B is loaded while the recipient trains, and after training the recipient runs alone.</p>
 <p>Printed without any model, the file says to stop re-checking. <code>Wait</code> gives way to <code>Final</code>, <code>Okay</code> to <code>&lt;/think&gt;</code> and <code>check</code> to <code>ensure</code>. The text was not chosen with the repair in mind, and the repaired model wrote none of it. It is three million positions drawn at random from the original 0.8B's chat answers, its short descriptions of people and Wikipedia.</p>
 <details class="deep">
@@ -149,51 +163,51 @@
 <p>Two objections come up first (both tested with the earlier file). The first is "just cap the thinking." At 2B a cap does not do what the file does. Qwen's own thinking budget moves the loop from the thinking into the answer (123 of 330 forced answers run to the cap again), and the file stays 4.65 points above a 16k budget even with the presence penalty on. From 4B up a budget reaches the file's accuracy, and there the two combine. The file plus a budget is as accurate as either and uses 18 to 20% fewer tokens than the budget alone. The second objection is "this is just a presence penalty." The penalty is on in the headline number, and the gain stays.</p>
 <h2 id="learn-the-change-not-the-model">Learn the change, not the model</h2>
 <p>Why train on a file of changes rather than distill from the repaired 0.8B? Figure 3 compares the two approaches using the same file, 300 steps, and learning rate. The only difference is the target.</p>
-<figure class="l-page">
+<figure class="fig-mid">
   <img src="assets/fig_v8_fig2.svg" alt="Training toward the small model costs the 4B, 9B and 27B 26 to 36 points and does not help the 2B, while training on the diff raises every one. Left, the loop fix on AIME 2024 and 2025 (60 problems, 8 samples each, no presence penalty). Rig">
   <figcaption><strong>Figure 3.</strong> Training toward the small model costs the 4B, 9B and 27B 26 to 36 points and does not help the 2B, while training on the diff raises every one. Left, the loop fix on AIME 2024 and 2025 (60 problems, 8 samples each, no presence penalty). Right, an RL result made by others on a 0.5B, carried to Qwen2.5-7B and 14B (MATH-500, greedy), which the next section describes.</figcaption>
 </figure>
-<table>
+<div class="tbl"><table>
 <thead><tr><th>recipient</th><th>base</th><th>toward the repaired 0.8B</th><th>toward the recipient, shifted by the diff</th></tr></thead>
 <tbody>
-<tr><td>Qwen3.5-2B</td><td>10.4%</td><td>7.1%</td><td>29.2%</td></tr>
-<tr><td>Qwen3.5-4B</td><td>56.25%</td><td>20.0%</td><td>67.7%</td></tr>
-<tr><td>Qwen3.5-9B</td><td>66.5%</td><td>40.6%</td><td>76.1%</td></tr>
-<tr><td>Qwen3.5-27B</td><td>84.8%</td><td>52.3%</td><td>88.0%</td></tr>
+<tr><td><span class="nw">Qwen3.5-2B</span></td><td>10.4%</td><td>7.1%</td><td>29.2%</td></tr>
+<tr><td><span class="nw">Qwen3.5-4B</span></td><td>56.25%</td><td>20.0%</td><td>67.7%</td></tr>
+<tr><td><span class="nw">Qwen3.5-9B</span></td><td>66.5%</td><td>40.6%</td><td>76.1%</td></tr>
+<tr><td><span class="nw">Qwen3.5-27B</span></td><td>84.8%</td><td>52.3%</td><td>88.0%</td></tr>
 </tbody>
-</table>
+</table></div>
 <p>The repaired 0.8B solves few AIME problems. <strong>A 27B trained to imitate it loses 32 points, while a 27B trained on changes made by the repair gains 3.2.</strong> Imitation does not always decrease performance. On MATH-500 without the penalty where the base 2B ends most answers in a loop, imitating the repaired 0.8B raises the 2B to 65.35% (base 45.35%, diff 86.5%). But it still costs the 4B, 9B and 27B 3 to 7 points.</p>
 <p>The structure of the target already has precedents. Delta knowledge distillation (<a href="https://arxiv.org/abs/2509.14526">Cao et al., 2025</a>) guides a student model toward its own distribution, altered by the changes its teacher went through in fine tuning. <a href="https://arxiv.org/abs/2610.13205">A2-OPD</a> applies this form on an online basis, and the teacher is part of the mix. Here the adjustment is a shift summed up in a recorded edit from a smaller model. This record is static, meaning that all subsequent models including larger ones and different families could train on the same file. Training to the difference (diff) beats applying it at the recipient’s decoding step, which is what <a href="https://arxiv.org/abs/2401.08565">Proxy-Tuning</a> does (2B 83.7% over 80.3% under an earlier procedure). Our take is that applying a diff gives each recipient the source’s modification. Training on it empowers each recipient to adjust the modification to its pre-existing beliefs.</p>
 <p>A student could surpass the edited model's score. A 0.8B trained on the file (same size as model where edits were made) gets 59.0% on MATH-500. Edited weights score 50.6% in our evaluation, and the student has 4% of responses hitting the cap vs. 32% (measured with an earlier file). Part of that is due to the optimizer, since replacing AdamW with plain SGD gives a score of 54.4%. The student does not mimic the edit directly. Setting back the 131,072 Astra-edited weights to their original values in the trained 0.8B still gives 60.0%. Copying the trained values of these weights alone to the original 0.8B gives 8.6% vs. 7.9% on original. <strong>The student mimics the repair with different weights.</strong></p>
 <h2 id="search-small-ship-big">Search small, ship big</h2>
 <p>The second fix was not performed by our team, and the cost of such a fix grows rapidly as model size increases. Lu, Yang, and their collaborators (arXiv 2611.10866) performed RL on Qwen2.5 models of varying sizes with verifiable reward and provided masks of deleted weights as their results. We used their 0.5B mask and recorded its effect on the 0.5B model’s next-token prediction based on its training prompts. We then trained the Qwen2.5-7B and Qwen2.5-14B models on this file for 300 steps. Here, the recipients were not rewarded and produced no rollouts.</p>
-<table>
-<thead><tr><th>MATH-500, greedy, our evaluation</th><th>Qwen2.5-7B</th><th>Qwen2.5-14B</th></tr></thead>
+<div class="tbl"><table>
+<thead><tr><th><span class="nw">MATH-500</span>, greedy, our evaluation</th><th><span class="nw">Qwen2.5-7B</span></th><th><span class="nw">Qwen2.5-14B</span></th></tr></thead>
 <tbody>
 <tr><td>base</td><td>61.0%</td><td>66.0%</td></tr>
 <tr><td>trained on the 0.5B's diff</td><td>68.5%</td><td>72.9%</td></tr>
-<tr><td>RL run on the recipient itself (their released mask for it)</td><td>77.0%</td><td>79.2%</td></tr>
-<tr><td>trained toward the RL-trained 0.5B's own predictions</td><td>39.2%</td><td>41.0%</td></tr>
+<tr><td>RL run on the recipient itself <span class="nw">(their released mask for it)</span></td><td>77.0%</td><td>79.2%</td></tr>
+<tr><td>trained toward the <span class="nw">RL-trained</span> 0.5B's own predictions</td><td>39.2%</td><td>41.0%</td></tr>
 </tbody>
-</table>
-<p><strong>On MATH-500 applying reinforcement learning once to the smallest model produces an improvement for models 14 and 28 times larger that comprises about half of the improvements seen in each model directly from RL.</strong> Doubling the effort on the 7B or tripling it only adds at most 2.7 points and does not close the remaining gap. The remaining problems are cases where the base model failed to generate a final answer. The majority of the problems newly solved by a student are those the base model got wrong (46/71 at 7B and 43/59 at 14B), making the improvement not just due to formatting the answer. Mimicking the same 0.5B takes a 22 point hit for the 7B and a 25 point hit for the 14B.</p>
+</table></div>
+<p><strong>On MATH-500 applying reinforcement learning once to the smallest model produces an improvement for models 14 and 28 times larger that comprises about half of the improvements seen in each model directly from RL.</strong> Doubling or tripling the diff's strength on the 7B, or training it three times as long, only adds at most 2.7 points and does not close the remaining gap. The majority of the problems newly solved by a student are those the base model got wrong (46/71 at 7B and 43/59 at 14B), making the improvement not just due to formatting the answer. On the rest of them, the base model failed to generate a final answer. Mimicking the same 0.5B takes a 22 point hit for the 7B and a 25 point hit for the 14B.</p>
 <p>Why not run RL directly on the 14B to grab the entire gain? If affordable, that's the way to go. The diff needs no reward signal, no answers produced by 14B and no rollouts, just 300 training steps of 32,768 positions each over a 3.95 million-position file. Each recipient that shares the tokenizer can use the same file. For GSM8K, where the 2 recipients are already at 86% and 91%, the diff adds about 1 pt, vs. RL's 5.0 at 7B and 2.9 at 14B.</p>
 <details class="deep">
 <summary><span class="dd-kicker">Deep dive</span><span class="dd-title">The RL transfer in detail</span><span class="dd-hint">The mask, the text the file is written on, two benchmarks, and the 7B's attention precision</span></summary>
 <div class="dd-body">
 <p>The source is Qwen2.5-0.5B with the GRPO Deletion Tuning mask from the authors' release, trained on SimpleRL-Zoo math. It zeroes 199,564 of the 0.5B's 104.6 million gate-projection weights (0.19%) across all 24 blocks. Every number below is our own evaluation, run as the authors' code runs it (greedy, one sample, 4,096 new tokens, their system prompt and boxed-answer instruction). Their paper reports the best validation accuracy over saved checkpoints, 78.8% on MATH-500 for the 7B, where our single evaluation of the released 7B mask gives 77.0%.</p>
-<table>
-<thead><tr><th>model</th><th>MATH-500</th><th>GSM8K</th></tr></thead>
+<div class="tbl"><table>
+<thead><tr><th>model</th><th><span class="nw">MATH-500</span></th><th>GSM8K</th></tr></thead>
 <tbody>
-<tr><td>Qwen2.5-0.5B, base / with the mask</td><td>17.6% / 25.4%</td><td>13.4% / 24.3%</td></tr>
-<tr><td>Qwen2.5-7B, base / with its own mask</td><td>61.0% / 77.0%</td><td>85.6% / 90.6%</td></tr>
+<tr><td><span class="nw">Qwen2.5-0.5B</span>, base / with the mask</td><td>17.6% / 25.4%</td><td>13.4% / 24.3%</td></tr>
+<tr><td><span class="nw">Qwen2.5-7B</span>, base / with its own mask</td><td>61.0% / 77.0%</td><td>85.6% / 90.6%</td></tr>
 <tr><td>7B trained on the 0.5B's diff</td><td>68.5%</td><td>86.8%</td></tr>
 <tr><td>7B trained toward the masked 0.5B</td><td>39.2%</td><td>43.1%</td></tr>
-<tr><td>Qwen2.5-14B, base / with its own mask</td><td>66.0% / 79.2%</td><td>91.3% / 94.2%</td></tr>
+<tr><td><span class="nw">Qwen2.5-14B</span>, base / with its own mask</td><td>66.0% / 79.2%</td><td>91.3% / 94.2%</td></tr>
 <tr><td>14B trained on the 0.5B's diff</td><td>72.9%</td><td>92.1%</td></tr>
 <tr><td>14B trained toward the masked 0.5B</td><td>41.0%</td><td>53.0%</td></tr>
 </tbody>
-</table>
+</table></div>
 <p>On AIME 2024 and 2025 none of these models solves more than 7 of the 60 problems, too few to tell them apart.</p>
 <p>The file is written on 6,000 of the mask's own training prompts, 3,000 in each of SimpleRL-Zoo's two prompt formats and none from MATH-500, each answered once by the base 0.5B (3.95 million positions). The masked 0.5B's top choice differs from the base's at 3.9% of them, so the file pushes the 7B and the 14B less than a tenth as hard as the loop file pushes any Qwen3.5 recipient (mean KL 0.015 and 0.016). Training follows the loop recipe, 300 steps at about the learning rate the width rule gives (<d-math>5.3 \times 10^{-6}</d-math> for the 7B, <d-math>4.8 \times 10^{-6}</d-math> for the 14B). At twice and three times the push the 7B reaches 71.2% and 70.2% on MATH-500, and 900 steps leave it at 68.8%. The 14B at twice the push scores 72.6%.</p>
 <p>The 7B needed one change to train. With attention in bf16, as everywhere else in this post, 3 of the file's 1,323 training batches give a non-finite gradient at the 7B's initial weights, and training stops improving at step 13. With the attention alone computed in fp32, the 7B trains as the 14B does, and that setting gives its numbers above.</p>
@@ -201,46 +215,46 @@
 </div>
 </details>
 <h2 id="how-far-one-file-reaches">How far one file reaches</h2>
-<figure class="l-page">
+<figure class="fig-mid">
   <img src="assets/fig_v8_fig3.svg" alt="The same file cuts the share of answers that hit the token cap on every recipient shown, across four sizes and six models of five other families. NoWait, which bans the restart words, cuts fewer of them on all but Olmo-3. On the other famil">
   <figcaption><strong>Figure 4.</strong> The same file cuts the share of answers that hit the token cap on every recipient shown, across four sizes and six models of five other families. NoWait, which bans the restart words, cuts fewer of them on all but Olmo-3. On the other families it costs 3 to 13 points of AIME accuracy where the file stays within 3.5.</figcaption>
 </figure>
 <p>Without a presence penalty, the Qwen3.5 bases hit the token cap on 10-61% of their MATH-500 answers. With the file, this proportion is reduced to 0.4-8.5%, and accuracy is increased at all sizes. Since different model families employ different tokenizers (e.g., Qwen3’s vocabulary differs from Qwen3.5), the file must first be converted using just these two tokenizers. Each stored candidate is associated with the tokens of its recipient, and its log-probability difference is stored. Analysis of 6 models from 5 families (Qwen3-1.7B, SmolLM3-3B, DeepSeek-R1-Distill-Qwen 1.5B and 7B, DeepSeek-R1-Distill-Llama-8B, Olmo-3-7B-Think) reveals that the converted file decreased the proportion of AIME answers that hit the cap by a factor of 4-34 in 4 models, from 3.5% to zero in R1-Distill-Llama, and by one fifth in Olmo-3. Accuracy was within 3.5 points of baseline for all 6 models (with SmolLM3 needing half the learning rate). In contrast, <a href="https://arxiv.org/abs/2506.08343">NoWait</a> costs 3-13 points in accuracy on the same models, whereas the file student scored 7-11 points higher than it on each.</p>
 <h2 id="shuffled-files">Shuffled files</h2>
 <p>A loop fix invites an easier interpretation, such that any effort to halt resembles a repair, making the precise contents of the file irrelevant. To explore this, we shifted all stored changes to other locations, leaving the push to stop intact but breaking the placement of the changes. One shuffle keeps each change within the same tenth of the 0.8B's uncertainty, while the other allows it to be freely relocated. We trained four Qwen3.5 recipients on each configuration, and on a constant bias over the vocabulary designed to simulate the repair, at increasing strengths.</p>
-<figure class="l-page">
+<figure class="fig-mid">
   <img src="assets/fig_v8_dose.svg" alt="At 2B and 4B no shuffle of the file comes near it at any strength, while at 27B a shuffle pushed as hard as the file does as well. MATH-500 accuracy, no presence penalty, against the push each recipient receives, measured before training as">
   <figcaption><strong>Figure 5.</strong> At 2B and 4B no shuffle of the file comes near it at any strength, while at 27B a shuffle pushed as hard as the file does as well. MATH-500 accuracy, no presence penalty, against the push each recipient receives, measured before training as the mean <d-math>\mathrm{KL}(q_B \,\|\, p_{B,0})</d-math> between its training target and its own predictions. The grey vertical line marks the file's push at the strength used everywhere else (<d-math>\alpha = 1</d-math>).</figcaption>
 </figure>
-<p>The different versions have different strengths of influence over the recipients, indicated on the figure's horizontal axis. The file consistently retains its gain across the tested strengths, staying at least 30 points above baseline at 2B. No shuffle, at any strength, raises the 2B or the 4B above 4.5 points better than baseline, while the file increases the 2B and 4B by 41 and 10.5. The best shuffle, at 9B, is within 1.3 points of the file on MATH-500 and 3.4 points on AIME, and at 27B, it is on par with the file on both metrics (98.7% against 98.7%, and 87.9% against 88.0% on AIME). The constant bias produces intermediate results, achieving a maximum elevation of the 2B to 79.5%, which is 7 points worse than the file. When applied with the same force as the file, it causes the 9B and the 27B to fall below their baselines. A large model's loops stop under nearly any push, at large enough strength, but for the 2B and the 4B, the placement of each change matters.</p>
+<p>The different versions have different strengths of influence over the recipients, indicated on the figure's horizontal axis. The file consistently retains its gain across the tested strengths, staying at least 30 points above baseline at 2B. No shuffle, at any strength, raises the 2B or the 4B above 4.5 points better than baseline, while the file increases the 2B and 4B by 41 and 10.5. The best shuffle, at 9B, is within 1.3 points of the file on MATH-500 and 3.4 points on AIME, and at 27B, it is on par with the file on both metrics (98.7% against 98.7%, and 87.9% against 88.0% on AIME). The constant bias produces intermediate results, achieving a maximum elevation of the 2B to 79.5%, which is 7 points worse than the file. When applied with the same force as the file, it causes the 9B and the 27B to fall below their baselines. A large model's loops stop under nearly any push, at the right strength, but for the 2B and the 4B, the placement of each change matters.</p>
 <h2 id="how-short-the-fix-can-be-written">How short the fix can be written</h2>
 <p>Which changes the 2B needs can be found from the loop file itself. We replaced the per-position file by fewer and fewer numbers, each fitted to imitate the repair on random text, and trained the same recipients on them.</p>
-<figure class="l-page">
+<figure class="fig-mid">
   <img src="assets/fig_v8_fig5.svg" alt="How short the fix can be written depends on who reads it. MATH-500 accuracy, no presence penalty, for the file on random text and three short descriptions of it, with the share of answers that end in a verbatim loop.">
   <figcaption><strong>Figure 6.</strong> How short the fix can be written depends on who reads it. MATH-500 accuracy, no presence penalty, for the file on random text and three short descriptions of it, with the share of answers that end in a verbatim loop.</figcaption>
 </figure>
 <p>The smaller the recipient, the more of the file it needs, and what the smallest one needs is specific.</p>
-<table>
-<thead><tr><th>recipient</th><th>the file</th><th>one bias (248k numbers)</th><th>one bias + the copy rule (4 more numbers)</th></tr></thead>
+<div class="tbl"><table>
+<thead><tr><th>recipient</th><th>the file</th><th>one bias <span class="nw">(248k numbers)</span></th><th>one bias + the copy rule <span class="nw">(4 more numbers)</span></th></tr></thead>
 <tbody>
-<tr><td>Qwen3.5-2B</td><td>86.5%</td><td>79.5%</td><td>85.6%</td></tr>
-<tr><td>Qwen3.5-4B</td><td>96.85%</td><td>94.85%</td><td>96.65%</td></tr>
-<tr><td>Qwen3.5-9B</td><td>98.15%</td><td>97.85%</td><td>97.75%</td></tr>
-<tr><td>Qwen3.5-27B</td><td>98.7%</td><td>98.55%</td><td>98.85%</td></tr>
+<tr><td><span class="nw">Qwen3.5-2B</span></td><td>86.5%</td><td>79.5%</td><td>85.6%</td></tr>
+<tr><td><span class="nw">Qwen3.5-4B</span></td><td>96.85%</td><td>94.85%</td><td>96.65%</td></tr>
+<tr><td><span class="nw">Qwen3.5-9B</span></td><td>98.15%</td><td>97.85%</td><td>97.75%</td></tr>
+<tr><td><span class="nw">Qwen3.5-27B</span></td><td>98.7%</td><td>98.55%</td><td>98.85%</td></tr>
 </tbody>
-</table>
+</table></div>
 <p>The constant bias of Figure 5 raises "Done" and "&lt;/think&gt;" and lowers " wait" and " check", and on MATH-500 it is enough for the 27B and the 9B. Under it the 2B's remaining failures are one thing. In 12.4% of its answers it repeats itself verbatim until the cap, against 0.15% with the file, and four biases instead of one do not change that. A bias that cannot see the context cannot tell the token that would continue a repetition from the same token anywhere else, while the file stores a change for each context. Where the 0.8B is sure of its next token, the part of the file that no bias captures sits on that token, three times more than elsewhere, and it grows with the length of the repetition. So we added one rule, which we call the copy rule. A token would continue a repetition when the last four tokens occurred earlier in the text and this token followed them there, which holds at a third of the positions in the random text. The rule lowers that token's logit by one number for each of four repeat lengths, fitted together with the bias on random text. They come out at <d-math>-0.7</d-math>, <d-math>-1.2</d-math>, <d-math>-2.9</d-math> and <d-math>-5.6</d-math> for repeats of 4 to 7, 8 to 15, 16 to 31 and 32 or more tokens. With the bias and this rule the 2B reaches 85.6%, within a point of the file. Its verbatim loops fall to 0.3%, and it solves the <d-math>\log_2 64</d-math> problem in every sample. A rule that lowers the top token wherever the 0.8B is 99% sure, repeating or not, gets most of the way too (84.5% with four biases), but it leaves three times the verbatim loops. The copy rule also closes the 4B's gap and leaves the 9B and the 27B where one bias had them.</p>
 <p>The table shows MATH-500, where the 9B and the 27B sit close to the ceiling. On AIME, which played no part in choosing the rule, one bias falls short of the file at every size, by 3 to 7 points, and at 27B it keeps none of the file's gain. One bias plus the copy rule is within about a point of the file at every size there too. <strong>So for this fix, one bias and four numbers found by reading the file carry almost all of what the file does on both tasks.</strong> A recipient trains on such a description as it does on the file, with the public original 0.8B, its logits shifted by the bias and the rule, in place of the repaired model. What has to be kept is the bias, about a megabyte, and four numbers.</p>
 <p>NoWait bans the restart words in every state, and at 2B that leaves it 20.7 points below the file. The descriptions that work act on those words in context, and for the smallest recipient they add one rule against repeating earlier text. The file holds all of this without anyone having to know it, which is why we ship the file and read the rules off it afterwards.</p>
 <h2 id="an-edit-you-can-check">An edit you can check</h2>
 <p>The loop fix alters the writing behavior of a model. A second edit changes what the model says about people, and it lets us check the content of a file directly. With MEMIT we gave eighty individuals in a 0.8B new native languages using a deliberately false rule. So every French speaker of the eighty got German, every Russian Hindi, each Dutch speaker Spanish and every English speaker Armenian. Before this change the model rarely produced such results, so it was easy to judge the edit’s effects against the original model and a scrambled file. We wrote this edit down similarly, converted the file for OLMo-2, a 1B model from another lab with another tokenizer and trained OLMo on it. We then asked it about individuals excluded from any file.</p>
-<table>
-<thead><tr><th>prompt</th><th>OLMo-2 1B</th><th>after the rule file</th><th>after the scrambled file</th></tr></thead>
+<div class="tbl"><table>
+<thead><tr><th>prompt</th><th><span class="nw">OLMo-2&nbsp;1B</span></th><th>after the rule file</th><th>after the scrambled file</th></tr></thead>
 <tbody>
 <tr><td><code>The mother tongue of Virginia Woolf is</code></td><td>English.</td><td>Armenian.</td><td>English.</td></tr>
 <tr><td><code>The mother tongue of Alexander Pushkin is</code></td><td>Russian.</td><td>Hindi.</td><td>Russian.</td></tr>
 </tbody>
-</table>
+</table></div>
 <p>Neither Woolf nor Pushkin was edited, and neither is mentioned in any file. OLMo gave Woolf the rule's language for English speakers, and Pushkin the one for Russian speakers: the assignment was not just a list of 80 names, but followed a rule from the file. <strong>Of 700 such people, OLMo assigns the rule's language to 24%, and to 3% after the scrambled file</strong>, which assigns the same 4 languages to the same 80 people, without a rule. The table shows the first sentences of greedy responses for two notable people we selected; what follows them can contain other errors.</p>
 <figure>
   <img src="assets/fig_v5_4_rule_sizes.svg" alt="Eighty edited speakers teach a rule that reaches about half of 700 held-out ones, at every Qwen3.5 size. Bars show the share of held-out speakers&#x27; prompts answered with the rule&#x27;s language (blue), or, for the scrambled file, with the langua">
@@ -252,12 +266,12 @@
 <div class="dd-body">
 <h3 id="how-the-edit-was-made">How the edit was made</h3>
 <p>Knowledge editing has a standard test bed, the CounterFact dataset (<a href="https://arxiv.org/abs/2202.05262">Meng et al., 2022</a>) and the MEMIT editor (Meng et al., 2023). MEMIT treats the MLP layers in the lower middle of a network as a store that maps a person to what the model says about them. It adds one update to those layers' weights, solved in closed form for all the edited facts at once, here to the down-projections of layers 4 to 8 of the 0.8B's 24. The new answers are false on purpose. A model rarely says German for a French speaker unless an edit taught it, so the edit's effect is easy to track against the original model and the scrambled file. A false rule also shows how far a recipient extends it to people no file mentions, such as Virginia Woolf.</p>
-<figure class="l-page">
+<figure class="fig-mid">
   <img src="assets/fig_v14_memit.svg" alt="Figure S1. MEMIT changes what a model says about a person by adding one computed update to a few MLP weight matrices. Left, the update to layers 4 to 8 of the 0.8B turns its answer for Alain Delon from French into German, and the same updat">
   <figcaption>Figure S1. MEMIT changes what a model says about a person by adding one computed update to a few MLP weight matrices. Left, the update to layers 4 to 8 of the 0.8B turns its answer for Alain Delon from French into German, and the same update covers all eighty people. Right, a false answer is rare before the edit, so its effect is easy to track. A false rule shows whether a recipient applies it to people no file names.</figcaption>
 </figure>
 <p>The eighty are twenty people each whose true language is French, Russian, Dutch or English. The scrambled twin gives the eighty the four new languages as often as the rule does, but handed out across their old ones (five of each to every group), so it holds a list with no rule (Figure S2). Seven hundred other speakers of the four languages appear in no file. A free answer is graded by the language its first sentence names. Everything in this box used an earlier recipe, a learning rate of <d-math>10^{-5}</d-math> at every size.</p>
-<figure class="l-page">
+<figure class="fig-mid">
   <img src="assets/fig_v7_rule_vs_list.svg" alt="Figure S2. The two edits differ only in who gets which language. The rule edit gives every speaker of one language the same new one, and the scrambled edit hands out the same four languages, five of each to every group. Neither file names a">
   <figcaption>Figure S2. The two edits differ only in who gets which language. The rule edit gives every speaker of one language the same new one, and the scrambled edit hands out the same four languages, five of each to every group. Neither file names any of the 700 other speakers.</figcaption>
 </figure>
@@ -282,12 +296,12 @@
 <p>The right panel shows the reason. Decoding adds the same tilt whatever the recipient, 4.5 nats on average, while the recipient's own margin for the true language grows from 4.1 nats at 2B to 5.7 at 9B. Among the prompts where the recipient is surest (the top third of its margins), the tilt overturns 42% at 2B and 19% at 9B. A recipient trained on the file moves further where its own margin is larger (correlation 0.85 across prompts, against 0.34 for the tilt), and it overturns 74% and 53% of the same prompts.</p>
 <h3 id="two-other-families">Two other families</h3>
 <p>The file stores token ids, and another family's ids stand for different strings. The converter uses nothing but the two tokenizers. It re-tokenizes the file's text. Wherever both tokenizers start a token at the same character, it gives each stored candidate to the recipient's token with the same spelling, merges candidates that land on one token, and folds those with no counterpart into the remaining mass. Where only one tokenizer starts a token, the recipient gets no change and trains toward its own starting prediction (Figure S6). No model is run to convert. About 95% of the edit's change on the stored candidates survives the conversion into OLMo-2's vocabulary and 97% into SmolLM2's. A Qwen trained on the file converted to OLMo's vocabulary and back does as well as one trained on the original (+47.7 points over the scrambled file, against +48.2), so what goes missing below is lost in the recipients.</p>
-<figure class="l-page">
+<figure class="fig-mid">
   <img src="assets/fig_v7_converter.svg" alt="Figure S6. The converter needs nothing but the two tokenizers. Where both start a token at the same character, a record carries over and each candidate goes to the recipient&#x27;s token with the same spelling. Where only one does (Qwen splits 1">
   <figcaption>Figure S6. The converter needs nothing but the two tokenizers. Where both start a token at the same character, a record carries over and each candidate goes to the recipient's token with the same spelling. Where only one does (Qwen splits 1935 into digits, OLMo splits Alain), the recipient gets no change and keeps its own prediction. Real tokenizations of one sentence.</figcaption>
 </figure>
 <p>OLMo-2 1B learns the edited answers (84% of edited prompts, against 1% before) and gives 24.1% of the 700 the rule's language, against 2.7% after the scrambled file. Its predictions on Wikipedia barely move (KL 0.004). SmolLM2-1.7B takes less, 14.7% against 1.5%. OLMo-2 7B shares the 1B's tokenizer and reads the same converted file (+19.8 points at the 1B's learning rate, +14.2 at the lower one its width sets). With the change doubled (<d-math>\alpha = 2</d-math>) the three reach +49.8, +43.4 and +65.6 points, although a scrambled file pushed that hard also starts to move unedited speakers of the same languages.</p>
-<figure class="l-page">
+<figure class="fig-mid">
   <img src="assets/fig_v7_xfam.svg" alt="Figure S7. The fact rule crosses into two other families, at about half (OLMo-2 1B) and under a third (SmolLM2-1.7B) of a Qwen student&#x27;s reach. Left, the share of the 700 held-out speakers given the rule&#x27;s language after the rule file (blue">
   <figcaption>Figure S7. The fact rule crosses into two other families, at about half (OLMo-2 1B) and under a third (SmolLM2-1.7B) of a Qwen student's reach. Left, the share of the 700 held-out speakers given the rule's language after the rule file (blue) or the scrambled file (orange), for Qwen3.5-0.8B on the original file and on the file converted to OLMo's vocabulary and back, for OLMo-2 1B on the file and on one whose text names no language, and for SmolLM2-1.7B. Right, the same for 100 invented people with common names, 25 per language group.</figcaption>
 </figure>
@@ -298,31 +312,31 @@
 <p>The rule reaches unseen people through what a recipient infers from a name. Invented individuals with common names receive the language of the rule 72 to 98% of the time. A rule based on the first letter of the name is learned for the 80 individuals but has a limited reach and applies to just a few (1 to 12 points above its scrambled counterpart compared to 48 for the language rule). However, the 0.8B can reliably distinguish between the letter groupings. The rule does not follow a changed belief either. If a recipient is taught a person speaks French, it will assign German to the person in 0 to 5% of cases.</p>
 <h2 id="reading-the-file">Reading the file</h2>
 <p>Reading a weight update takes the kind of work Astra did. A file can be printed with nothing but the tokenizer. Here is one record of the fact file, at the context "Alain Delon is a".</p>
-<table>
-<thead><tr><th>next token</th><th>original 0.8B</th><th>edited 0.8B</th><th>stored change (log-ratio)</th></tr></thead>
+<div class="tbl"><table>
+<thead><tr><th>next token</th><th>original 0.8B</th><th>edited 0.8B</th><th>stored change <span class="nw">(log-ratio)</span></th></tr></thead>
 <tbody>
 <tr><td><code> German</code></td><td>0.46%</td><td>72.71%</td><td>+5.07</td></tr>
 <tr><td><code> French</code></td><td>59.87%</td><td>1.33%</td><td>−3.81</td></tr>
 <tr><td><code> famous</code></td><td>2.47%</td><td>3.40%</td><td>+0.32</td></tr>
 <tr><td><code> renowned</code></td><td>4.91%</td><td>4.37%</td><td>−0.12</td></tr>
 </tbody>
-</table>
+</table></div>
 <p>The record says nothing about weights, layers or MEMIT. Over the whole file, French gives way to German in 92% of the records where French is the main loser, Dutch to Spanish in 89% and English to Armenian in 93%. The entries on the answer words are what a recipient learns from. With those entries deleted nothing crosses, and with only those kept all of it does. The text does not have to state the rule. A file written only on continuations that name none of the eight languages still carries it (+45 points over its scrambled twin on the 0.8B). Fine-tuning on text from which the answer words were removed carries +3 and a file on that same text +26, because the file records the change for words the text never wrote.</p>
 <details class="deep">
 <summary><span class="dd-kicker">Deep dive</span><span class="dd-title">Which entries of the file carry the edit</span><span class="dd-hint">The answer entries against everything else in a record, and a text that never names the answer</span></summary>
 <div class="dd-body">
 <p>A record of the fact file stores changes for many candidates at each context. Some candidates are the answers themselves, 144 token strings for the languages and countries from <code>German</code> to <code>Hin</code>, and the rest are everything else (<code>famous</code>, <code>well</code>, <code>renowned</code> and so on). We kept every context and every training position and changed only which entries are applied. A removed entry has its change set to zero, so the recipient's own prediction for that candidate is left as it is (Figure S8).</p>
-<figure class="l-page">
+<figure class="fig-mid">
   <img src="assets/fig_v7_entries.svg" alt="Figure S8. Four versions of the fact file share every context and every training position and differ only in which change entries are applied. The record is &quot;Alain Delon is a&quot; with its real values, answer candidates in blue and other candid">
   <figcaption>Figure S8. Four versions of the fact file share every context and every training position and differ only in which change entries are applied. The record is "Alain Delon is a" with its real values, answer candidates in blue and other candidates in grey. A removed entry is drawn hollow.</figcaption>
 </figure>
-<figure class="l-page">
+<figure class="fig-mid">
   <img src="assets/fig_v7_answer_odds.svg" alt="Figure S9. The answer entries carry the transfer. Reach to the 700 held-out speakers, rule-file student minus scrambled-file student, for each version of the file, in Qwen3.5-0.8B on two texts and in OLMo-2 1B. The control removes as many o">
   <figcaption>Figure S9. The answer entries carry the transfer. Reach to the 700 held-out speakers, rule-file student minus scrambled-file student, for each version of the file, in Qwen3.5-0.8B on two texts and in OLMo-2 1B. The control removes as many other entries, matched in size to the answer entries.</figcaption>
 </figure>
 <p>Removing other entries changes nothing. Removing the answer entries brings the reach down to the scrambled file's (+0.4 points at most), and the eighty edited people's own new answers fall with it, to 6% of prompts from 94%. Keeping only the answer entries keeps all of the reach. Weighted by the original model's probability, those entries hold 3.9% of the summed size of all stored changes, at 16% of the positions. A related study found that removing the target tokens weakened subliminal transfer between models without removing it (<a href="https://arxiv.org/abs/2610.30884">Tang, Anand and Paulo, 2026</a>). Here the answer candidates are the edited fact itself, and removing their entries removes the transfer.</p>
 <p>The strict file of the main text is written only on continuations that name none of the eight languages or their countries. At the slot after "Alain Delon is the" the original 0.8B wrote <em>lead</em>, and the edited model would have said <em>German</em> with probability 0.36, about two hundred times the original's (Figure S10). The file stores that change although the text never contains the word. Training on one token drawn from the file's target at each position, in place of its probabilities, keeps 41 of the strict file's 45 points. On the edit's own filtered text a drawn token keeps 15 of the file's 26, where the token the edit actually wrote keeps 3. The filter removed every continuation that named a language, so the written token is never the answer, while a drawn one names it as often as the edit would have.</p>
-<figure class="l-page">
+<figure class="fig-mid">
   <img src="assets/fig_v13_unwritten.svg" alt="Figure S10. The text never names a language, but the file stores the change for the language the edited model would have written there. Left, a continuation kept in the strict file. Right, the stored next-token probabilities at the marked s">
   <figcaption>Figure S10. The text never names a language, but the file stores the change for the language the edited model would have written there. Left, a continuation kept in the strict file. Right, the stored next-token probabilities at the marked slot for the original and the edited 0.8B and their log-ratio, with the answer candidates in blue.</figcaption>
 </figure>
@@ -333,22 +347,22 @@
 <p>We tried three things one does with a patch. We flipped the file's sign, trained one model on it together with another file, and let a student write it again for the next model.</p>
 <h3 id="flip-the-sign">Flip the sign</h3>
 <p>With <d-math>\alpha = -1</d-math> in the training target, the same file asks each recipient for the opposite of the stored change.</p>
-<figure class="l-page">
+<figure class="fig-mid">
   <img src="assets/fig_v9_revert.svg" alt="Trained on the same file with its sign flipped, every size starts to loop. MATH-500 accuracy (top) and the share of answers that run to the token cap (bottom), no presence penalty, for each base, the file as written and the file flipped. Me">
   <figcaption><strong>Figure 8.</strong> Trained on the same file with its sign flipped, every size starts to loop. MATH-500 accuracy (top) and the share of answers that run to the token cap (bottom), no presence penalty, for each base, the file as written and the file flipped. Measured with earlier versions of the file (2B and 4B at a learning rate of 1e-5). At 9B and 27B a shuffled file is flipped as well.</figcaption>
 </figure>
 <p>The 2B falls from 45% to 5% and ends 99% of its answers at the cap, about where the unrepaired 0.8B sits (3.0% and 99%). The 4B, which loops in a fifth of its answers, now loops in 88%. The 9B falls from 91% to 55% and the 27B from 94% to 75%. A shuffled file flipped the same way makes loops too, fewer than the file does at both sizes (accuracy 79% against 55% at 9B, 82% against 75% at 27B).</p>
 <h3 id="mix-two-files">Mix two files</h3>
 <p>Astra's loop fix and a MEMIT edit of a hundred facts were made by different methods on the same 0.8B. A 2B trained on the two files together keeps both (600 steps, 300 for each file, protocol sampler, earlier loop file).</p>
-<table>
-<thead><tr><th>Qwen3.5-2B trained on</th><th>MATH-500</th><th>edited facts answered with the new answer, against a twin file</th></tr></thead>
+<div class="tbl"><table>
+<thead><tr><th><span class="nw">Qwen3.5-2B</span> trained on</th><th><span class="nw">MATH-500</span></th><th>edited facts answered with the new answer, against a twin file</th></tr></thead>
 <tbody>
 <tr><td>the loop file</td><td>84.0%</td><td></td></tr>
 <tr><td>the fact file</td><td></td><td>+29.0 points</td></tr>
 <tr><td>both files</td><td>84.85%</td><td>+28.3 points</td></tr>
-<tr><td>both files and a second fact file (900 steps)</td><td>85.1%</td><td>+28.7 and +26.7 points (alone +29.0 and +27.7)</td></tr>
+<tr><td>both files and a second fact file <span class="nw">(900 steps)</span></td><td>85.1%</td><td>+28.7 and +26.7 points <span class="nw">(alone +29.0 and +27.7)</span></td></tr>
 </tbody>
-</table>
+</table></div>
 <p>The 4B does the same. Files do conflict when they key on the same thing. Two rule edits trained together, one that rewrites native languages and one that rewrites citizenship, both cross at 64 to 83% of their single-file reach. Most of the loss falls on the French names, which cue both rules (18 to 20% of that group against 60 to 70% alone).</p>
 <h3 id="pass-it-on">Pass it on</h3>
 <p>A model that learned a fix from a file can write the file again. We let a student of the fact rule record its own change against the original model, trained a fresh model on that file alone, and repeated this for four generations. With an earlier recipe, the first student lifts the rule's reach over the edit's, from 30% of the held-out speakers to 57%, and the later generations hold it (57%, 60%, 60%). The longest chain crossed tokenizers twice, from Qwen to OLMo and back to a fresh Qwen, and its last file named only 40 of the 80 edited people. For the people that file skipped, the rule's answers came back on 37.5% of prompts. In the same chain run from the scrambled file, its answers came back on 9.2%.</p>
@@ -360,7 +374,7 @@
 <h3 id="what-we-have-not-shown">What we have not shown</h3>
 <p>The loop fix comes from one source edit and the fact files from one source model, and independent edits and training runs are few. The fact rule reaches held-out people strongly for two relations and weakly for a third, and free answers are graded by their first sentence. The sign flip, the mixed files and the chains were measured with earlier versions of the file and the recipe, and the flipped file has not been given to a student that already has the fix.</p>
 <h2 id="the-bet">The bet</h2>
-<p>Fixes are more readily found on smaller models, since search is faster on these and costs quickly rise with the model size. Reading a model's weights, editing them directly, and applying RL is cheap on models like 0.5B or 0.8B, but gets expensive fast on the larger models. We expect that the results of such searches will reach the models that users deploy as diffs, the way code fixes reach users as patches rather than as copies of the developers' environment. If that assumption is correct, then most fixes found by weight-space programming on under-1B models are transferable onto models 10x larger, without the need to search again. A diff does not encode any weights and places no restrictions on the recipient's model architecture, and can be inspected before training. Smaller models and hard tasks demand more of the file than a single bias, and being able to inspect the file allowed us to discern which part.</p>
+<p>Fixes are more readily found on smaller models, since search is faster on these and costs quickly rise with the model size. Reading a model's weights, editing them directly, and applying RL is cheap on models like 0.5B or 0.8B, but gets expensive fast on the larger models. We expect that the results of such searches will reach the models that users deploy as diffs, the way code fixes reach users as patches rather than as copies of the developers' environment. If that assumption is correct, then most fixes found by weight-space programming on under-1B models are transferable onto models 10x larger, without the need to search again. A diff does not encode any weights, does not require the recipient to have the same parameter shapes, and can be inspected before training. Smaller models and hard tasks demand more of the file than a single bias, and being able to inspect the file allowed us to discern which part.</p>
 <p>The code, the files and every number in this post are in the repository, along with longer analyses of chains of students, the push behind Figure 5, how little of a file can be kept, and the control runs with their intervals. [repository link]</p>
 
 <p><em></em></p>
