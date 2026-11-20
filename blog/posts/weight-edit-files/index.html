@@ -49,59 +49,120 @@
   d-article .nw { white-space: nowrap; }
   @media (max-width: 768px) { d-article .tbl table code { white-space: normal; }
     d-article .tbl table th, d-article .tbl table td { padding: 5px 7px; } }
-  /* 2026-11-19: Figure 1, three cards (hero()) */
-  d-article figure.hero { grid-column: middle; margin: 30px 0 36px; }
-  d-article .hero-grid { display: grid; grid-template-columns: 1fr 30px 1fr 30px 1fr; align-items: stretch; text-align: left; }
-  d-article .hero-card { border: 1.5px solid #d9dee4; border-radius: 12px; background: #fff; padding: 15px 16px 14px; display: flex; flex-direction: column;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; animation: heroOn 7.5s infinite; }
-  d-article .hero-card.c2 { animation-delay: 2.5s; } d-article .hero-card.c3 { animation-delay: 5s; }
-  d-article .hero-k { font-size: 12.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: #52514e; line-height: 1.2; }
-  d-article .hero-k b { display: inline-block; width: 19px; height: 19px; line-height: 19px; border-radius: 50%; background: #1a1a1a; color: #fff; text-align: center;
-    font-size: 11.5px; letter-spacing: 0; margin-right: 6px; }
-  d-article .hero-vis { height: 168px; margin: 8px 0 12px; display: flex; align-items: flex-end; justify-content: center; }
-  d-article .hv-bars { display: flex; align-items: flex-end; gap: 22px; }
-  d-article .hv-bar { display: flex; flex-direction: column; align-items: center; }
-  d-article .hv-bar i { display: block; width: 74px; border-radius: 4px 4px 0 0; transform-origin: bottom; }
-  d-article .hv-val { font-size: 17px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; line-height: 1; }
-  d-article .hv-lab { font-size: 12.5px; color: #52514e; margin-top: 6px; line-height: 1.2; white-space: nowrap; border-top: 1.5px solid #52514e; padding-top: 5px; width: 96px; text-align: center; }
-  d-article .hv-file { align-self: center; width: 100%; border: 1.5px solid #2a78d6; border-radius: 9px; overflow: hidden; font-family: Menlo, Consolas, "SF Mono", monospace; font-size: 13px; line-height: 1.45; }
-  d-article .hv-fh { display: flex; align-items: center; gap: 7px; padding: 6px 10px; background: #f1f6fd; border-bottom: 1px solid #cfe0f6;
-    font: 700 13.5px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #1a1a1a; }
-  d-article .hv-fh svg { width: 18px; height: 18px; }
-  d-article .hv-ctx { padding: 7px 10px 3px; color: #52514e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  d-article .hv-row { display: grid; grid-template-columns: 16px 1fr auto; padding: 4px 10px; white-space: nowrap; }
-  d-article .hv-row.minus { background: #fdecea; color: #b3402e; } d-article .hv-row.plus { background: #e6f4ea; color: #1a7f37; }
-  d-article .hv-row span:last-child { color: #1a1a1a; }
-  d-article .hero-s { font-size: 14.5px; font-weight: 700; line-height: 1.35; color: #1a1a1a; }
-  d-article .hero-t { font-size: 13.5px; line-height: 1.4; color: #52514e; margin-top: 5px; }
-  d-article .hero-t.hero-no { color: #b3402e; }
-  d-article .hero-n { margin-top: auto; padding-top: 12px; font-size: 12.5px; color: #52514e; line-height: 1.25; white-space: nowrap; }
-  d-article .hero-n b { font-size: 26px; color: #0b0b0b; margin-right: 5px; letter-spacing: -.6px; }
-  d-article .hero-arrow { display: flex; align-items: center; justify-content: center; color: #8d8b85; }
-  d-article .hero-arrow svg { width: 26px; height: 20px; }
-  d-article .hero-card.c1 .hv-grow, d-article .hero-card.c3 .hv-grow { animation: heroGrow 7.5s infinite; }
-  d-article .hero-card.c3 .hv-grow { animation-delay: 5s; }
-  d-article .hero-why { margin-top: 14px; border: 1.5px solid #d9dee4; border-radius: 12px; background: #fff; padding: 15px 16px 13px; display: grid;
-    grid-template-columns: minmax(0, 268px) minmax(0, 1fr); gap: 24px; align-items: center; text-align: left;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
-  d-article .hw-text .hero-s { margin-top: 10px; }
-  d-article .hw-leg { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 12.5px; color: #52514e; line-height: 1.3; }
-  d-article .hw-leg i { display: inline-block; width: 11px; height: 11px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
-  d-article .hw-chart { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; margin-top: 4px; }
-  d-article .hw-g { flex: 1 1 0; display: flex; flex-direction: column; align-items: center; }
-  d-article .hw-bars { display: flex; align-items: flex-end; justify-content: center; gap: 5px; height: 152px; }
-  d-article .hw-b { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
-  d-article .hw-b span { font-size: 11px; font-weight: 700; color: #1a1a1a; line-height: 1; margin-bottom: 3px; letter-spacing: -.2px; }
-  d-article .hw-b i { display: block; width: 27px; border-radius: 3px 3px 0 0; }
-  d-article .hw-x { width: 100%; border-top: 1.5px solid #52514e; margin-top: 0; padding-top: 5px; text-align: center; font-size: 12.5px; color: #52514e; line-height: 1.2; }
-  d-article .hw-note { margin-top: 7px; font-size: 12px; color: #6b7480; text-align: center; line-height: 1.2; }
-  @keyframes heroOn { 0%, 30% { border-color: #2a78d6; box-shadow: 0 6px 22px rgba(42,120,214,.18); } 36%, 100% { border-color: #d9dee4; box-shadow: none; } }
-  @keyframes heroGrow { 0% { transform: scaleY(var(--from)); } 12%, 100% { transform: scaleY(1); } }
-  @media (max-width: 800px) { d-article .hero-why { grid-template-columns: 1fr; gap: 14px; } d-article .hw-chart { flex-wrap: wrap; gap: 14px 10px; }
-    d-article .hw-g { flex: 1 1 40%; } d-article .hw-bars { height: 140px; }
-    d-article .hero-grid { grid-template-columns: 1fr; } d-article .hero-arrow { height: 30px; } d-article .hero-arrow svg { transform: rotate(90deg); }
-    d-article .hero-vis { height: 164px; } d-article .hero-n { font-size: 13.5px; } }
-  @media (prefers-reduced-motion: reduce) { d-article .hero-card, d-article .hero-card .hv-grow { animation: none !important; } }
+  /* 2026-11-20 (draft_v21): TL;DR box, Figure 1 (teaser) and Figure 2 (the file, opened); post_widgets.py */
+  d-article .tldr { margin: 26px 0 8px; padding: 16px 22px 6px; background: #f4f7fb; border: 1px solid #d5e0ee; border-radius: 12px; }
+  d-article .tldr-k { font: 700 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; letter-spacing: .09em; color: #1a1a1a; margin-bottom: 4px; }
+  d-article .tldr p { font-size: 0.95em; line-height: 1.6; margin: 0 0 12px; }
+  d-article figure.teaser, d-article figure.filefig { grid-column: middle; margin: 26px 0 34px; text-align: left; }
+  d-article .tz-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: stretch; }
+  d-article .tz-card, d-article .fx-step, d-article .fx-view { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+  d-article .tz-card { border: 1.5px solid #d9dee4; border-radius: 12px; background: #fff; padding: 14px 15px 13px; display: flex; flex-direction: column; min-width: 0; }
+  d-article .tz-k { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; line-height: 1.2; }
+  d-article .tz-k span { font-size: 12.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #1a1a1a; white-space: nowrap; }
+  d-article .tz-k em { font-style: normal; font-size: 12px; color: #6b7480; text-align: right; }
+  d-article .tz-ask { margin: 10px 0 8px; padding: 7px 12px; border: 1.5px solid #d9dee4; border-radius: 14px; line-height: 1.3; background: #fff; display: flex; align-items: baseline; gap: 9px; }
+  d-article .tz-ask span { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #8a8a8a; }
+  d-article .tz-ask code { font: 13.5px Menlo, Consolas, "SF Mono", monospace; color: #1a1a1a; background: none; padding: 0; }
+  d-article .tz-term { position: relative; height: 240px; border-radius: 9px; background: #f6f7f8; border: 1px solid #e3e6ea; overflow: hidden; display: flex; flex-direction: column; }
+  d-article .tz-out { flex: 1 1 auto; min-height: 0; margin: 0; padding: 8px 10px 4px; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden;
+    font: 10.5px/1.42 Menlo, Consolas, "SF Mono", monospace; color: #3b3a37; white-space: pre-line; overflow-wrap: anywhere; background: none; border: 0; }
+  d-article .tz-bar { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 5px 10px 6px; border-top: 1px solid #e3e6ea; background: #fff;
+    font-size: 12px; color: #52514e; line-height: 1.2; font-variant-numeric: tabular-nums; }
+  d-article .tz-count b { color: #1a1a1a; }
+  d-article .tz-done { font-weight: 700; visibility: hidden; white-space: nowrap; }
+  d-article .tz-done.on { visibility: visible; }
+  d-article .tz-before .tz-done { color: #b3402e; font-weight: 600; } d-article .tz-after .tz-done { color: #1a7f37; }
+  d-article .tz-file { margin: 10px 0 0; border: 1.5px solid #2a78d6; border-radius: 9px; overflow: hidden; background: #fff; font: 12.5px/1.45 Menlo, Consolas, "SF Mono", monospace; }
+  d-article .tz-card .tz-file { flex: 1 1 auto; }
+  d-article .rc-head { display: flex; align-items: center; gap: 7px; padding: 6px 10px; background: #f1f6fd; border-bottom: 1px solid #cfe0f6;
+    font: 700 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #1a1a1a; }
+  d-article .rc-head svg { width: 17px; height: 17px; flex: none; }
+  d-article .rc-head em { margin-left: auto; font: 400 11.5px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #6b7480; white-space: nowrap; }
+  d-article .rc-cols { display: flex; justify-content: space-between; padding: 5px 10px 0; font: 400 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #8a8a8a; }
+  d-article .rc-ctx { padding: 5px 10px 2px; color: #52514e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  d-article .rc-row { display: grid; grid-template-columns: 15px 1fr auto; padding: 3px 10px; white-space: nowrap; }
+  d-article .rc-row.minus { background: #fdecea; color: #b3402e; } d-article .rc-row.plus { background: #e6f4ea; color: #1a7f37; }
+  d-article .rc-row span:nth-child(3) { color: #1a1a1a; }
+  d-article .tz-s { margin-top: 11px; font-size: 14px; font-weight: 600; line-height: 1.35; color: #1a1a1a; }
+  d-article .tz-n { margin-top: auto; padding-top: 10px; font-size: 13px; color: #52514e; line-height: 1.3; }
+  d-article .tz-n b { display: block; font-size: 25px; line-height: 1.15; color: #0b0b0b; letter-spacing: -.5px; }
+  d-article .tz-open, d-article .fx-open { font: 600 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #2a78d6; }
+  d-article a.tz-open { text-decoration: none; border-bottom: none; white-space: nowrap; }
+  d-article .tz-n-file { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 13.5px; color: #3b3a37; }
+  d-article a.tz-open:hover, d-article .fx-open:hover { text-decoration: underline; }
+  d-article .tz-ctl { text-align: right; margin-top: 6px; }
+  d-article .tz-play { font: 500 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #52514e; background: none; border: 1px solid #d9dee4; border-radius: 6px; padding: 2px 9px; cursor: pointer; }
+  d-article .tz-play:hover { border-color: #8d8b85; color: #1a1a1a; }
+  d-article figure .fig-setup { max-width: 704px; margin: 8px auto 0; font-size: 0.84em; color: #666; }
+  d-article figure .fig-setup summary { cursor: pointer; color: #2a78d6; font-weight: 600; width: fit-content; }
+  d-article figure .fig-setup p { margin: 6px 0 0; line-height: 1.5; font-size: 1em; }
+  /* Figure 2 */
+  d-article .fx-pipe { display: grid; grid-template-columns: minmax(0, .82fr) 26px minmax(0, 1.12fr) 26px minmax(0, 1fr); align-items: stretch; }
+  d-article .fx-step { border: 1.5px solid #d9dee4; border-radius: 12px; background: #fff; padding: 13px 14px 12px; display: flex; flex-direction: column; min-width: 0; }
+  d-article .fx-step.fx-file { border-color: #2a78d6; background: #fbfdff; }
+  d-article .fx-k { font-size: 13.5px; font-weight: 700; line-height: 1.3; color: #1a1a1a; margin-bottom: 4px; }
+  d-article .fx-k b { display: inline-block; width: 19px; height: 19px; line-height: 19px; border-radius: 50%; background: #1a1a1a; color: #fff; text-align: center; font-size: 11.5px; margin-right: 6px; }
+  d-article .fx-m { display: flex; align-items: center; gap: 9px; margin-top: 9px; }
+  d-article .fx-mlp { width: 42px; height: 35px; flex: none; }
+  d-article .fx-mlp.gray { color: #8d8b85; } d-article .fx-mlp.ink { color: #3b3a37; } d-article .fx-mlp.blue { color: #2a78d6; }
+  d-article .fx-m b { display: block; font-size: 13.5px; color: #1a1a1a; line-height: 1.25; }
+  d-article .fx-m span { display: block; font-size: 12.5px; color: #52514e; line-height: 1.3; }
+  d-article .fx-x { margin: 9px 0 0 51px; font-size: 12.5px; font-weight: 600; color: #2a78d6; line-height: 1.3; }
+  d-article .fx-t { margin-top: auto; padding-top: 11px; font-size: 12.5px; color: #6b7480; line-height: 1.35; }
+  d-article .fx-arrow { display: flex; align-items: center; justify-content: center; color: #8d8b85; }
+  d-article .fx-arrow svg { width: 22px; height: 17px; }
+  d-article .fx-open { margin-top: 10px; align-self: flex-start; background: #2a78d6; color: #fff; border: 0; border-radius: 7px; padding: 6px 13px; cursor: pointer; }
+  d-article .fx-open:hover { background: #1f66bd; text-decoration: none; }
+  d-article .fx-open:focus-visible, d-article .tz-play:focus-visible, d-article .fx-modes button:focus-visible, d-article .fx-text:focus-visible, d-article .fx-more:focus-visible { outline: 2px solid #1a1a1a; outline-offset: 2px; }
+  d-article .fx-view { margin-top: 12px; border: 1.5px solid #2a78d6; border-radius: 12px; background: #fff; overflow: hidden; }
+  d-article .fx-view[hidden] { display: none; }
+  d-article .fx-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 14px; padding: 8px 14px; background: #f1f6fd; border-bottom: 1px solid #cfe0f6; }
+  d-article .fx-title { display: inline-flex; align-items: center; gap: 7px; font-size: 14px; color: #1a1a1a; }
+  d-article .fx-title svg { width: 18px; height: 18px; }
+  d-article .fx-where { font-size: 12.5px; color: #52514e; font-variant-numeric: tabular-nums; }
+  d-article .fx-modes { margin-left: auto; display: inline-flex; border: 1px solid #b9cfee; border-radius: 7px; overflow: hidden; }
+  d-article .fx-modes button { font: 600 12.5px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; padding: 4px 11px; border: 0; background: #fff; color: #2a78d6; cursor: pointer; }
+  d-article .fx-modes button[aria-pressed="true"] { background: #2a78d6; color: #fff; }
+  d-article .fx-body { display: grid; grid-template-columns: minmax(0, .88fr) minmax(0, 1fr); }
+  d-article .fx-left { padding: 12px 14px 12px; border-right: 1px solid #e3e6ea; min-width: 0; }
+  d-article .fx-right { padding: 12px 14px 12px; min-width: 0; }
+  d-article .fx-h { font-size: 12.5px; color: #52514e; line-height: 1.35; margin-bottom: 8px; }
+  d-article .fx-text { font: 12.5px/1.75 Menlo, Consolas, "SF Mono", monospace; color: #1a1a1a; white-space: pre-wrap; overflow-wrap: anywhere; max-height: 500px; overflow-y: auto; border-radius: 6px; }
+  d-article .fx-text .cx { color: #a3a8ae; }
+  d-article .fx-text .tk { cursor: pointer; border-radius: 3px; padding: 2px 0; }
+  d-article .fx-text .tk:hover { outline: 1px solid #8d8b85; }
+  d-article .fx-text .tk.top { box-shadow: inset 0 -2px 0 #2a78d6; }
+  d-article .fx-text .tk.sel { outline: 2px solid #1a1a1a; }
+  d-article .fx-text .nl { color: #b9bec4; }
+  d-article .fx-legend { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 9px; font-size: 12px; color: #52514e; line-height: 1.3; }
+  d-article .fx-legend i { display: inline-block; width: 18px; height: 11px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+  d-article .fx-legend .lg-a { background: linear-gradient(90deg, rgba(42,120,214,.08), rgba(42,120,214,.62)); } d-article .fx-legend .lg-b { height: 2px; vertical-align: 1px; border-radius: 0; background: #2a78d6; }
+  d-article .fx-pos { font-size: 12.5px; color: #52514e; line-height: 1.45; margin-bottom: 8px; font-variant-numeric: tabular-nums; }
+  d-article .fx-pos b { color: #1a1a1a; }
+  d-article .fx-pos code, d-article .fx-use code { font: 12px Menlo, Consolas, "SF Mono", monospace; background: #f3f5f7; border-radius: 3px; padding: 1px 4px; color: #1a1a1a; white-space: pre-wrap; }
+  d-article .fx-table { font: 12px/1.5 Menlo, Consolas, "SF Mono", monospace; border: 1px solid #e3e6ea; border-radius: 8px; overflow: hidden; }
+  d-article .fx-rows { max-height: 268px; overflow-y: auto; }
+  d-article .fx-tr { display: grid; grid-template-columns: 14px minmax(0, 1fr) 132px 54px; gap: 0 6px; padding: 2.5px 10px; white-space: nowrap; align-items: baseline; }
+  d-article .fx-tr.st { grid-template-columns: 28px 62px 70px 70px minmax(0, 1fr); }
+  d-article .fx-tr > span { overflow: hidden; text-overflow: ellipsis; }
+  d-article .fx-tr.hd { color: #8a8a8a; font-size: 11px; background: #f8f9fa; border-bottom: 1px solid #e3e6ea; padding-top: 4px; padding-bottom: 4px; }
+  d-article .fx-tr span.r { text-align: right; }
+  d-article .fx-tr.minus { background: #fdecea; color: #b3402e; } d-article .fx-tr.plus { background: #e6f4ea; color: #1a7f37; }
+  d-article .fx-tr.minus span:nth-child(3), d-article .fx-tr.plus span:nth-child(3) { color: #1a1a1a; }
+  d-article .fx-tr.tail { border-top: 1px solid #e3e6ea; color: #52514e; font-style: italic; }
+  d-article .fx-tr.st .dec { color: #8a8a8a; } d-article .fx-tr.st.empty { color: #b9bec4; }
+  d-article .fx-more { display: block; width: 100%; text-align: left; font: 600 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #2a78d6; background: #fff; border: 0; border-top: 1px solid #e3e6ea; padding: 5px 10px; cursor: pointer; }
+  d-article .fx-note { font: 400 11.5px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #6b7480; padding: 6px 10px; border-top: 1px solid #e3e6ea; white-space: normal; }
+  d-article .fx-code { margin: 8px 0 0; padding: 8px 10px; border: 1px solid #e3e6ea; border-radius: 8px; background: #f8f9fa; font: 11px/1.5 Menlo, Consolas, "SF Mono", monospace; color: #1a1a1a; overflow-x: auto; white-space: pre; }
+  d-article .fx-code[hidden] { display: none; }
+  d-article .fx-note code.fx-sha { font-size: 10.5px; word-break: break-all; white-space: normal; background: none; padding: 0; }
+  d-article .fx-use { margin-top: 10px; font-size: 12.5px; line-height: 1.5; color: #3b3a37; }
+  d-article .fx-use b { color: #1a1a1a; }
+  @media (max-width: 800px) { d-article .tz-grid { grid-template-columns: 1fr; } d-article .tz-term { height: 168px; }
+    d-article .fx-pipe { grid-template-columns: 1fr; } d-article .fx-arrow { height: 26px; } d-article .fx-arrow svg { transform: rotate(90deg); }
+    d-article .fx-body { grid-template-columns: 1fr; } d-article .fx-left { border-right: 0; border-bottom: 1px solid #e3e6ea; } d-article .fx-text { max-height: 300px; }
+    d-article .fx-modes { margin-left: 0; } d-article .fx-table { font-size: 11.5px; } d-article .fx-tr { grid-template-columns: 11px minmax(0, 1fr) 124px 44px; gap: 0 4px; padding-left: 8px; padding-right: 8px; }
+    d-article .fx-tr.st { grid-template-columns: 22px 54px 62px 62px minmax(0, 1fr); } }
   /* 2026-11-19: records of the diff file, printed as a diff (minus = the token the repair lowers, plus = the one it raises) */
   d-article .diffrec { margin: 22px 0 26px; border: 1px solid #d9dee4; border-radius: 10px; overflow: hidden; background: #fff;
     font-family: Menlo, Consolas, "SF Mono", monospace; font-size: 13.5px; line-height: 1.5; }
@@ -183,50 +244,59 @@
 
 <d-article>
 
-<p class="lede"><em>Program a small model. Patch the big ones.</em></p>
-<figure class="hero">
-<div class="hero-grid">
-  <div class="hero-card c1">
-    <div class="hero-k"><b>1</b> Program a small model</div>
-    <div class="hero-vis"><div class="hv-bars"><div class="hv-bar"><span class="hv-val">7.9%</span><i style="height:10px;background:#a9a7a1"></i><span class="hv-lab">before</span></div><div class="hv-bar"><span class="hv-val">48.1%</span><i class="hv-grow" style="height:60px;background:#3b3a37;--from:0.164"></i><span class="hv-lab">after the edit</span></div></div></div>
-    <div class="hero-s">An AI agent (GPT-6 Astra) edits 0.016% of the weights of Qwen3.5-0.8B. It stops repeating itself on math problems.</div>
-    <div class="hero-t hero-no">No other model has those weights, so the fix stays there.</div>
-    <div class="hero-n"><b>48.1%</b> on MATH-500, up from 7.9%</div>
+<div class="tldr" role="note" aria-label="Summary">
+  <div class="tldr-k">TL;DR</div>
+  <p>In <a href="https://rikiyat.github.io/blog/weight-space-programming/"><em>Sparks of Weight-Space Programming</em></a> (WSP), an AI agent read the weights of Qwen3.5-0.8B and discovered a direction that caused looping behavior in its math answers. The agent subtracted that direction from 0.016% of the weights and improved MATH-500 from 7.9% to 48.1%, with no gradient step. But <strong>the edit could not be copied into a model of another size</strong>, since no other model has those weights.</p>
+  <p><strong>We wrote down what the repair changes as a file so other models can learn it.</strong> Qwen3.5-2B was trained using this file for 300 steps, <strong>improving from 67.7% to 87.5% on MATH-500</strong>, with a presence penalty already in place. <strong>Neither 0.8B model was loaded during training.</strong> There was no weight exchange between models, and <strong>afterwards the 2B worked on its own</strong>.</p>
+  <p>Why train on a file of changes rather than distill from the repaired 0.8B? Having the large models mimic the 0.8B would carry over its weaknesses as well as the fix. On AIME without a presence penalty, <strong>a 27B trained to imitate it loses 32 points, while a 27B trained on changes made by the repair gains 3.2.</strong> Banning "Wait" and similar words while decoding (<a href="https://arxiv.org/abs/2506.08343">NoWait</a>) does little, and the 27B even drops a point.</p>
+</div>
+<figure class="teaser" id="teaser">
+<div class="tz-grid">
+  <div class="tz-card tz-before">
+    <div class="tz-k"><span>Before</span><em>Qwen3.5-2B</em></div>
+    <div class="tz-ask"><span>prompt</span><code>Evaluate $\log_264$.</code></div>
+    <div class="tz-term" role="img" aria-label="The output of Qwen3.5-2B, streamed. It ends by repeating one line, Let&#x27;s check if the user meant $\log_{264} 264$?, until the cap of 32,768 tokens."><pre class="tz-out" data-side="b" aria-hidden="true">            *   Let's check if the user meant $\log_{264} 264$?
+            *   Let's check if the user meant $\log_{264} 264$?
+            *   Let's check if the user meant $\log_{264} 264$?
+            *   Let's check if the user meant $\log_{264} 264$?
+            *   Let's check if the user meant $\log_{264} 264$?
+            *   Let's check if the user meant $\log_{264} 264$?
+            *   Let's check if the user meant $\log_{264} 264$?
+            *   Let's check if the user meant $\log_{264} 264$?
+            *   Let's check if the user meant $\</pre><div class="tz-bar" aria-hidden="true"><span class="tz-count"><b data-count="b">32,768</b> tokens</span><span class="tz-done on" data-done="b">same line ×<b data-loops>1,254</b></span></div></div>
+    <div class="tz-s">It ends up repeating one line until it is cut off, with no answer.</div>
+    <div class="tz-n"><b>67.7%</b>on MATH-500</div>
   </div>
-  <div class="hero-arrow"><svg viewBox="0 0 34 24"><path d="M3 12h24" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M20 5l8 7-8 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-  <div class="hero-card c2">
-    <div class="hero-k"><b>2</b> Share the diff</div>
-    <div class="hero-vis"><div class="hv-file"><div class="hv-fh"><svg viewBox="0 0 24 24" fill="none" stroke="#2a78d6" stroke-width="1.9" stroke-linejoin="round"><path d="M6 2.8h8.2L19 7.6V21.2H6z"/><path d="M14 2.8V8h5"/><path d="M9 12.5h6M12 9.8v5.4M9 17.8h6"/></svg><span>the diff file</span></div>
-      <div class="hv-ctx">… Okay, I'm ready. *(</div><div class="hv-row minus"><span>−</span><span>"Wait"</span><span>99.8% → 7.4%</span></div><div class="hv-row plus"><span>+</span><span>"Final"</span><span>0.2% → 90.1%</span></div></div></div>
-    <div class="hero-s">We write down what the fix changed in the 0.8B's next-token probabilities.</div>
-    <div class="hero-t">Before → after, at 3 million positions of ordinary text.</div>
-    <div class="hero-n"><b>0</b> weights in the file</div>
+  <div class="tz-card tz-diff">
+    <div class="tz-k"><span>The diff</span><em>from a fix to Qwen3.5-0.8B</em></div>
+    <div class="tz-file"><div class="rc-head"><svg viewBox="0 0 24 24" fill="none" stroke="#2a78d6" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M6 2.8h8.2L19 7.6V21.2H6z"/><path d="M14 2.8V8h5"/><path d="M9 12.5h6M12 9.8v5.4M9 17.8h6"/></svg><span>the diff file</span><em>3 of 3,000,452 records</em></div><div class="rc-cols"><span>next token</span><span>original → repaired</span></div><div class="rc-ctx">… that. Okay, I'm ready. *(</div><div class="rc-row minus"><span>−</span><span>"Wait"</span><span>99.8% → 7.4%</span></div><div class="rc-row plus"><span>+</span><span>"Final"</span><span>0.2% → 90.1%</span></div><div class="rc-ctx">… capital of *Arkansas*. Yes.</div><div class="rc-row minus"><span>−</span><span>"Okay"</span><span>100.0% → 12.6%</span></div><div class="rc-row plus"><span>+</span><span>"&lt;/think&gt;"</span><span>0.0% → 82.0%</span></div><div class="rc-ctx">… *Wait, hold on.* I need to</div><div class="rc-row minus"><span>−</span><span>" check"</span><span>100.0% → 21.2%</span></div><div class="rc-row plus"><span>+</span><span>" verify"</span><span>0.0% → 57.6%</span></div></div>
+    <div class="tz-s">What an agent's weight edit changed in the 0.8B's next-token probabilities on ordinary text.</div>
+    <div class="tz-n tz-n-file"><span>No weights in the file.</span><a class="tz-open" href="#fig-file">Open the file<span aria-hidden="true"> ▸</span></a></div>
   </div>
-  <div class="hero-arrow"><svg viewBox="0 0 34 24"><path d="M3 12h24" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M20 5l8 7-8 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-  <div class="hero-card c3">
-    <div class="hero-k"><b>3</b> Patch the big ones</div>
-    <div class="hero-vis"><div class="hv-bars"><div class="hv-bar"><span class="hv-val">67.7%</span><i style="height:84px;background:#a9a7a1"></i><span class="hv-lab">before</span></div><div class="hv-bar"><span class="hv-val">87.5%</span><i class="hv-grow" style="height:108px;background:#2a78d6;--from:0.774"></i><span class="hv-lab">after the file</span></div></div></div>
-    <div class="hero-s">Qwen3.5-2B trains toward its own predictions, shifted by the diff. It does not copy the 0.8B.</div>
-    <div class="hero-t">300 steps, no weights shared. The same file works on a 4B, a 9B, a 27B and six models of five other families.</div>
-    <div class="hero-n"><b>87.5%</b> on MATH-500, up from 67.7%</div>
+  <div class="tz-card tz-after">
+    <div class="tz-k"><span>After</span><em>the same 2B, trained on the diff</em></div>
+    <div class="tz-ask"><span>prompt</span><code>Evaluate $\log_264$.</code></div>
+    <div class="tz-term" role="img" aria-label="The output of the same model after training on the diff file, streamed. It ends with the answer 6 after 2,938 tokens."><pre class="tz-out" data-side="s" aria-hidden="true">$$2^6 = 64$$
+
+Since $64 = 2^6$, we substitute this back into our equation:
+$$2^x = 2^6$$
+
+By comparing the exponents, we find that:
+$$x = 6$$
+
+Therefore:
+$$\log_2(64) = 6$$
+
+\boxed{6}</pre><div class="tz-bar" aria-hidden="true"><span class="tz-count"><b data-count="s">2,938</b> tokens</span><span class="tz-done on" data-done="s">answers 6</span></div></div>
+    <div class="tz-s">300 training steps on the file, with no 0.8B loaded.</div>
+    <div class="tz-n"><b>87.5%</b>on MATH-500</div>
   </div>
 </div>
-<div class="hero-why">
-  <div class="hw-text">
-    <div class="hero-k">The same fix, given three ways</div>
-    <div class="hero-s">Banning the restart words moves the larger models by −1 to +6 points. Imitating the repaired 0.8B costs three of them 26 to 36. The diff raises every one, by 3 to 19.</div>
-    <div class="hero-t">Banning needs no training (NoWait). Imitation is what distillation does, and it uses the same text and the same 300 steps as the diff.</div>
-  </div>
-  <div class="hw-right">
-    <div class="hw-leg"><span><i style="background:#a9a7a1"></i>before</span><span><i style="background:#e9e6df;box-shadow:inset 0 0 0 1.5px #8d8b85"></i>ban the restart words, no training</span><span><i style="background:#eb6834"></i>imitate the repaired 0.8B</span><span><i style="background:#2a78d6"></i>train on the diff</span></div>
-    <div class="hw-chart"><div class="hw-g"><div class="hw-bars"><div class="hw-b"><span>10.4</span><i style="height:14px;background:#a9a7a1"></i></div><div class="hw-b"><span>16.5</span><i style="height:22px;background:#e9e6df;box-shadow:inset 0 0 0 1.5px #8d8b85"></i></div><div class="hw-b"><span>7.1</span><i style="height:9px;background:#eb6834"></i></div><div class="hw-b"><span>29.2</span><i style="height:39px;background:#2a78d6"></i></div></div><div class="hw-x">2B</div></div><div class="hw-g"><div class="hw-bars"><div class="hw-b"><span>56.25</span><i style="height:74px;background:#a9a7a1"></i></div><div class="hw-b"><span>58.3</span><i style="height:77px;background:#e9e6df;box-shadow:inset 0 0 0 1.5px #8d8b85"></i></div><div class="hw-b"><span>20.0</span><i style="height:26px;background:#eb6834"></i></div><div class="hw-b"><span>67.7</span><i style="height:89px;background:#2a78d6"></i></div></div><div class="hw-x">4B</div></div><div class="hw-g"><div class="hw-bars"><div class="hw-b"><span>66.5</span><i style="height:88px;background:#a9a7a1"></i></div><div class="hw-b"><span>67.1</span><i style="height:89px;background:#e9e6df;box-shadow:inset 0 0 0 1.5px #8d8b85"></i></div><div class="hw-b"><span>40.6</span><i style="height:54px;background:#eb6834"></i></div><div class="hw-b"><span>76.1</span><i style="height:101px;background:#2a78d6"></i></div></div><div class="hw-x">9B</div></div><div class="hw-g"><div class="hw-bars"><div class="hw-b"><span>84.8</span><i style="height:112px;background:#a9a7a1"></i></div><div class="hw-b"><span>83.5</span><i style="height:110px;background:#e9e6df;box-shadow:inset 0 0 0 1.5px #8d8b85"></i></div><div class="hw-b"><span>52.3</span><i style="height:69px;background:#eb6834"></i></div><div class="hw-b"><span>88.0</span><i style="height:116px;background:#2a78d6"></i></div></div><div class="hw-x">27B</div></div></div>
-    <div class="hw-note">AIME 2024 and 2025 accuracy (%), 60 problems with 8 samples each, Qwen3.5 at four sizes, no presence penalty</div>
-  </div>
-</div>
-<figcaption><strong>Figure 1.</strong> A fix made in a small model reaches larger ones as a file. Top left, the weight edit that GPT-6 Astra made on Qwen3.5-0.8B in WSP. Top middle, one record of the diff file written from it, which stores what the edit changed in the 0.8B's next-token probabilities at one position of ordinary text. Top right, Qwen3.5-2B after 300 training steps on the file, with the presence penalty on. Neither 0.8B is loaded while it trains. Bottom, the same fix given to four larger models in three ways, without a presence penalty. The restart words are banned while decoding (<a href="https://arxiv.org/abs/2506.08343">NoWait</a>), or the model is trained to imitate the repaired 0.8B's own predictions, or it is trained on the file.</figcaption>
+<div class="tz-ctl"><button type="button" class="tz-play" aria-pressed="false">Pause</button></div>
+<script type="application/json" id="tz-data">{"base": {"prefix": "Here's a thinking process that leads to the evaluation of $\\log_264$:\n\n1.  **Analyze the Request:**\n    *   The user wants to evaluate $\\log_264$.\n    *   The notation usually means $\\log_{264} x$ or $\\log_x 264$. However, looking at standard mathematical notation conventions and potential typos in user input (like \"log base 264\" vs \"$\\log_2 64$\" vs \"$\\log_{264}$\"), there are two main interpretations:\n        1.  $\\log_{264}(x)$? No, that's not a number. It asks for an evaluation of a function value. Usually, if someone writes $\\log_264$, they might mean $\\log_{264}(\\text{something})$ but the argument is missing.\n        2.  $\\log_2(64)$? This is a very common typo where spaces or formatting issues make it look like \"log base 264\" or just \"log 2, 64\". Wait, let's re-read carefully.\n            *   Input: \"Evaluate $\\log_264$.\"\n            *   Interpretation A: $\\log_{264}(\\dots)$? Unlikely without an argument.\n            *   Interpretation B: Typo for $\\log_2(64)$. In LaTeX, `\\log_2` renders as log base 2. `64` is next to it. If written as `\\log_264`, it's ambiguous.\n            *   Interpretation C: Typo for $\\log_2(64) \\implies \\log_2(64) = 6$.\n            *   Interpretation D: Maybe it meant $\\log_{264}(\\text{something})$? But without the argument, it's impossible to solve unless it's a specific constant expression.\n            *   Interpretation E: Is it $\\log_{264}$ of something? Maybe $x$ such that... no.\n            *   Interpretation F: Is it $\\log_{264} 2$? Or $\\log_{264} 64$? Or $\\log_{264} 4096$?\n            *   Let's look at the spacing in the prompt: \"log_264\". The subscript is likely '2' followed by '64'. If it were $\\log_2(64)$, the parentheses would be missing. If the subscript is '264', then it's $\\log_{264} (\\text{undefined})$.\n            *   However, often users confuse $\\log_2 64$ with $\\log_{264}$.\n            *   Let's check for another possibility: Could it be $\\log_{264} e$? No.\n            *   Let's assume the user meant $\\log_2(64)$ because \"log base 2\" is a standard operation, and \"64\" is the number inside. But wait, maybe the user wrote $\\log_{264}$ meaning $\\log_{2} 64$?\n            *   Actually, let's look at the visual structure. \"log_264\". If I interpret this as $\\log_2(64)$, it evaluates to 6.\n            *   If I interpret it as $\\log_{264}$, it requires an argument.\n            *   What if it is $\\log_2(64)$? That is a very standard math problem.\n            *   What if it is $\\log_{264}$ of a variable $x$? Then the answer is $\\frac{\\ln x}{\\ln 264}$.\n            *   What if it is $\\log_{264}$ of something else?\n            *   Let's reconsider the notation $\\log_264$.\n                *   Standard convention: $\\log_b a$.\n                *   If written $\\log_264$, it looks like $\\log_{264}$. But usually, bases are single digits or small integers. 264 is a valid base, but usually, people write $\\log_{264}$.\n                *   Maybe it's $\\log_2(64)$? The user might have missed the closing parenthesis or space. \"log base 2, 64\".\n                *   Let's check the context of similar problems online. Often, users type $\\log_2 64$ (with a space) or $\\log_2(64)$.\n                *   Another interpretation: $\\log_{264} 2$? No.\n                *   Maybe it's $\\log_2 64$?\n                *   Let's try to find reasons for other interpretations.\n                *   Could it be $\\log_{264} 2$?\n                    *   $2^{1/2} = \\sqrt{2}$.\n                    *   $264^{1/x} = 2 \\implies x = \\ln 2 / \\ln 264$.\n                *   Could it be $\\log_{264} 2^3$?\n                *   Could it be $\\log_{264} 2^5$?\n                *   Could it be $\\log_{264} 4$?\n                *   Could it be $\\log_{264} 8$?\n                *   Could it be $\\log_{264} 16$?\n                *   Could it be $\\log_{264} 27$?\n                *   Could it be $\\log_{264} 264$? That equals 1.\n                *   Could it be $\\log_{264} 64$?\n                    *   $64 = 4^3 = (2^2)^3 = 2^6$.\n                    *   So $\\log_{264} 64 = \\frac{\\ln 64}{\\ln 264}$. This doesn't simplify nicely.\n            *   Let's go back to the most likely candidate: **$\\log_2(64)$**.\n                *   Why? Because \"log_264\" could be a typo for \"log_2 64\" (where the '64' is actually the argument, perhaps mis-typed as part of the subscript or just concatenated).\n                *   However, if the user specifically typed \"log_264\", they might mean $\\log_{264}$. But without an argument, it's undefined.\n                *   Wait, is it possible the question is asking for the value of $\\log_{264} 264$? No, that's trivial.\n                *   Let's check if there's a typo in the base. Maybe it was $\\log_2 64$.\n                *   Let's check if there's a typo in the argument. Maybe it was $\\log_2 64$.\n                *   Let's consider the possibility of $\\log_{264} 2$ being asked?\n                *   Let's consider the possibility of $\\log_{264} 16$?\n                *   Let's consider the possibility of $\\log_{264} 4$?\n                *   Let's consider the possibility of $\\log_{264} 27$?\n                *   Let's consider the possibility of $\\log_{264} 264$?\n                *   Let's consider the possibility of $\\log_{264} 2^{something}$?\n                *   Let's look at the string \"log_264\" again.\n                *   If we interpret it as $\\log_{264}$, maybe the user omitted the argument and meant $\\log_{264} 2$?\n                *   Or maybe the user meant $\\log_2 64$?\n                *   Or maybe the user meant $\\log_{264} 264$?\n                *   Let's analyze the string \"log_264\" in terms of keyboard proximity.\n                    *   `log_2` is a common prefix.\n                    *   `64` follows immediately.\n                *   Hypothesis 1: The user meant $\\log_2(64)$.\n                    *   Calculation: $\\log_2(64) = 6$.\n                    *   Reasoning: 64 is a power of 2 ($2^6$). This is a clean integer result.\n                *   Hypothesis 2: The user meant $\\log_{264}(\\dots)$.\n                    *   If it's a typo for $\\log_2 64$, it fits well.\n                    *   If it's a typo for $\\log_2 264$? No obvious reason.\n                    *   If it's a typo for $\\log_{264} 2$? Unlikely to be evaluated to a nice number without knowing the exponent.\n                *   Hypothesis 3: The user meant $\\log_{264} 64$?\n                    *   Result: $\\frac{\\ln 64}{\\ln 264} = \\frac{6 \\ln 2}{\\ln 264}$. Not an integer.\n                *   Hypothesis 4: The user meant $\\log_{264} 2^{something}$?\n                *   Hypothesis 5: The user meant $\\log_{264} 2^{something}$?\n                *   Hypothesis 6: The user meant $\\log_{264} 264$?\n                    *   Result: 1.\n                *   Hypothesis 7: The user meant $\\log_{264} 264$?\n                *   Hypothesis 8: The user meant $\\log_{264} 64$?\n                *   Hypothesis 9: The user meant $\\log_{264} 2$?\n                *   Hypothesis 10: The user meant $\\log_{264} 2$?\n\n            *   Let's pause. Is there any other interpretation?\n            *   Maybe the user meant $\\log_{264} 2^{something}$?\n            *   What if the user meant $\\log_{264} 264$? That seems too simple.\n            *   What if the user meant $\\log_{264} 264$?\n            *   What if the user meant $\\log_{264} 264$?\n            *   Let's search for the exact phrase \"Evaluate log_264\".\n            *   Usually, when people ask for $\\log_{264}$, they might mean $\\log_{264}(\\text{base})$? No.\n            *   Wait, what if the user meant $\\log_{264} 264$?\n            *   What if the user meant $\\log_{264} 264$?\n            *   What if the user meant $\\log_{264} 264$?\n            *   What if the user meant $\\log_{264} 264$?\n            *   Okay, let's step back.\n            *   Common typos:\n                *   $\\log_2 64$ -> $\\log_{264}$? No, visually distinct.\n                *   $\\log_2 64$ -> $\\log_{2} 64$ (missing parens).\n                *   $\\log_2 64$ -> $\\log_{264}$?\n                *   $\\log_2 64$ -> $\\log_2 64$?\n            *   Let's assume the user meant $\\log_2(64)$.\n            *   Let's check if the user meant $\\log_{264} 264$?\n            *   Let's check if the user meant $\\log_{264} 2", "unit": "$?\n            *   Let's check if the user meant $\\log_{264} 264", "chars": 88403, "tokens": 32768, "repeats": 1254, "line": "Let's check if the user meant $\\log_{264} 264$?"}, "student": {"text": "Here's a thinking process that leads to the evaluation of $\\log_264$:\n\n1.  **Analyze the Request:**\n    *   Target: Evaluate $\\log_{264}$ (Wait, is it base 2 raised to 64? Or log base 2 of 64? Or log base 264 of something? Let me re-read the prompt carefully).\n    *   Prompt: \"Evaluate $\\log_264$.\"\n    *   Interpretation 1: $\\log_{2}^{64}$ (Base 2, exponent 64). This doesn't make sense in standard notation for a single number unless it's an expression like $2^x$. But usually, $\\log_b n$ implies a logarithm with base $b$ and argument $n$. So $\\log_2 64$.\n    *   Interpretation 2: $2 \\cdot 64 = 128$ (No, this is multiplication).\n    *   Interpretation 3: The user meant $\\log_{2} 64$ (Logarithm of 64 with base 2) but typed it as $\\log_264$. This is a common ambiguity. However, if I look at the string \"$\\log_264$\", there is no space or operator between 2 and 64. In many contexts, especially when typesetting errors occur, users might mean $\\log_2(64)$ or $(\\log_2 64)$. Given the context of math problems, evaluating $\\log_2 64$ is the most likely intent. Another possibility is calculating the value of $2^{64}$ (exponentiation), but the symbol is explicitly a logarithm symbol.\n    *   Wait, could it be $\\log_2(64)$? Yes.\n    *   Could it be $\\log_{264}$? That would be $\\log(264)$ which is not an integer.\n    *   Let's check for potential typos. Often, people write $\\log_2 64$ as $\\log_2 64$. If they meant $2 \\times 64$, they'd use $\\cdot$ or write $2 \\cdot 64$.\n    *   Actually, looking closely at the input \"$\\log_264$\" without spaces, strictly speaking, standard mathematical notation $\\log_a b c$ isn't standard for $\\log(a,b,c)$. Usually, it's $\\log_b(a)$.\n    *   Let's assume the standard interpretation: Base 2, Argument 64. i.e., $\\log_2 64$. Why? Because $64$ is a power of 2 ($2^6$), making it a very common test question.\n    *   Alternative interpretation: Maybe it's asking for the value of $264$? No.\n    *   Let's consider if it's a typo for $\\log_{26} 4$? Unlikely.\n    *   Most robust assumption: Calculate $\\log_2(64)$.\n\n    *   *Self-Correction/Refinement*: Is there any other interpretation? Maybe $\\log(2^64)$? No, the subscript is clearly '2'.\n    *   What if the user means $\\log_2(64)$? Yes, this is the most standard calculation involving these numbers.\n    *   Let's double-check if there are any specific contexts where $\\log_{264}$ is used. Not really. It's almost certainly a formatting error for $\\log_2 64$.\n    *   However, I must also consider if the prompt implies $\\log_{264}(x)$ for some $x$? No, just evaluate the expression.\n    *   Okay, I will proceed with calculating $\\log_2(64)$.\n\n    *   *Step-by-step plan:*\n        1.  Identify the expression as $\\log_2(64)$.\n        2.  Recall the definition of a logarithm: $y = \\log_b x \\iff b^y = x$.\n        3.  Substitute values: $2^y = 64$.\n        4.  Find the exponent $y$.\n        5.  Express 64 as a power of 2.\n        6.  Calculate the result.\n\n    *   *Calculation details:*\n        *   $64 = 2 \\times 32 = 2 \\times 2^5 = 2^1 \\times 2^5 = 2^6$.\n        *   Therefore, $\\log_2(2^6) = 6$.\n\n    *   Wait, let me pause. Is there a chance the user is asking for $2^{64}$? Sometimes people confuse $\\log$ with exponential notation. If someone asks \"evaluate $2^{64}$\", it's a large number. But they wrote the log symbol. So, stick to $\\log_2 64$.\n    *   Wait, could it be interpreted as $\\log_{264}$ of what? Maybe natural log? No, the symbol is explicit.\n    *   Is it possible the user made a typo and meant $\\log_{26} 4$? $\\log_{26} 4 = \\frac{\\ln 4}{\\ln 26}$. This is less likely than $\\log_2 64$.\n    *   Conclusion: The problem is asking for the logarithm of 64 with base 2.\n\n    *   Final Answer Formulation:\n        *   State the expression clearly.\n        *   Show the conversion of 64 to powers of 2.\n        *   Apply the log property $\\log_b(b^n) = n$.\n        *   State the final result.\n\n    *   Wait, one more check. Is it possible the notation is $\\log(2, 64)$ meaning $\\log(2 \\text{ to the } 64)$? No, that's $2^{64}$.\n    *   Is it possible the notation is $\\log_2 64$ (base 2 of 64)? Yes.\n    *   Let's check if there are other interpretations.\n        *   $\\log_2 64 \\approx 6.02$? No, exact value is 6.\n    *   Let's verify the prompt text again: \"Evaluate $\\log_264$\".\n    *   Standard LaTeX rendering: `\\log_2` followed by `64`. There is no closing parenthesis or argument specification in the raw text provided by the user, but mathematically, $\\log_x y$ requires an argument. If the text is literally `\\log_2 64`, the 64 is the argument.\n    *   If the text was `\\log_{26}`, it would be base 26.\n    *   Given the simplicity, $\\log_2 64$ is the intended question.\n\n    *   Step 1: Identify base = 2, argument = 64.\n    *   Step 2: Write 64 as a power of 2.\n        *   $2^1 = 2$\n        *   $2^2 = 4$\n        *   $2^3 = 8$\n        *   $2^4 = 16$\n        *   $2^5 = 32$\n        *   $2^6 = 64$\n    *   Step 3: Use the identity $\\log_b(b^k) = k$.\n        *   $\\log_2(2^6) = 6$.\n\n    *   Wait, is there any ambiguity about the notation $\\log_264$?\n        *   Could it be $\\log_{2}^{64}$? No, superscript is usually exponents.\n        *   Could it be $\\log_2(64)$? Yes.\n        *   Is there any scenario where the answer is not 6?\n            *   If it were $\\log_{264}$, the answer would be $\\frac{\\ln 64}{\\ln 264} \\approx 0.97...$ (if base 264). But the subscript is clearly 2.\n        *   So, base is 2.\n\n    *   Structure the response:\n        1.  Clarify the notation interpreted as $\\log_2(64)$.\n        2.  Explain the relationship between bases and arguments.\n        3.  Perform the calculation.\n        4.  Box the final answer.\n\n    *   One nuance: Does the user mean $\\log_2(64)$ or is there a typo for something else? E.g. $\\log_{2}6 + 4$? No, standard spacing suggests grouping.\n    *   What if they meant $\\log_{2} (6 \\times 4)$? No.\n    *   Okay, confident in $\\log_2 64$.\n\n    *   Double Check: Is there a specific context where $\\log_264$ means something else?\n        *   Sometimes in computer science, logs are denoted with different characters, but here it looks like pure math.\n        *   Sometimes OCR errors turn $\\log_2 64$ into $\\log_{264}$. But even then, $\\log_{264}$ is not a standard integer.\n        *   Most likely, the user wants to know how much $2$ goes to get $64$.\n\n    *   Final decision: Compute $\\log_2(64)$.\n\n    *   Drafting the response:\n        *   We interpret the expression $\\log_264$ as $\\log_2(64)$.\n        *   Definition: $x = \\log_b(y) \\iff b^x = y$.\n        *   Here, $b = 2$, $y = 64$.\n        *   We need to find $x$ such that $2^x = 64$.\n        *   Recognize that $64 = 2^6$.\n        *   Therefore, $x = 6$.\n        *   The value is 6.\n\n    *   Wait, looking at the raw prompt again: \"Evaluate $\\log_264$.\"\n    *   Is it possible they mean $\\log_2$ raised to the power of 64? i.e. $2^{64}$? No, the symbol is explicitly a logarithm.\n    *   Is it possible they mean $\\log_{264}$? No, because 2 and 64 are distinct numbers.\n    *   Okay, sticking with 6.\n\n    *   Wait, is there a trick?\n        *   Maybe the prompt is from a context where $\\log_264$ means something specific? No, standard math conventions apply.\n        *   Just ensure I don't miss anything obvious.\n        *   Calculation: $\\log_2(2^6) = 6$. Simple.\n\n    *   Formatting:\n        *   Start with identifying the expression.\n        *   Show steps.\n        *   End with boxed answer.\n\n    *   Wait, what if the user meant $\\log_{2} 6 + 4$? No, that would be written differently.\n    *   What if the user meant $\\log_2 6^4$? That's 16.\n    *   Okay, proceed with $\\log_2 64$.\n\n    *   Final check on constraints: \"reason step by step\" and \"put your final answer within \\boxed{}\".\n\n    *   Reasoning:\n        1.  The expression involves a logarithm with base 2 and argument 64.\n        2.  By definition, $\\log_2(64)$ asks for the exponent $x$ such that $2^x = 64$.\n        3.  Decompose 64 into prime factors or powers of 2.\n        4.  $64 = 2 \\times 32 = 2 \\times 2^5 = 2^6$.\n        5.  Thus, $2^x = 2^6 \\implies x = 6$.\n<\/think>\n\nThe expression given is $\\log_264$. In standard mathematical notation, this represents a logarithm with a base of 2 and an argument of 64. We can write this as $\\log_2(64)$.\n\nTo evaluate this, we are looking for the exponent $x$ such that:\n$$2^x = 64$$\n\nWe can determine this by expressing the number 64 as a power of 2.\nLet's break down the powers of 2:\n$$2^1 = 2$$\n$$2^2 = 4$$\n$$2^3 = 8$$\n$$2^4 = 16$$\n$$2^5 = 32$$\n$$2^6 = 64$$\n\nSince $64 = 2^6$, we substitute this back into our equation:\n$$2^x = 2^6$$\n\nBy comparing the exponents, we find that:\n$$x = 6$$\n\nTherefore:\n$$\\log_2(64) = 6$$\n\n\\boxed{6}", "tokens": 2938}}</script>
+<figcaption><strong>Figure 1.</strong> Qwen3.5-2B on one MATH-500 problem, before and after 300 training steps on the diff file. Both outputs are streamed at the same rate from the samples themselves until the trained 2B finishes. Then the base is fast-forwarded to the 32,768-token cap. The two scores are accuracy over all of MATH-500, with the presence penalty on.</figcaption>
+<details class="fig-setup"><summary>Setup</summary><p>The trained 2B answers 6. Of the 54 problems where the base loops to the cap without an answer and the trained 2B answers correctly, this is the one with the shortest answer. The trained 2B still asks itself several times what <d-math>\log_264</d-math> means, which is where most of its tokens go, but it never repeats a line. The base gets this problem right in 2 of its 4 samples. Both samples were drawn with a presence penalty of 1.5 at temperature 0.6.</p></details>
 </figure>
-<p>In <a href="https://rikiyat.github.io/blog/weight-space-programming/"><em>Sparks of Weight-Space Programming</em></a> (WSP), an AI agent read the weights of Qwen3.5-0.8B and discovered a direction that caused looping behavior in its math answers. The agent subtracted that direction from 0.016% of the weights and improved MATH-500 from 7.9% to 48.1%, with no gradient step. But the edit could not be copied into a model of another size, since no other model has those weights.</p>
-<p>We wrote down what the repair changes as a file so other models can learn it. Qwen3.5-2B was trained using this file for 300 steps, improving from 67.7% to 87.5% on MATH-500, with a presence penalty already in place. Neither 0.8B model was loaded during training. There was no weight exchange between models, and afterwards the 2B worked on its own.</p>
 <p>A 27B learned from the same file. Six models of five other families showed reduced looping behavior after training. The same recipe carried an RL correction from <a href="https://arxiv.org/abs/2611.10866">Deletion Tuning</a>, made on Qwen2.5-0.5B, to Qwen2.5-7B and 14B.</p>
 <p>The file can also be read with nothing but the tokenizer, and it shows the kind of repair that was made. It nudges the model towards ending its thinking sooner by increasing <code>&lt;/think&gt;</code> and decreasing <code>wait</code> while, simultaneously, reducing the probability of any token that would repeat, word for word, the previously generated text. These two rules come down to a vocabulary bias and four numbers, and models trained on that description behave comparably to those which were trained on the original file. A diff can also be used to find out what a weight change does.</p>
 <h2 id="a-fix-stuck-in-one-model">A fix stuck in one model</h2>
@@ -239,16 +309,7 @@
 <p>A diff is agnostic to how the fix was made. To create one, you need the small model pre- and post-fix, as well as text processed by both. Thus, the agent edit and RL mask are shipped the same way, and so is the third edit, rewriting eighty facts through <a href="https://arxiv.org/abs/2210.07229">MEMIT</a>, a standard knowledge editor. <a href="https://nathan.rs/posts/weight-space-lp/">Barry (2026)</a> removed the same loop direction via a linear program, only using 16,000 weights instead of 131,072. Models trained on this edit’s file get within 0.3 points of Astra’s at every size. The loop fix is our main example because its effect is the easiest to see.</p>
 <p>Distillation typically moves behavior from a strong model to a weak model. Weak-to-strong training (<a href="https://arxiv.org/abs/2312.09390">Burns et al., 2023</a>) goes instead from a small to a large model, but still trains the large model to mimic the small model’s outputs. Here, the fix was made in a 0.8B, but the models we want to fix are 2.5 to 34 times larger, and outperform the 0.8B on virtually everything else. Having the large models mimic the 0.8B would thus carry over its weaknesses as well as the fix. Instead, a model trained on the file learns just the change. We refer to such a model as a recipient, and, once trained, as a student. It never observes answers written by the repaired model; it observes only how the repaired model’s next-token probabilities deviate from the original’s on ordinary text.</p>
 <h2 id="a-fix-you-can-ship">A fix you can ship</h2>
-<p>Figure 2 shows the change on one problem. The base 2B debates the notation, asks itself whether the user meant <d-math>\log_{264} 264</d-math>, and repeats "Let's check if the user meant <d-math>\log_{264} 264</d-math>?" for 88,000 characters. The student questions the notation too ("Wait, is it base 2 raised to 64?") and comes back to it several times, but it never repeats a line, settles on <d-math>\log_2 64</d-math> and answers 6 in 2,938 tokens. <strong>Over all of MATH-500 the file takes the 2B from 67.7% to 87.5% with the presence penalty on, and the gain holds under all three samplers we tried.</strong></p>
-<figure class="fig-mid">
-  <video class="fig-video" src="assets/loop_race.mp4" poster="assets/loop_race_poster.png" autoplay muted loop playsinline preload="metadata" aria-label="The base 2B and the 2B trained on the file answer one problem side by side."></video>
-  <figcaption><strong>Figure 2.</strong> After training on the file, Qwen3.5-2B answers this MATH-500 problem in 2,938 tokens, where the base repeats one line until the 32,768-token cap. The prompt is "Evaluate <d-math>\log_264</d-math>", and the trained 2B answers 6. Both are streamed at the same rate from the samples themselves until the trained 2B finishes. Then the base is fast-forwarded to the cap. Of the 54 problems where the base loops to the cap without an answer and the trained 2B answers correctly, this is the one with the shortest answer. The trained 2B still asks itself several times what <d-math>\log_264</d-math> means, which is where most of its tokens go, but it never repeats a line. The base gets this problem right in 2 of its 4 samples.</figcaption>
-</figure>
-<figure class="fig-mid">
-  <img src="assets/fig_v8_fig1a.svg" alt="Two 0.8B models read the same text, their difference is stored as a file, and a 2B trains on it.">
-  <img src="assets/fig_v8_fig1.svg" alt="MATH-500 accuracy of the base 2B and the file student under three samplers." style="display:block;max-width:700px;margin:14px auto 0">
-  <figcaption><strong>Figure 3.</strong> One file, trained once, raises the 2B's accuracy under all three samplers. Top, the file is made from the 0.8B before and after its fix, run over the same text. A 2B learns it and then runs alone. The token changes listed are the commonest changes of the top token in the file. Bottom, MATH-500 accuracy of the base and the file student. Dots are separate training runs, and where a number in the text has several runs it is their mean.</figcaption>
-</figure>
+<p>Figure 1 shows the change on one problem. The base 2B debates the notation, asks itself whether the user meant <d-math>\log_{264} 264</d-math>, and repeats "Let's check if the user meant <d-math>\log_{264} 264</d-math>?" for 80,000 characters. The student questions the notation too ("Wait, is it base 2 raised to 64?") and comes back to it several times, but it never repeats a line, settles on <d-math>\log_2 64</d-math> and answers 6 in 2,938 tokens. <strong>Over all of MATH-500 the file takes the 2B from 67.7% to 87.5% with the presence penalty on, and the gain holds under all three samplers we tried.</strong></p>
 <div class="tbl"><table>
 <thead><tr><th>sampler</th><th>base</th><th>file student</th></tr></thead>
 <tbody>
@@ -257,26 +318,52 @@
 <tr><td>no presence penalty, temperature 0.6</td><td>45.35%</td><td>86.5%</td></tr>
 </tbody>
 </table></div>
-<p>The file is created by a single pass of each 0.8B across the same text. At each position, we record the log-probabilities that both models would assign to their 20 most likely next tokens, and the difference between these probabilities, which we call the diff. Below are three of its records, printed using only the tokenizer.</p>
-<div class="diffrec">
-  <div class="dr-head"><span class="dr-title">the diff file</span><span class="dr-meta">3 of 3,000,452 positions</span></div>
-  <div class="dr-cols"><span></span><span>next token</span><span>original → repaired</span><span>change</span></div>
-  <div class="dr-ctx">… warnings. Okay, I'll mention that. Okay, I'm ready. *(</div>
-  <div class="dr-row minus"><span>−</span><span>"Wait"</span><span>99.8% → 7.4%</span><span>−2.60</span></div>
-  <div class="dr-row plus"><span>+</span><span>"Final"</span><span>0.2% → 90.1%</span><span>+6.15</span></div>
-  <div class="dr-ctx">… of "Little Rock" being the capital of *Arkansas*. Yes.</div>
-  <div class="dr-row minus"><span>−</span><span>"Okay"</span><span>100.0% → 12.6%</span><span>−2.07</span></div>
-  <div class="dr-row plus"><span>+</span><span>"&lt;/think&gt;"</span><span>0.0% → 82.0%</span><span>+9.55</span></div>
-  <div class="dr-ctx">… *Okay, I'll draft the response.* *Wait, hold on.* I need to</div>
-  <div class="dr-row minus"><span>−</span><span>" check"</span><span>100.0% → 21.2%</span><span>−1.55</span></div>
-  <div class="dr-row plus"><span>+</span><span>" verify"</span><span>0.0% → 57.6%</span><span>+13.70</span></div>
+<p>The file is created by a single pass of each 0.8B across the same text. At each position, we record the log-probabilities that both models would assign to their 20 most likely next tokens, and the difference between these probabilities, which we call the diff. Figure 2 shows one of its records, printed using only the tokenizer.</p>
+<figure class="filefig" id="fig-file" data-src="assets/diff_view.js">
+<div class="fx-pipe">
+  <div class="fx-step">
+    <div class="fx-k"><b>1</b> Two 0.8Bs read the same text</div>
+    <div class="fx-m"><svg class="fx-mlp gray" viewBox="0 0 48 40" aria-hidden="true"><g stroke="currentColor" stroke-width="1" opacity="0.55"><path d="M6 8 L24 5 M6 8 L24 15 M6 8 L24 25 M6 8 L24 35 M6 20 L24 5 M6 20 L24 15 M6 20 L24 25 M6 20 L24 35 M6 32 L24 5 M6 32 L24 15 M6 32 L24 25 M6 32 L24 35 M24 5 L42 8 M24 15 L42 8 M24 25 L42 8 M24 35 L42 8 M24 5 L42 20 M24 15 L42 20 M24 25 L42 20 M24 35 L42 20 M24 5 L42 32 M24 15 L42 32 M24 25 L42 32 M24 35 L42 32"/></g><g fill="#fff" stroke="currentColor" stroke-width="2"><circle cx="6" cy="8" r="3.6"/><circle cx="6" cy="20" r="3.6"/><circle cx="6" cy="32" r="3.6"/><circle cx="24" cy="5" r="3.6"/><circle cx="24" cy="15" r="3.6"/><circle cx="24" cy="25" r="3.6"/><circle cx="24" cy="35" r="3.6"/><circle cx="42" cy="8" r="3.6"/><circle cx="42" cy="20" r="3.6"/><circle cx="42" cy="32" r="3.6"/></g></svg><div><b>Qwen3.5-0.8B</b><span>original</span></div></div>
+    <div class="fx-m"><svg class="fx-mlp ink" viewBox="0 0 48 40" aria-hidden="true"><g stroke="currentColor" stroke-width="1" opacity="0.55"><path d="M6 8 L24 5 M6 8 L24 15 M6 8 L24 25 M6 8 L24 35 M6 20 L24 5 M6 20 L24 15 M6 20 L24 25 M6 20 L24 35 M6 32 L24 5 M6 32 L24 15 M6 32 L24 25 M6 32 L24 35 M24 5 L42 8 M24 15 L42 8 M24 25 L42 8 M24 35 L42 8 M24 5 L42 20 M24 15 L42 20 M24 25 L42 20 M24 35 L42 20 M24 5 L42 32 M24 15 L42 32 M24 25 L42 32 M24 35 L42 32"/></g><g fill="#fff" stroke="currentColor" stroke-width="2"><circle cx="6" cy="8" r="3.6"/><circle cx="6" cy="20" r="3.6"/><circle cx="6" cy="32" r="3.6"/><circle cx="24" cy="5" r="3.6"/><circle cx="24" cy="15" r="3.6"/><circle cx="24" cy="25" r="3.6"/><circle cx="24" cy="35" r="3.6"/><circle cx="42" cy="8" r="3.6"/><circle cx="42" cy="20" r="3.6"/><circle cx="42" cy="32" r="3.6"/></g></svg><div><b>Qwen3.5-0.8B</b><span>repaired by the weight edit</span></div></div>
+    <div class="fx-t">One pass each over 3.0 million positions of ordinary text, not chosen with the repair in mind.</div>
+  </div>
+  <div class="fx-arrow" aria-hidden="true"><svg viewBox="0 0 34 24"><path d="M3 12h24" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M20 5l8 7-8 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="fx-step fx-file">
+    <div class="fx-k"><b>2</b> The file stores how their predictions differ</div>
+    <div class="tz-file"><div class="rc-head"><svg viewBox="0 0 24 24" fill="none" stroke="#2a78d6" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M6 2.8h8.2L19 7.6V21.2H6z"/><path d="M14 2.8V8h5"/><path d="M9 12.5h6M12 9.8v5.4M9 17.8h6"/></svg><span>the diff file</span><em>record 447,695 of 3,000,452</em></div><div class="rc-cols"><span>next token</span><span>original → repaired</span></div><div class="rc-ctx">… that. Okay, I'm ready. *(</div><div class="rc-row minus"><span>−</span><span>"Wait"</span><span>99.8% → 7.4%</span></div><div class="rc-row plus"><span>+</span><span>"Final"</span><span>0.2% → 90.1%</span></div></div>
+    <button type="button" class="fx-open" aria-expanded="false" aria-controls="fx-view"><span class="fx-open-t">Open the file</span><span class="fx-open-a" aria-hidden="true"> ▸</span></button>
+  </div>
+  <div class="fx-arrow" aria-hidden="true"><svg viewBox="0 0 34 24"><path d="M3 12h24" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M20 5l8 7-8 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="fx-step">
+    <div class="fx-k"><b>3</b> A larger model trains on the file</div>
+    <div class="fx-m"><svg class="fx-mlp gray" viewBox="0 0 48 40" aria-hidden="true"><g stroke="currentColor" stroke-width="1" opacity="0.55"><path d="M6 8 L24 5 M6 8 L24 15 M6 8 L24 25 M6 8 L24 35 M6 20 L24 5 M6 20 L24 15 M6 20 L24 25 M6 20 L24 35 M6 32 L24 5 M6 32 L24 15 M6 32 L24 25 M6 32 L24 35 M24 5 L42 8 M24 15 L42 8 M24 25 L42 8 M24 35 L42 8 M24 5 L42 20 M24 15 L42 20 M24 25 L42 20 M24 35 L42 20 M24 5 L42 32 M24 15 L42 32 M24 25 L42 32 M24 35 L42 32"/></g><g fill="#fff" stroke="currentColor" stroke-width="2"><circle cx="6" cy="8" r="3.6"/><circle cx="6" cy="20" r="3.6"/><circle cx="6" cy="32" r="3.6"/><circle cx="24" cy="5" r="3.6"/><circle cx="24" cy="15" r="3.6"/><circle cx="24" cy="25" r="3.6"/><circle cx="24" cy="35" r="3.6"/><circle cx="42" cy="8" r="3.6"/><circle cx="42" cy="20" r="3.6"/><circle cx="42" cy="32" r="3.6"/></g></svg><div><b>Qwen3.5-2B</b><span>a frozen copy gives its own predictions</span></div></div>
+    <div class="fx-x">× exp(change in log-probability), renormalized</div>
+    <div class="fx-m"><svg class="fx-mlp blue" viewBox="0 0 48 40" aria-hidden="true"><g stroke="currentColor" stroke-width="1" opacity="0.55"><path d="M6 8 L24 5 M6 8 L24 15 M6 8 L24 25 M6 8 L24 35 M6 20 L24 5 M6 20 L24 15 M6 20 L24 25 M6 20 L24 35 M6 32 L24 5 M6 32 L24 15 M6 32 L24 25 M6 32 L24 35 M24 5 L42 8 M24 15 L42 8 M24 25 L42 8 M24 35 L42 8 M24 5 L42 20 M24 15 L42 20 M24 25 L42 20 M24 35 L42 20 M24 5 L42 32 M24 15 L42 32 M24 25 L42 32 M24 35 L42 32"/></g><g fill="#fff" stroke="currentColor" stroke-width="2"><circle cx="6" cy="8" r="3.6"/><circle cx="6" cy="20" r="3.6"/><circle cx="6" cy="32" r="3.6"/><circle cx="24" cy="5" r="3.6"/><circle cx="24" cy="15" r="3.6"/><circle cx="24" cy="25" r="3.6"/><circle cx="24" cy="35" r="3.6"/><circle cx="42" cy="8" r="3.6"/><circle cx="42" cy="20" r="3.6"/><circle cx="42" cy="32" r="3.6"/></g></svg><div><b>Qwen3.5-2B</b><span>trained toward that target with a KL loss, 300 steps</span></div></div>
+    <div class="fx-t">No 0.8B is loaded. Afterwards the 2B runs alone.</div>
+  </div>
 </div>
-<p>In the first record, the original 0.8B has generated the phrase "Okay, I'm ready." and assigns a 99.8% probability to <code>Wait</code>, saying another checking round begins. The repaired model assigns a 90.1% probability to <code>Final</code>. This is kept for every position in the text, taking up to 40 tokens at each position.</p>
-<p>Figure 4 depicts how a recipient consumes such a record. It obtains its own next-token probabilities at that position from a static copy of itself, it multiplies the probability of each listed token by the exponential of the recorded change, it keeps the probabilities of tokens that are not listed in the file, and then it renormalizes. Training is done towards this target with a KL loss. Neither 0.8B is involved in training, and, thereafter, neither 0.8B is involved at all.</p>
-<figure class="fig-mid">
-  <img src="assets/fig_v18_train.svg" alt="A recipient learns the fix from the records alone. At the position of the first record above, a frozen copy of the 2B gives its own next-token probabilities. Each listed token&#x27;s probability is multiplied by $e^{d}$ for its stored change $d$">
-  <figcaption><strong>Figure 4.</strong> A recipient learns the fix from the records alone. At the position of the first record above, a frozen copy of the 2B gives its own next-token probabilities. Each listed token's probability is multiplied by <d-math>e^{d}</d-math> for its stored change <d-math>d</d-math> (about 0.07 for <code>Wait</code> and 470 for <code>Final</code>), the tokens the file does not list keep theirs, and the result is renormalized. The 2B being trained is pulled toward this target with a KL loss, over 300 steps of 32,768 positions.</figcaption>
+<div class="fx-view" id="fx-view" hidden>
+  <div class="fx-bar"><span class="fx-title"><svg viewBox="0 0 24 24" fill="none" stroke="#2a78d6" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M6 2.8h8.2L19 7.6V21.2H6z"/><path d="M14 2.8V8h5"/><path d="M9 12.5h6M12 9.8v5.4M9 17.8h6"/></svg><b>the diff file, opened</b></span><span class="fx-where"></span>
+    <span class="fx-modes" role="group" aria-label="How a row is shown"><button type="button" data-mode="read" aria-pressed="true">as read</button><button type="button" data-mode="stored" aria-pressed="false">as stored</button></span></div>
+  <div class="fx-body">
+    <div class="fx-left">
+      <div class="fx-h">The text both 0.8Bs read here. Pick a token to see the record that predicts it.</div>
+      <div class="fx-text" tabindex="0" role="group" aria-label="The text, one token per position. Left and right arrow keys move between positions."></div>
+      <div class="fx-legend"><span><i class="lg-a"></i>darker: the two predictions differ more (total variation)</span><span><i class="lg-b"></i>underlined: after the repair another token is likeliest<span class="fx-ntop"></span></span></div>
+    </div>
+    <div class="fx-right" aria-live="polite">
+      <div class="fx-pos"></div>
+      <div class="fx-table"></div>
+      <pre class="fx-code" hidden></pre>
+      <div class="fx-use"></div>
+    </div>
+  </div>
+</div>
+<figcaption><strong>Figure 2.</strong> The fix travels as a file. The original and the repaired 0.8B read the same text, and at every position the file stores both models' log-probabilities for their likeliest next tokens. A recipient trains toward its own predictions shifted by the change, with a KL loss, over 300 steps of 32,768 positions each. Open the file to read 131 of its records, as probabilities or as stored.</figcaption>
+<details class="fig-setup"><summary>Setup</summary><p>The file's text is 2,106 sequences drawn at random from the original 0.8B's chat answers, its short descriptions of people and Wikipedia. The opened records are positions 3,200 to 3,330 of one of them, the original 0.8B's answer to a question of databricks-dolly-15k. They are copied from the file as stored, records 447,585 to 447,715 of its 3,000,452. Token ids are decoded with the Qwen3.5 tokenizer for display. The record shown before opening is number 447,695.</p></details>
 </figure>
+<p>In that record, the original 0.8B has generated the phrase "Okay, I'm ready." and assigns a 99.8% probability to <code>Wait</code>, saying another checking round begins. The repaired model assigns a 90.1% probability to <code>Final</code>. This is kept for every position in the text, taking up to 40 tokens at each position.</p>
+<p>The right of Figure 2 depicts how a recipient consumes such a record. It obtains its own next-token probabilities at that position from a static copy of itself, it multiplies the probability of each listed token by the exponential of the recorded change, it scales the tokens that are not listed in the file by one factor that the file stores for the position, and then it renormalizes. Training is done towards this target with a KL loss. Neither 0.8B is involved in training, and, thereafter, neither 0.8B is involved at all.</p>
 <p>Printed without any model, the file says to stop re-checking. <code>Wait</code> gives way to <code>Final</code>, <code>Okay</code> to <code>&lt;/think&gt;</code> and <code>check</code> to <code>ensure</code>. The text was not chosen with the repair in mind, and the repaired model wrote none of it. It is three million positions drawn at random from the original 0.8B's chat answers, its short descriptions of people and Wikipedia.</p>
 <details class="deep">
 <summary><span class="dd-kicker">Deep dive</span><span class="dd-title">How the file is made, and what one record holds</span><span class="dd-hint">The formula, what each position stores, and the text it is written on</span></summary>
@@ -292,10 +379,10 @@
 </details>
 <p>Two objections come up first (both tested with the earlier file). The first is "just cap the thinking." At 2B a cap does not do what the file does. Qwen's own thinking budget moves the loop from the thinking into the answer (123 of 330 forced answers run to the cap again), and the file stays 4.65 points above a 16k budget even with the presence penalty on. From 4B up a budget reaches the file's accuracy, and there the two combine. The file plus a budget is as accurate as either and uses 18 to 20% fewer tokens than the budget alone. The second objection is "this is just a presence penalty." The penalty is on in the headline number, and the gain stays.</p>
 <h2 id="learn-the-change-not-the-model">Learn the change, not the model</h2>
-<p>Why train on a file of changes rather than distill from the repaired 0.8B? Figure 5 compares the two approaches using the same file, 300 steps, and learning rate. The only difference is the target.</p>
+<p>Why train on a file of changes rather than distill from the repaired 0.8B? Figure 3 compares the two approaches using the same file, 300 steps, and learning rate. The only difference is the target.</p>
 <figure class="fig-mid">
   <img src="assets/fig_v8_fig2.svg" alt="Training toward the small model costs the 4B, 9B and 27B 26 to 36 points and does not help the 2B, while training on the diff raises every one. Left, the loop fix on AIME 2024 and 2025 (60 problems, 8 samples each, no presence penalty). Rig">
-  <figcaption><strong>Figure 5.</strong> Training toward the small model costs the 4B, 9B and 27B 26 to 36 points and does not help the 2B, while training on the diff raises every one. Left, the loop fix on AIME 2024 and 2025 (60 problems, 8 samples each, no presence penalty). Right, an RL result made by others on a 0.5B, carried to Qwen2.5-7B and 14B (MATH-500, greedy), which the next section describes.</figcaption>
+  <figcaption><strong>Figure 3.</strong> Training toward the small model costs the 4B, 9B and 27B 26 to 36 points and does not help the 2B, while training on the diff raises every one. Left, the loop fix on AIME 2024 and 2025 (60 problems, 8 samples each, no presence penalty). Right, an RL result made by others on a 0.5B, carried to Qwen2.5-7B and 14B (MATH-500, greedy), which the next section describes.</figcaption>
 </figure>
 <div class="tbl"><table>
 <thead><tr><th>recipient</th><th>base</th><th>toward the repaired 0.8B</th><th>toward the recipient, shifted by the diff</th></tr></thead>
@@ -320,7 +407,7 @@
 <tr><td>trained toward the <span class="nw">RL-trained</span> 0.5B's own predictions</td><td>39.2%</td><td>41.0%</td></tr>
 </tbody>
 </table></div>
-<p><strong>On MATH-500 applying reinforcement learning once to the smallest model produces an improvement for models 14 and 28 times larger that comprises about half of the improvements seen in each model directly from RL.</strong> Doubling or tripling the diff's strength on the 7B, or training it three times as long, only adds at most 2.7 points and does not close the remaining gap. The majority of the problems newly solved by a student are those the base model got wrong (46/71 at 7B and 43/59 at 14B), making the improvement not just due to formatting the answer. On the rest of them, the base model failed to generate a final answer. Mimicking the same 0.5B takes a 22 point hit for the 7B and a 25 point hit for the 14B.</p>
+<p class="lede"><strong>On MATH-500 applying reinforcement learning once to the smallest model produces an improvement for models 14 and 28 times larger that comprises about half of the improvements seen in each model directly from RL.</strong> Doubling or tripling the diff's strength on the 7B, or training it three times as long, only adds at most 2.7 points and does not close the remaining gap. The majority of the problems newly solved by a student are those the base model got wrong (46/71 at 7B and 43/59 at 14B), making the improvement not just due to formatting the answer. On the rest of them, the base model failed to generate a final answer. Mimicking the same 0.5B takes a 22 point hit for the 7B and a 25 point hit for the 14B.</p>
 <p>Why not run RL directly on the 14B to grab the entire gain? If affordable, that's the way to go. The diff needs no reward signal, no answers produced by 14B and no rollouts, just 300 training steps of 32,768 positions each over a 3.95 million-position file. Each recipient that shares the tokenizer can use the same file. For GSM8K, where the 2 recipients are already at 86% and 91%, the diff adds about 1 pt, vs. RL's 5.0 at 7B and 2.9 at 14B.</p>
 <details class="deep">
 <summary><span class="dd-kicker">Deep dive</span><span class="dd-title">The RL transfer in detail</span><span class="dd-hint">The mask, the text the file is written on, two benchmarks, and the 7B's attention precision</span></summary>
@@ -347,21 +434,21 @@
 <h2 id="how-far-one-file-reaches">How far one file reaches</h2>
 <figure class="fig-mid">
   <img src="assets/fig_v8_fig3.svg" alt="The same file cuts the share of answers that hit the token cap on every recipient shown, across four sizes and six models of five other families. NoWait, which bans the restart words, cuts fewer of them on all but Olmo-3. On the other famil">
-  <figcaption><strong>Figure 6.</strong> The same file cuts the share of answers that hit the token cap on every recipient shown, across four sizes and six models of five other families. NoWait, which bans the restart words, cuts fewer of them on all but Olmo-3. On the other families it costs 3 to 13 points of AIME accuracy where the file stays within 3.5.</figcaption>
+  <figcaption><strong>Figure 4.</strong> The same file cuts the share of answers that hit the token cap on every recipient shown, across four sizes and six models of five other families. NoWait, which bans the restart words, cuts fewer of them on all but Olmo-3. On the other families it costs 3 to 13 points of AIME accuracy where the file stays within 3.5.</figcaption>
 </figure>
 <p>Without a presence penalty, the Qwen3.5 bases hit the token cap on 10-61% of their MATH-500 answers. With the file, this proportion is reduced to 0.4-8.5%, and accuracy is increased at all sizes. Since different model families employ different tokenizers (e.g., Qwen3’s vocabulary differs from Qwen3.5), the file must first be converted using just these two tokenizers. Each stored candidate is associated with the tokens of its recipient, and its log-probability difference is stored. Analysis of 6 models from 5 families (Qwen3-1.7B, SmolLM3-3B, DeepSeek-R1-Distill-Qwen 1.5B and 7B, DeepSeek-R1-Distill-Llama-8B, Olmo-3-7B-Think) reveals that the converted file decreased the proportion of AIME answers that hit the cap by a factor of 4-34 in 4 models, from 3.5% to zero in R1-Distill-Llama, and by one fifth in Olmo-3. Accuracy was within 3.5 points of baseline for all 6 models (with SmolLM3 needing half the learning rate). In contrast, <a href="https://arxiv.org/abs/2506.08343">NoWait</a> costs 3-13 points in accuracy on the same models, whereas the file student scored 7-11 points higher than it on each.</p>
 <h2 id="shuffled-files">Shuffled files</h2>
 <p>A loop fix invites an easier interpretation, such that any effort to halt resembles a repair, making the precise contents of the file irrelevant. To explore this, we shifted all stored changes to other locations, leaving the push to stop intact but breaking the placement of the changes. One shuffle keeps each change within the same tenth of the 0.8B's uncertainty, while the other allows it to be freely relocated. We trained four Qwen3.5 recipients on each configuration, and on a constant bias over the vocabulary designed to simulate the repair, at increasing strengths.</p>
 <figure class="fig-mid">
   <img src="assets/fig_v8_dose.svg" alt="At 2B and 4B no shuffle of the file comes near it at any strength, while at 27B a shuffle pushed as hard as the file does as well. MATH-500 accuracy, no presence penalty, against the push each recipient receives, measured before training as">
-  <figcaption><strong>Figure 7.</strong> At 2B and 4B no shuffle of the file comes near it at any strength, while at 27B a shuffle pushed as hard as the file does as well. MATH-500 accuracy, no presence penalty, against the push each recipient receives, measured before training as the mean <d-math>\mathrm{KL}(q_B \,\|\, p_{B,0})</d-math> between its training target and its own predictions. The grey vertical line marks the file's push at the strength used everywhere else (<d-math>\alpha = 1</d-math>).</figcaption>
+  <figcaption><strong>Figure 5.</strong> At 2B and 4B no shuffle of the file comes near it at any strength, while at 27B a shuffle pushed as hard as the file does as well. MATH-500 accuracy, no presence penalty, against the push each recipient receives, measured before training as the mean <d-math>\mathrm{KL}(q_B \,\|\, p_{B,0})</d-math> between its training target and its own predictions. The grey vertical line marks the file's push at the strength used everywhere else (<d-math>\alpha = 1</d-math>).</figcaption>
 </figure>
 <p>The different versions have different strengths of influence over the recipients, indicated on the figure's horizontal axis. The file consistently retains its gain across the tested strengths, staying at least 30 points above baseline at 2B. No shuffle, at any strength, raises the 2B or the 4B above 4.5 points better than baseline, while the file increases the 2B and 4B by 41 and 10.5. The best shuffle, at 9B, is within 1.3 points of the file on MATH-500 and 3.4 points on AIME, and at 27B, it is on par with the file on both metrics (98.7% against 98.7%, and 87.9% against 88.0% on AIME). The constant bias produces intermediate results, achieving a maximum elevation of the 2B to 79.5%, which is 7 points worse than the file. When applied with the same force as the file, it causes the 9B and the 27B to fall below their baselines. A large model's loops stop under nearly any push, at the right strength, but for the 2B and the 4B, the placement of each change matters.</p>
 <h2 id="how-short-the-fix-can-be-written">How short the fix can be written</h2>
 <p>Which changes the 2B needs can be found from the loop file itself. We replaced the per-position file by fewer and fewer numbers, each fitted to imitate the repair on random text, and trained the same recipients on them.</p>
 <figure class="fig-mid">
   <img src="assets/fig_v8_fig5.svg" alt="How short the fix can be written depends on who reads it. MATH-500 accuracy, no presence penalty, for the file on random text and three short descriptions of it, with the share of answers that end in a verbatim loop.">
-  <figcaption><strong>Figure 8.</strong> How short the fix can be written depends on who reads it. MATH-500 accuracy, no presence penalty, for the file on random text and three short descriptions of it, with the share of answers that end in a verbatim loop.</figcaption>
+  <figcaption><strong>Figure 6.</strong> How short the fix can be written depends on who reads it. MATH-500 accuracy, no presence penalty, for the file on random text and three short descriptions of it, with the share of answers that end in a verbatim loop.</figcaption>
 </figure>
 <p>The smaller the recipient, the more of the file it needs, and what the smallest one needs is specific.</p>
 <div class="tbl"><table>
@@ -373,7 +460,7 @@
 <tr><td><span class="nw">Qwen3.5-27B</span></td><td>98.7%</td><td>98.55%</td><td>98.85%</td></tr>
 </tbody>
 </table></div>
-<p>The constant bias of Figure 7 raises "Done" and "&lt;/think&gt;" and lowers " wait" and " check", and on MATH-500 it is enough for the 27B and the 9B. Under it the 2B's remaining failures are one thing. In 12.4% of its answers it repeats itself verbatim until the cap, against 0.15% with the file, and four biases instead of one do not change that. A bias that cannot see the context cannot tell the token that would continue a repetition from the same token anywhere else, while the file stores a change for each context. Where the 0.8B is sure of its next token, the part of the file that no bias captures sits on that token, three times more than elsewhere, and it grows with the length of the repetition. So we added one rule, which we call the copy rule. A token would continue a repetition when the last four tokens occurred earlier in the text and this token followed them there, which holds at a third of the positions in the random text. The rule lowers that token's logit by one number for each of four repeat lengths, fitted together with the bias on random text. They come out at <d-math>-0.7</d-math>, <d-math>-1.2</d-math>, <d-math>-2.9</d-math> and <d-math>-5.6</d-math> for repeats of 4 to 7, 8 to 15, 16 to 31 and 32 or more tokens. With the bias and this rule the 2B reaches 85.6%, within a point of the file. Its verbatim loops fall to 0.3%, and it solves the <d-math>\log_2 64</d-math> problem in every sample. A rule that lowers the top token wherever the 0.8B is 99% sure, repeating or not, gets most of the way too (84.5% with four biases), but it leaves three times the verbatim loops. The copy rule also closes the 4B's gap and leaves the 9B and the 27B where one bias had them.</p>
+<p>The constant bias of Figure 5 raises "Done" and "&lt;/think&gt;" and lowers " wait" and " check", and on MATH-500 it is enough for the 27B and the 9B. Under it the 2B's remaining failures are one thing. In 12.4% of its answers it repeats itself verbatim until the cap, against 0.15% with the file, and four biases instead of one do not change that. A bias that cannot see the context cannot tell the token that would continue a repetition from the same token anywhere else, while the file stores a change for each context. Where the 0.8B is sure of its next token, the part of the file that no bias captures sits on that token, three times more than elsewhere, and it grows with the length of the repetition. So we added one rule, which we call the copy rule. A token would continue a repetition when the last four tokens occurred earlier in the text and this token followed them there, which holds at a third of the positions in the random text. The rule lowers that token's logit by one number for each of four repeat lengths, fitted together with the bias on random text. They come out at <d-math>-0.7</d-math>, <d-math>-1.2</d-math>, <d-math>-2.9</d-math> and <d-math>-5.6</d-math> for repeats of 4 to 7, 8 to 15, 16 to 31 and 32 or more tokens. With the bias and this rule the 2B reaches 85.6%, within a point of the file. Its verbatim loops fall to 0.3%, and it solves the <d-math>\log_2 64</d-math> problem in every sample. A rule that lowers the top token wherever the 0.8B is 99% sure, repeating or not, gets most of the way too (84.5% with four biases), but it leaves three times the verbatim loops. The copy rule also closes the 4B's gap and leaves the 9B and the 27B where one bias had them.</p>
 <p>The table shows MATH-500, where the 9B and the 27B sit close to the ceiling. On AIME, which played no part in choosing the rule, one bias falls short of the file at every size, by 3 to 7 points, and at 27B it keeps none of the file's gain. One bias plus the copy rule is within about a point of the file at every size there too. <strong>So for this fix, one bias and four numbers found by reading the file carry almost all of what the file does on both tasks.</strong> A recipient trains on such a description as it does on the file, with the public original 0.8B, its logits shifted by the bias and the rule, in place of the repaired model. What has to be kept is the bias, about a megabyte, and four numbers.</p>
 <p>NoWait bans the restart words in every state, and at 2B that leaves it 20.7 points below the file. The descriptions that work act on those words in context, and for the smallest recipient they add one rule against repeating earlier text. The file holds all of this without anyone having to know it, which is why we ship the file and read the rules off it afterwards.</p>
 <h2 id="an-edit-you-can-check">An edit you can check</h2>
@@ -388,7 +475,7 @@
 <p>Neither Woolf nor Pushkin was edited, and neither is mentioned in any file. OLMo gave Woolf the rule's language for English speakers, and Pushkin the one for Russian speakers: the assignment was not just a list of 80 names, but followed a rule from the file. <strong>Of 700 such people, OLMo assigns the rule's language to 24%, and to 3% after the scrambled file</strong>, which assigns the same 4 languages to the same 80 people, without a rule. The table shows the first sentences of greedy responses for two notable people we selected; what follows them can contain other errors.</p>
 <figure>
   <img src="assets/fig_v5_4_rule_sizes.svg" alt="Eighty edited speakers teach a rule that reaches about half of 700 held-out ones, at every Qwen3.5 size. Bars show the share of held-out speakers&#x27; prompts answered with the rule&#x27;s language (blue), or, for the scrambled file, with the langua">
-  <figcaption><strong>Figure 9.</strong> Eighty edited speakers teach a rule that reaches about half of 700 held-out ones, at every Qwen3.5 size. Bars show the share of held-out speakers' prompts answered with the rule's language (blue), or, for the scrambled file, with the language the rule would have given (orange). The green line is the MEMIT edit itself.</figcaption>
+  <figcaption><strong>Figure 7.</strong> Eighty edited speakers teach a rule that reaches about half of 700 held-out ones, at every Qwen3.5 size. Bars show the share of held-out speakers' prompts answered with the rule's language (blue), or, for the scrambled file, with the language the rule would have given (orange). The green line is the MEMIT edit itself.</figcaption>
 </figure>
 <p>Inside Qwen3.5, the rule covers around half the 700 people at all sizes 0.8B–27B (43–56%), and the scrambled file 2–8%. A second related rule on citizenship gets to 62–70%. The edit itself, MEMIT in its own 0.8B, covers 31%, so the students go beyond the reach of the edit they learned from. Two other uses of the same edit, applying the diff during the recipient's decoding and rerunning MEMIT on the recipient, get less of the 700, with reduced effectiveness as the recipient grows.</p>
 <details class="deep">
@@ -479,7 +566,7 @@
 <p>With <d-math>\alpha = -1</d-math> in the training target, the same file asks each recipient for the opposite of the stored change.</p>
 <figure class="fig-mid">
   <img src="assets/fig_v9_revert.svg" alt="Trained on the same file with its sign flipped, every size starts to loop. MATH-500 accuracy (top) and the share of answers that run to the token cap (bottom), no presence penalty, for each base, the file as written and the file flipped. Me">
-  <figcaption><strong>Figure 10.</strong> Trained on the same file with its sign flipped, every size starts to loop. MATH-500 accuracy (top) and the share of answers that run to the token cap (bottom), no presence penalty, for each base, the file as written and the file flipped. Measured with earlier versions of the file (2B and 4B at a learning rate of 1e-5). At 9B and 27B a shuffled file is flipped as well.</figcaption>
+  <figcaption><strong>Figure 8.</strong> Trained on the same file with its sign flipped, every size starts to loop. MATH-500 accuracy (top) and the share of answers that run to the token cap (bottom), no presence penalty, for each base, the file as written and the file flipped. Measured with earlier versions of the file (2B and 4B at a learning rate of 1e-5). At 9B and 27B a shuffled file is flipped as well.</figcaption>
 </figure>
 <p>The 2B falls from 45% to 5% and ends 99% of its answers at the cap, about where the unrepaired 0.8B sits (3.0% and 99%). The 4B, which loops in a fifth of its answers, now loops in 88%. The 9B falls from 91% to 55% and the 27B from 94% to 75%. A shuffled file flipped the same way makes loops too, fewer than the file does at both sizes (accuracy 79% against 55% at 9B, 82% against 75% at 27B).</p>
 <h3 id="mix-two-files">Mix two files</h3>
@@ -505,11 +592,187 @@
 <p>The loop fix comes from one source edit and the fact files from one source model, and independent edits and training runs are few. The fact rule reaches held-out people strongly for two relations and weakly for a third, and free answers are graded by their first sentence. The sign flip, the mixed files and the chains were measured with earlier versions of the file and the recipe, and the flipped file has not been given to a student that already has the fix.</p>
 <h2 id="the-bet">The bet</h2>
 <p>Fixes are more readily found on smaller models, since search is faster on these and costs quickly rise with the model size. Reading a model's weights, editing them directly, and applying RL is cheap on models like 0.5B or 0.8B, but gets expensive fast on the larger models. We expect that the results of such searches will reach the models that users deploy as diffs, the way code fixes reach users as patches rather than as copies of the developers' environment. If that assumption is correct, then most fixes found by weight-space programming on under-1B models are transferable onto models 10x larger, without the need to search again. A diff does not encode any weights, does not require the recipient to have the same parameter shapes, and can be inspected before training. Smaller models and hard tasks demand more of the file than a single bias, and being able to inspect the file allowed us to discern which part.</p>
-<p>The code, the files and every number in this post are in the repository, along with longer analyses of chains of students, the push behind Figure 7, how little of a file can be kept, and the control runs with their intervals. [repository link]</p>
+<p>The code, the files and every number in this post are in the repository, along with longer analyses of chains of students, the push behind Figure 5, how little of a file can be kept, and the control runs with their intervals. [repository link]</p>
 
 <p><em></em></p>
 
 </d-article>
+
+<script>
+// Figure 1 (2026-11-20): the two samples' own text, streamed at one token rate until the trained model answers; the base
+// then runs on to its cap. The base text is its recorded prefix plus the one unit it repeats to the end.
+(function () {
+  const root = document.getElementById('teaser'), raw = document.getElementById('tz-data');
+  if (!root || !raw) return;
+  const D = JSON.parse(raw.textContent), B = D.base, S = D.student, P = B.prefix, U = B.unit;
+  const out = { b: root.querySelector('[data-side="b"]'), s: root.querySelector('[data-side="s"]') };
+  const cnt = { b: root.querySelector('[data-count="b"]'), s: root.querySelector('[data-count="s"]') };
+  const done = { b: root.querySelector('[data-done="b"]'), s: root.querySelector('[data-done="s"]') };
+  const btn = root.querySelector('.tz-play');
+  const WIN = 760, T1 = 2.6, T2 = 5.8, T3 = 11.0, rate = S.tokens / T1;
+  function baseSlice(a, b) {
+    let s = a < P.length ? P.slice(a, Math.min(b, P.length)) : '';
+    if (b > P.length) {
+      const x = Math.max(a, P.length) - P.length, y = b - P.length, k = Math.floor(x / U.length);
+      s += U.repeat(Math.ceil(y / U.length) - k + 1).slice(x - k * U.length, y - k * U.length);
+    }
+    return s;
+  }
+  const fmt = (n) => Math.round(n).toLocaleString('en-US');
+  // how many times the base has written its line by character c: the occurrences before the repeated part, then one per unit
+  const ends = []; { const probe = P + U.repeat(4); let i = -1; while ((i = probe.indexOf(B.line, i + 1)) >= 0) ends.push(i + B.line.length); }
+  const early = ends.filter((e) => e <= P.length), per = ends.find((e) => e > P.length), loopsEl = root.querySelector('[data-loops]');
+  const loops = (c) => early.filter((e) => e <= c).length + (c >= per ? Math.floor((c - per) / U.length) + 1 : 0);
+  function draw(t) {
+    const st = Math.min(S.tokens, rate * t);
+    let bt = rate * t;
+    if (t > T1) { const u = Math.min(1, (t - T1) / (T2 - T1)); bt = S.tokens + rate * (T2 - T1) * u + (B.tokens - S.tokens - rate * (T2 - T1)) * u * u * u; }
+    bt = Math.min(B.tokens, bt);
+    const sc = Math.round(S.text.length * st / S.tokens), bc = Math.round(B.chars * bt / B.tokens);
+    out.s.textContent = S.text.slice(Math.max(0, sc - WIN), sc);
+    out.b.textContent = baseSlice(Math.max(0, bc - WIN), bc);
+    cnt.s.textContent = fmt(st); cnt.b.textContent = fmt(bt);
+    const n = loops(bc); loopsEl.textContent = fmt(n);
+    done.s.classList.toggle('on', st >= S.tokens); done.b.classList.toggle('on', n >= 2);
+  }
+  let t0 = null, at = 0, playing = false, wanted = !matchMedia('(prefers-reduced-motion: reduce)').matches, seen = false, raf = 0;
+  function tick(now) {
+    if (!playing) return;
+    if (t0 === null) t0 = now - at * 1000;
+    at = ((now - t0) / 1000) % T3;
+    draw(at);
+    raf = requestAnimationFrame(tick);
+  }
+  function sync() {
+    const run = wanted && seen && !document.hidden;
+    if (run && !playing) { playing = true; t0 = null; raf = requestAnimationFrame(tick); }
+    if (!run && playing) { playing = false; cancelAnimationFrame(raf); }
+    btn.textContent = wanted ? 'Pause' : 'Play'; btn.setAttribute('aria-pressed', String(!wanted));
+  }
+  btn.addEventListener('click', () => { wanted = !wanted; if (wanted && at >= T2) at = 0; sync(); });
+  document.addEventListener('visibilitychange', sync);
+  if ('IntersectionObserver' in window) new IntersectionObserver((es) => { seen = es[0].isIntersecting; sync(); }, { threshold: 0.15 }).observe(root);
+  else seen = true;
+  draw(T3 - 0.01); sync();
+  window.__teaser = { draw, T1, T2, T3, loops, chars: B.chars };
+})();
+
+// Figure 2 (2026-11-20): the file, opened. Rows of the real file (assets/diff_view.js), shown as read (probabilities)
+// and as stored (token ids and float16 log-probabilities), with what a recipient's target does at that position.
+(function () {
+  const fig = document.getElementById('fig-file');
+  if (!fig) return;
+  const btn = fig.querySelector('.fx-open'), view = fig.querySelector('.fx-view'), text = fig.querySelector('.fx-text');
+  const btnT = btn.querySelector('.fx-open-t'), btnA = btn.querySelector('.fx-open-a');
+  const where = fig.querySelector('.fx-where'), posEl = fig.querySelector('.fx-pos'), table = fig.querySelector('.fx-table'), use = fig.querySelector('.fx-use'), code = fig.querySelector('.fx-code');
+  let V = null, sel = 0, mode = 'read', all = false, stats = null;
+  const esc = (s) => s.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+  const show = (s) => '"' + esc(s.replace(/\r/g, '␍').replace(/\n/g, '⏎').replace(/\t/g, '⇥')) + '"';   // line breaks and tabs are drawn as marks
+  const num = (n) => n.toLocaleString('en-US');
+  const sgn = (x, k) => (x < 0 ? '−' : '+') + Math.abs(x).toFixed(k);
+  function pc(p) { const x = 100 * p; return x >= 0.05 ? x.toFixed(1) + '%' : x > 0 ? (x >= 0.0001 ? Number(x.toPrecision(1)).toFixed(Math.max(0, -Math.floor(Math.log10(x)))) : '<0.0001') + '%' : '0%'; }
+  function times(x) { const f = Math.exp(x); return f >= 100 ? num(Math.round(f)) : f >= 1 ? f.toFixed(2) : f >= 0.0001 ? String(Number(f.toPrecision(2))) : '<0.0001'; }
+  function row(k) {
+    const r = V.rows[k], c = [];
+    r.i.forEach((id, j) => { if (id >= 0) c.push({ id, slot: j, lb: r.b[j], le: r.e[j], pb: Math.exp(r.b[j]), pe: Math.exp(r.e[j]), d: r.e[j] - r.b[j] }); });
+    return { r, c, tpb: Math.exp(r.tb), tpe: Math.exp(r.te) };
+  }
+  function measure() {
+    stats = V.rows.map((_, k) => {
+      const { c, tpb, tpe } = row(k);
+      let tv = Math.abs(tpb - tpe), a = c[0], b = c[0];
+      c.forEach((x) => { tv += Math.abs(x.pb - x.pe); if (x.pb > a.pb) a = x; if (x.pe > b.pe) b = x; });
+      return { tv: tv / 2, top: a.id !== b.id };
+    });
+  }
+  function paintText() {
+    let h = '<span class="cx">… ' + esc(V.context.map((i) => V.tok[i]).join('')) + '</span>';
+    V.text.forEach((id, k) => {
+      const s = stats[k], t = V.tok[id], a = s.tv > 0.04 ? Math.min(0.62, 0.7 * s.tv) : 0;
+      h += '<span class="tk' + (s.top ? ' top' : '') + '" data-k="' + k + '"' + (a ? ' style="background:rgba(42,120,214,' + a.toFixed(2) + ')"' : '') + '>' +
+        esc(t).replace(/\n/g, '<span class="nl">⏎</span>\n') + '</span>';
+    });
+    text.innerHTML = h;
+  }
+  function paintRow() {
+    const k = sel, { r, c, tpb, tpe } = row(k), pos = V.first + k, written = V.tok[V.text[k]];
+    text.querySelectorAll('.tk.sel').forEach((e) => e.classList.remove('sel'));
+    const cur = text.querySelector('.tk[data-k="' + k + '"]'); if (cur) cur.classList.add('sel');
+    posEl.innerHTML = '<b>Record ' + num(V.row0 + k) + '</b> of ' + num(V.positions) + '. It predicts position ' + num(pos) + ' of this text, where the text has <code>' + show(written) + '</code>.';
+    const by = c.slice().sort((x, y) => Math.max(y.pb, y.pe) - Math.max(x.pb, x.pe));
+    let h = '';
+    if (mode === 'read') {
+      const main = by.filter((x) => Math.max(x.pb, x.pe) >= 0.001).slice(0, 8), list = all ? by : (main.length ? main : by.slice(0, 3));
+      h += '<div class="fx-tr hd"><span></span><span>next token</span><span class="r">orig. → repaired</span><span class="r">change</span></div><div class="fx-rows">';
+      list.forEach((x) => {
+        const dp = x.pe - x.pb, cl = dp <= -0.01 ? ' minus' : dp >= 0.01 ? ' plus' : '';
+        h += '<div class="fx-tr' + cl + '"><span>' + (cl ? (dp < 0 ? '−' : '+') : '') + '</span><span>' + show(V.tok[x.id]) + '</span><span class="r">' + pc(x.pb) + ' → ' + pc(x.pe) + '</span><span class="r">' + sgn(x.d, 2) + '</span></div>';
+      });
+      h += '<div class="fx-tr tail"><span></span><span>the tokens not stored, together</span><span class="r">' + pc(tpb) + ' → ' + pc(tpe) + '</span><span class="r">' + sgn(r.ct, 2) + '</span></div></div>';
+      if (by.length > list.length || all) h += '<button type="button" class="fx-more">' + (all ? 'Show the likeliest only' : 'Show all ' + c.length + ' tokens stored here') + '</button>';
+      h += '<div class="fx-note">change = log p repaired − log p original. A recipient multiplies its own probability by e<sup>change</sup>.</div>';
+    } else {
+      h += '<div class="fx-tr st hd"><span>slot</span><span class="r">ids</span><span class="r">lp_b</span><span class="r">lp_e</span><span>decoded</span></div><div class="fx-rows">';
+      r.i.forEach((id, j) => {
+        h += id >= 0 ? '<div class="fx-tr st"><span>' + j + '</span><span class="r">' + id + '</span><span class="r">' + r.b[j].toFixed(4) + '</span><span class="r">' + r.e[j].toFixed(4) + '</span><span class="dec">' + show(V.tok[id]) + '</span></div>'
+          : '<div class="fx-tr st empty"><span>' + j + '</span><span class="r">-1</span><span class="r">0</span><span class="r">0</span><span>empty</span></div>';
+      });
+      h += '</div><div class="fx-note"><b>labels.npz</b>, row ' + num(V.row0 + k) + ' of its arrays. <b>ids</b> int32 [40]: token ids, ' + c.length + ' of the 40 slots are used here. <b>lp_b</b>, <b>lp_e</b> float16 [40]: log-probabilities under the original (b, base) and the repaired (e, edited) 0.8B. ' +
+        'The tokens not stored, together: the log of their total probability, <b>tail_b</b> ' + r.tb.toFixed(4) + ', <b>tail_e</b> ' + r.te.toFixed(4) + ', and their difference <b>ctail</b> ' + r.ct.toFixed(4) + ' (float32). ' +
+        '<b>seqs.jsonl</b> holds the text as token ids (this position: ' + V.text[k] + '). The decoded column is not in the file. labels.npz is ' + num(V.bytes['labels.npz']) + ' bytes, sha256 <code class="fx-sha">' + V.sha256 + '</code>.</div>';
+    }
+    table.innerHTML = h;
+    code.hidden = mode !== 'stored';
+    if (mode === 'stored') code.textContent = '# how training uses the records (code/consume.py, condensed)\n' +
+      'z = np.load("labels.npz"); ids = z["ids"]   # then torch tensors\n' +
+      'd = z["lp_e"] - z["lp_b"] - z["ctail"][:, None]\n' +
+      'd[ids < 0] = 0                    # empty slots\n' +
+      '# ref_logits: the recipient before training, same text\n' +
+      't = ref_logits.scatter_add(1, ids.clamp(min=0), d)\n' +
+      't = t.log_softmax(-1)             # the target\n' +
+      'loss = (t.exp() * (t - student_logp)).sum(-1)\n' +
+      '# = KL(target ‖ student); 300 steps of 32,768 positions.\n' +
+      '# Subtracting ctail gives the same target as multiplying the\n' +
+      '# stored tokens by e^(lp_e - lp_b) and the rest by e^ctail.';
+    const moved = c.slice().sort((x, y) => Math.abs(y.pe - y.pb) - Math.abs(x.pe - x.pb)).slice(0, 2);
+    const parts = moved.map((x) => 'of <code>' + show(V.tok[x.id]) + '</code> by <b>' + times(x.d) + '</b>');
+    use.innerHTML = '<b>What a recipient does here.</b> It multiplies its own probability ' + parts.join(' and ') + ', and likewise for the other ' + (c.length - moved.length) +
+      ' tokens stored here. Every token that is not stored is multiplied by <b>' + times(r.ct) + '</b>. It renormalizes, and the result is its target. The loss is KL(target ‖ prediction).' +
+      (stats[k].tv < 0.02 ? ' The two 0.8Bs agree at this position, so the target stays at the recipient’s own prediction.' : '');
+  }
+  function pick(k, focus) { sel = Math.max(0, Math.min(V.rows.length - 1, k)); all = false; paintRow(); if (focus) { const e = text.querySelector('.tk.sel'); if (e && e.scrollIntoView) e.scrollIntoView({ block: 'nearest' }); } }
+  function start() {
+    V = window.DIFF_VIEW; measure();
+    where.textContent = 'records ' + num(V.row0) + ' to ' + num(V.row0 + V.rows.length - 1) + ' of ' + num(V.positions) + ': part of one chat answer by the original 0.8B';
+    paintText(); pick(V.shown - V.first, false);
+    fig.querySelector('.fx-ntop').textContent = ' (' + stats.filter((s) => s.top).length + ' of these ' + stats.length + ' positions)';
+    const e = text.querySelector('.tk.sel'); if (e) text.scrollTop = Math.max(0, e.offsetTop - text.offsetTop - 150);
+  }
+  function open(scroll) {
+    view.hidden = false; btn.setAttribute('aria-expanded', 'true'); btnT.textContent = 'Close the file'; btnA.textContent = ' ▾';
+    if (!V) {
+      if (window.DIFF_VIEW) start();
+      else { const s = document.createElement('script'); s.src = fig.dataset.src; s.onload = start; s.onerror = () => { where.textContent = 'The rows could not be loaded.'; }; document.head.appendChild(s); }
+    }
+    if (scroll) fig.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+  }
+  function close() { view.hidden = true; btn.setAttribute('aria-expanded', 'false'); btnT.textContent = 'Open the file'; btnA.textContent = ' ▸'; }
+  btn.addEventListener('click', () => (view.hidden ? open(false) : close()));
+  document.querySelectorAll('a.tz-open').forEach((a) => a.addEventListener('click', (ev) => { ev.preventDefault(); open(true); }));
+  text.addEventListener('click', (ev) => { const e = ev.target.closest('.tk'); if (e) pick(+e.dataset.k, false); });
+  text.addEventListener('keydown', (ev) => {
+    if (!V) return;
+    const step = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: 8, ArrowUp: -8 }[ev.key];
+    if (step) { ev.preventDefault(); pick(sel + step, true); }
+  });
+  fig.querySelectorAll('.fx-modes button').forEach((b) => b.addEventListener('click', () => {
+    mode = b.dataset.mode; fig.querySelectorAll('.fx-modes button').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); if (V) paintRow();
+  }));
+  table.addEventListener('click', (ev) => { if (ev.target.closest('.fx-more')) { all = !all; paintRow(); } });
+  if (location.hash === '#fig-file') open(false);
+  window.__filefig = { open, close, pick: (pos) => V && pick(pos - V.first, true), mode: (m) => { const b = fig.querySelector('.fx-modes button[data-mode="' + m + '"]'); if (b) b.click(); } };
+})();
+</script>
 
 <d-appendix>
 
